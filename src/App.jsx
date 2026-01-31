@@ -11,10 +11,18 @@ import { AnimatePresence, motion } from 'framer-motion';
 function App() {
   const { theme, toggleTheme } = useStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Prevent hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Robust theme application
   useEffect(() => {
+    if (!mounted) return;
     const root = window.document.documentElement;
+    console.log('Applying theme class:', theme);
     if (theme === 'dark') {
       root.classList.add('dark');
       root.style.colorScheme = 'dark';
@@ -22,16 +30,18 @@ function App() {
       root.classList.remove('dark');
       root.style.colorScheme = 'light';
     }
-  }, [theme]);
+  }, [theme, mounted]);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
 
+  if (!mounted) return null;
+
   return (
     <Router>
-      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
+      <div className="min-h-screen flex flex-col bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300">
         {/* Navigation */}
-        <nav className="border-b border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md sticky top-0 z-50">
+        <nav className="border-b border-[var(--border-primary)] bg-white/70 dark:bg-slate-950/70 backdrop-blur-md sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-16 items-center">
               <Link to="/" className="flex items-center space-x-2 z-50" onClick={closeMenu}>
@@ -121,7 +131,7 @@ function App() {
         </main>
 
         {/* Footer */}
-        <footer className="border-t border-slate-200 dark:border-slate-800 py-12 bg-white dark:bg-slate-950 transition-colors">
+        <footer className="border-t border-[var(--border-primary)] py-12 bg-[var(--bg-primary)] transition-colors">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <p className="text-slate-500 dark:text-slate-400 text-sm italic font-light">"Visualizing the core of your data."</p>
             <p className="mt-4 text-slate-400 dark:text-slate-600 text-xs font-mono uppercase tracking-widest">© 2026 SQL Cosmos • Built by OpenClaw</p>

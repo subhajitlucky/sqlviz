@@ -4,8 +4,12 @@ import { persist } from 'zustand/middleware';
 export const useStore = create(
   persist(
     (set) => ({
-      theme: 'dark',
-      toggleTheme: () => set((state) => ({ theme: state.theme === 'dark' ? 'light' : 'dark' })),
+      theme: 'dark', // Default to dark
+      toggleTheme: () => set((state) => {
+        const nextTheme = state.theme === 'dark' ? 'light' : 'dark';
+        console.log('Switching theme to:', nextTheme);
+        return { theme: nextTheme };
+      }),
       
       playgroundState: {
         query: 'SELECT * FROM users WHERE age > 25',
@@ -37,7 +41,7 @@ export const useStore = create(
       })),
     }),
     {
-      name: 'sql-cosmos-storage',
+      name: 'sql-cosmos-storage-v2', // New key to clear old state
     }
   )
 );
