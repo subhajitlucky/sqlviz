@@ -5,7 +5,7 @@ import { Database, Zap, ArrowRight, Layers, Cpu, Share2, Terminal } from 'lucide
 
 const Home = () => {
   return (
-    <div className="relative overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-300">
+    <div className="relative overflow-hidden bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
       {/* Background Blobs */}
       <div className="absolute top-0 -left-4 w-72 h-72 bg-sapphire-400 dark:bg-sapphire-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 dark:opacity-20 animate-blob"></div>
       <div className="absolute top-0 -right-4 w-72 h-72 bg-blue-400 dark:bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 dark:opacity-20 animate-blob animation-delay-2000"></div>

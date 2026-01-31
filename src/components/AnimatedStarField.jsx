@@ -15,7 +15,7 @@ const AnimatedStarField = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-slate-950">
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-transparent dark:bg-slate-950">
       {/* Background Glows (Nebulas) */}
       <div className="absolute top-[-10%] left-[-10%] w-[70%] h-[70%] bg-sapphire-900/10 blur-[120px] rounded-full animate-pulse" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[70%] h-[70%] bg-indigo-900/10 blur-[120px] rounded-full animate-pulse" style={{ animationDuration: '12s' }} />

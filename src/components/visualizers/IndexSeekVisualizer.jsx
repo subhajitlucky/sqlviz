@@ -3,13 +3,13 @@ import { motion } from 'framer-motion';
 
 const IndexSeekVisualizer = () => {
   return (
-    <div className="w-full h-64 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 relative overflow-hidden flex flex-col items-center justify-center p-6 transition-colors shadow-sm">
+    <div className="w-full h-64 bg-slate-100 dark:bg-slate-950 rounded-xl border border-slate-300 dark:border-slate-800 relative overflow-hidden flex flex-col items-center justify-center p-6 transition-colors shadow-sm">
       <svg className="w-full h-full" viewBox="0 0 100 60">
         {/* Simplified Tree Paths */}
-        <line x1="50" y1="10" x2="25" y2="30" stroke="currentColor" className="text-slate-100 dark:text-slate-900" strokeWidth="0.5" />
-        <line x1="50" y1="10" x2="75" y2="30" stroke="currentColor" className="text-slate-100 dark:text-slate-900" strokeWidth="0.5" />
-        <line x1="75" y1="30" x2="65" y2="50" stroke="currentColor" className="text-slate-100 dark:text-slate-900" strokeWidth="0.5" />
-        <line x1="75" y1="30" x2="85" y2="50" stroke="currentColor" className="text-slate-100 dark:text-slate-900" strokeWidth="0.5" />
+        <line x1="50" y1="10" x2="25" y2="30" stroke="currentColor" className="text-slate-200 dark:text-slate-900" strokeWidth="0.5" />
+        <line x1="50" y1="10" x2="75" y2="30" stroke="currentColor" className="text-slate-200 dark:text-slate-900" strokeWidth="0.5" />
+        <line x1="75" y1="30" x2="65" y2="50" stroke="currentColor" className="text-slate-200 dark:text-slate-900" strokeWidth="0.5" />
+        <line x1="75" y1="30" x2="85" y2="50" stroke="currentColor" className="text-slate-200 dark:text-slate-900" strokeWidth="0.5" />
 
         {/* Seek Path Animation */}
         <motion.path
@@ -37,7 +37,7 @@ const IndexSeekVisualizer = () => {
           { x: 50, y: 10 }, { x: 25, y: 30 }, { x: 75, y: 30 },
           { x: 15, y: 50 }, { x: 35, y: 50 }, { x: 65, y: 50 }, { x: 85, y: 50 }
         ].map((p, i) => (
-          <circle key={i} cx={p.x} cy={p.y} r="1.5" fill="currentColor" className="text-slate-200 dark:text-slate-800" stroke="currentColor" strokeWidth="0.2" />
+          <circle key={i} cx={p.x} cy={p.y} r="1.5" fill="currentColor" className="text-slate-300 dark:text-slate-800" stroke="currentColor" strokeWidth="0.2" />
         ))}
       </svg>
 

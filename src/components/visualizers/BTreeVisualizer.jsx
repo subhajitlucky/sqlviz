@@ -21,7 +21,7 @@ const BTreeVisualizer = () => {
   ];
 
   return (
-    <div className="w-full h-64 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 relative overflow-hidden p-4 transition-colors">
+    <div className="w-full h-64 bg-slate-100 dark:bg-slate-950 rounded-xl border border-slate-300 dark:border-slate-800 relative overflow-hidden p-4 transition-colors">
       <svg className="w-full h-full" viewBox="0 0 100 100">
         {connections.map((conn, i) => {
           const from = nodes.find(n => n.id === conn.from);
@@ -31,7 +31,7 @@ const BTreeVisualizer = () => {
               key={i}
               x1={from.x} y1={from.y + 5} x2={to.x} y2={to.y - 5}
               stroke="currentColor"
-              className="text-slate-200 dark:text-slate-800"
+              className="text-slate-300 dark:text-slate-800"
               strokeWidth="0.5"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}

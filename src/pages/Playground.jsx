@@ -162,12 +162,12 @@ const Playground = () => {
             </button>
           </div>
 
-          <div className="flex-grow relative overflow-auto">
+          <div className="flex-grow relative overflow-auto bg-white dark:bg-slate-950">
             {activeTab === 'editor' ? (
               <textarea
                 value={localQuery}
                 onChange={(e) => setLocalQuery(e.target.value)}
-                className="w-full h-full bg-white dark:bg-slate-950 text-slate-800 dark:text-sapphire-100 p-6 font-mono text-sm focus:outline-none resize-none"
+                className="w-full h-full bg-transparent text-slate-800 dark:text-sapphire-100 p-6 font-mono text-sm focus:outline-none resize-none border-2 border-slate-200 dark:border-transparent focus:border-sapphire-500 transition-all"
                 spellCheck="false"
                 placeholder="Type your query here..."
               />

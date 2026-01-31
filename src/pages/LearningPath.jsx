@@ -108,7 +108,7 @@ const TopicCard = ({ concept, index }) => {
     >
       <Link 
         to={`/topic/${concept.id}`}
-        className="group flex flex-col h-full p-6 md:p-5 rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/40 backdrop-blur-xl hover:border-sapphire-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-500 relative overflow-hidden ring-1 ring-inset ring-slate-200/50 dark:ring-white/5"
+        className="group flex flex-col h-full p-6 md:p-5 rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/60 backdrop-blur-xl hover:border-sapphire-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-500 relative overflow-hidden ring-1 ring-inset ring-slate-200/50 dark:ring-white/5"
       >
         {/* Sapphire Pulse Hover Effect */}
         <div className="absolute inset-0 bg-sapphire-500/0 group-hover:bg-sapphire-500/5 transition-colors duration-500" />
@@ -185,7 +185,7 @@ const LearningPath = () => {
   const hasResults = filteredConcepts.length > 0;
 
   return (
-    <div className="relative min-h-screen bg-white dark:bg-slate-950 transition-colors duration-300 overflow-hidden" ref={containerRef}>
+    <div className="relative min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-300 overflow-hidden" ref={containerRef}>
       <AnimatedStarField />
       
       {/* Constellation Connectors */}
@@ -315,7 +315,7 @@ const LearningPath = () => {
                   <div className="flex items-center gap-5">
                     <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-sapphire-600 to-sapphire-400 flex items-center justify-center text-white shadow-lg shadow-sapphire-500/20 relative group">
                       <Icon className="w-7 h-7 relative z-10" />
-                      <div className="absolute inset-0 bg-white blur-xl opacity-0 group-hover:opacity-20 transition-opacity rounded-full" />
+                      <div className="absolute inset-0 bg-white/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
                     </div>
                     <div>
                       <span className="text-[10px] font-black uppercase tracking-[0.3em] text-sapphire-600 dark:text-sapphire-400 mb-1 block">

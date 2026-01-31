@@ -10,7 +10,7 @@ const ACIDVisualizer = () => {
   ];
 
   return (
-    <div className="w-full h-64 bg-slate-950 rounded-xl border border-slate-800 relative overflow-hidden flex flex-col items-center justify-center p-6">
+    <div className="w-full h-64 bg-slate-100 dark:bg-slate-950 rounded-xl border border-slate-300 dark:border-slate-800 relative overflow-hidden flex flex-col items-center justify-center p-6">
       <div className="grid grid-cols-2 gap-4 w-full h-full">
         {letters.map((item, i) => (
           <motion.div

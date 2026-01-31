@@ -5,10 +5,10 @@ const ScanVisualizer = () => {
   const pages = Array.from({ length: 12 }).map((_, i) => i);
 
   return (
-    <div className="w-full h-64 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 relative overflow-hidden flex flex-col items-center justify-center p-6 transition-colors shadow-sm">
+    <div className="w-full h-64 bg-slate-100 dark:bg-slate-950 rounded-xl border border-slate-300 dark:border-slate-800 relative overflow-hidden flex flex-col items-center justify-center p-6 transition-colors shadow-sm">
       <div className="grid grid-cols-4 gap-3">
         {pages.map((page, i) => (
-          <div key={i} className="relative w-12 h-10 rounded border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 overflow-hidden">
+          <div key={i} className="relative w-12 h-10 rounded border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden">
             {/* Page content lines */}
             <div className="p-1 space-y-1">
               <div className="h-0.5 w-full bg-slate-200 dark:bg-slate-800 rounded"></div>

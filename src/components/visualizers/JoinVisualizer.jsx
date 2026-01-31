@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const JoinVisualizer = () => {
   return (
-    <div className="w-full h-64 bg-slate-950 rounded-xl border border-slate-800 relative overflow-hidden flex items-center justify-center p-4">
+    <div className="w-full h-64 bg-slate-100 dark:bg-slate-950 rounded-xl border border-slate-300 dark:border-slate-800 relative overflow-hidden flex items-center justify-center p-4">
       <div className="relative w-full max-w-sm flex items-center justify-between">
         {/* Table A */}
         <div className="flex flex-col space-y-2">

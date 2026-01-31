@@ -175,7 +175,7 @@ const TopicDetail = () => {
   }
 
   return (
-    <div className="bg-white dark:bg-slate-950 min-h-screen text-slate-900 dark:text-slate-200 selection:bg-sapphire-500/30 transition-colors duration-300">
+    <div className="bg-slate-50 dark:bg-slate-950 min-h-screen text-slate-900 dark:text-slate-200 selection:bg-sapphire-500/30 transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-6 py-12">
         
         {/* Header Navigation */}
