@@ -3,13 +3,14 @@ import { persist } from 'zustand/middleware';
 
 export const useStore = create(
   persist(
-    (set) => ({
+    (set, get) => ({
       theme: 'dark', // Default to dark
-      toggleTheme: () => set((state) => {
-        const nextTheme = state.theme === 'dark' ? 'light' : 'dark';
-        console.log('Switching theme to:', nextTheme);
-        return { theme: nextTheme };
-      }),
+      toggleTheme: () => {
+        const currentTheme = get().theme;
+        const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        console.log('Explicitly switching theme from', currentTheme, 'to', nextTheme);
+        set({ theme: nextTheme });
+      },
       
       playgroundState: {
         query: 'SELECT * FROM users WHERE age > 25',
