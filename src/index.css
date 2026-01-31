@@ -1,10 +1,28 @@
 @import "tailwindcss";
 
+@layer base {
+  :root {
+    --bg-primary: #f8fafc;
+    --text-primary: #0f172a;
+    --border-primary: #e2e8f0;
+    --sapphire-glow: #36aff7;
+  }
+
+  .dark {
+    --bg-primary: #020617;
+    --text-primary: #f1f5f9;
+    --border-primary: #1e293b;
+    --sapphire-glow: #0ea5e9;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
 @theme {
-  --color-slate-950: #020617;
-  --color-slate-900: #0f172a;
-  --color-slate-800: #1e293b;
-  
   --color-sapphire-50: #f0f7ff;
   --color-sapphire-100: #e0effe;
   --color-sapphire-200: #bae0fd;
@@ -16,63 +34,34 @@
   --color-sapphire-800: #064d85;
   --color-sapphire-900: #0b416f;
   --color-sapphire-950: #07294a;
-
-  --animate-blob: blob 7s infinite;
-
-  @keyframes blob {
-    0% { transform: translate(0px, 0px) scale(1); }
-    33% { transform: translate(30px, -50px) scale(1.1); }
-    66% { transform: translate(-20px, 20px) scale(0.9); }
-    100% { transform: translate(0px, 0px) scale(1); }
-  }
-
-  @keyframes shimmer {
-    from { transform: translateX(-100%) skewX(-35deg); }
-    to { transform: translateX(200%) skewX(-35deg); }
-  }
 }
 
-@layer base {
-  body {
-    @apply transition-colors duration-300;
-  }
-  
-  .dark body {
-    @apply bg-slate-950 text-slate-100;
-  }
-  
-  body:not(.dark body) {
-    @apply bg-slate-50 text-slate-900;
-  }
+@keyframes shimmer {
+  0% { transform: translateX(-100%) skewX(-35deg); }
+  100% { transform: translateX(200%) skewX(-35deg); }
 }
 
-@layer components {
-  /* Slate & Sapphire Theme Utility Classes */
-  .text-primary {
-    @apply text-slate-900 dark:text-slate-100;
-  }
-  
-  .text-secondary {
-    @apply text-slate-600 dark:text-slate-400;
-  }
-  
-  .bg-main {
-    @apply bg-white dark:bg-slate-950;
-  }
-  
-  .bg-surface {
-    @apply bg-slate-100 dark:bg-slate-900;
-  }
-  
-  .border-main {
-    @apply border-slate-200 dark:border-slate-800;
-  }
+.shimmer-sweep {
+  position: relative;
+  overflow: hidden;
+}
 
-  .accent-sapphire {
-    @apply text-sapphire-600 dark:text-sapphire-400;
-  }
-  
-  .bg-sapphire-accent {
-    @apply bg-sapphire-600 dark:bg-sapphire-500;
-  }
+.shimmer-sweep::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+  transform: translateX(-100%) skewX(-35deg);
+}
+
+.group:hover .shimmer-sweep::after {
+  animation: shimmer 1.5s infinite;
 }
