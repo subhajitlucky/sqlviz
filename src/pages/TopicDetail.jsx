@@ -292,11 +292,11 @@ const TopicDetail = () => {
         </div>
 
         {/* Navigation Footer */}
-        <footer className="mt-20 pt-8 border-t border-slate-100 dark:border-slate-900">
+        <footer className="mt-20 pt-8 border-t border-slate-200 dark:border-slate-900">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
             {prevConcept ? (
               <Link 
-                to={`/concept/${prevConcept.id}`}
+                to={`/topic/${prevConcept.id}`}
                 className="w-full sm:w-auto group flex items-center p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-sapphire-500/50 transition-all hover:bg-slate-50 dark:hover:bg-slate-900/50"
               >
                 <ChevronLeft className="w-5 h-5 mr-4 text-slate-400 group-hover:text-sapphire-500 transition-colors" />
@@ -309,7 +309,7 @@ const TopicDetail = () => {
 
             {nextConcept ? (
               <Link 
-                to={`/concept/${nextConcept.id}`}
+                to={`/topic/${nextConcept.id}`}
                 className="w-full sm:w-auto group flex items-center p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-sapphire-500/50 transition-all hover:bg-slate-50 dark:hover:bg-slate-900/50"
               >
                 <div className="text-right">

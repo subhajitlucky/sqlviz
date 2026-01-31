@@ -108,7 +108,7 @@ const TopicCard = ({ concept, index }) => {
     >
       <Link 
         to={`/topic/${concept.id}`}
-        className="group flex flex-col h-full p-5 rounded-2xl border border-white/10 bg-slate-900/40 backdrop-blur-xl hover:border-sapphire-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-500 relative overflow-hidden ring-1 ring-inset ring-white/5"
+        className="group flex flex-col h-full p-5 rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/40 backdrop-blur-xl hover:border-sapphire-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-500 relative overflow-hidden ring-1 ring-inset ring-slate-200/50 dark:ring-white/5"
       >
         {/* Sapphire Pulse Hover Effect */}
         <div className="absolute inset-0 bg-sapphire-500/0 group-hover:bg-sapphire-500/5 transition-colors duration-500" />
@@ -116,28 +116,28 @@ const TopicCard = ({ concept, index }) => {
 
         <div className="relative z-10">
           <div className="flex justify-between items-start mb-4">
-            <div className="p-3 rounded-xl bg-slate-800/80 border border-white/5 group-hover:bg-sapphire-500 group-hover:text-white group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-              <Icon className="w-5 h-5" />
+            <div className="p-3 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-white/5 group-hover:bg-sapphire-500 group-hover:text-white group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+              <Icon className="w-5 h-5 text-slate-600 dark:text-slate-300 group-hover:text-white" />
             </div>
             <DifficultyBadge difficulty={concept.difficulty} />
           </div>
           
-          <h3 className="text-base font-bold text-white group-hover:text-sapphire-400 transition-colors mb-2">
+          <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-sapphire-600 dark:group-hover:text-sapphire-400 transition-colors mb-2">
             {concept.title}
           </h3>
           
-          <p className="text-xs text-slate-400 line-clamp-2 mb-4 flex-grow">
+          <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mb-4 flex-grow">
             {concept.definition}
           </p>
           
-          <div className="flex items-center text-xs font-semibold text-sapphire-400 group-hover:text-sapphire-300">
+          <div className="flex items-center text-xs font-semibold text-sapphire-600 dark:text-sapphire-400 group-hover:text-sapphire-500 dark:group-hover:text-sapphire-300">
             Launch Module <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
           </div>
         </div>
         
         {/* Inner Glow Border */}
-        <div className="absolute inset-0 rounded-2xl border border-white/5 pointer-events-none" />
-        <div className="absolute inset-[1px] rounded-[15px] border border-white/5 pointer-events-none" />
+        <div className="absolute inset-0 rounded-2xl border border-slate-200 dark:border-white/5 pointer-events-none" />
+        <div className="absolute inset-[1px] rounded-[15px] border border-slate-100 dark:border-white/5 pointer-events-none" />
         
         {/* Dynamic Glow effect */}
         <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-sapphire-500/10 blur-3xl rounded-full group-hover:bg-sapphire-500/20 transition-colors duration-500" />
@@ -185,7 +185,7 @@ const LearningPath = () => {
   const hasResults = filteredConcepts.length > 0;
 
   return (
-    <div className="relative min-h-screen bg-slate-950 transition-colors duration-300 overflow-hidden" ref={containerRef}>
+    <div className="relative min-h-screen bg-white dark:bg-slate-950 transition-colors duration-300 overflow-hidden" ref={containerRef}>
       <AnimatedStarField />
       
       {/* Constellation Connectors */}
@@ -239,7 +239,7 @@ const LearningPath = () => {
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-black mb-6 text-white tracking-tight"
+            className="text-4xl md:text-5xl font-black mb-6 text-slate-900 dark:text-white tracking-tight"
           >
             SQL <span className="text-transparent bg-clip-text bg-gradient-to-r from-sapphire-600 to-sapphire-400">Cosmos</span> Map
           </motion.h1>
@@ -248,7 +248,7 @@ const LearningPath = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.1 }}
-            className="text-slate-400 max-w-2xl mx-auto mb-10 text-lg"
+            className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-10 text-lg"
           >
             Navigate the relational universe. From atomic queries to distributed engine internals.
           </motion.p>
@@ -262,7 +262,7 @@ const LearningPath = () => {
                 placeholder="Search galaxies, concepts, or keywords..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-2xl text-white focus:ring-2 focus:ring-sapphire-500 transition-all outline-none shadow-xl"
+                className="w-full pl-12 pr-4 py-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-2xl text-slate-900 dark:text-white focus:ring-2 focus:ring-sapphire-500 transition-all outline-none shadow-xl"
               />
             </div>
           </div>
@@ -277,11 +277,11 @@ const LearningPath = () => {
               exit={{ opacity: 0 }}
               className="text-center py-20 relative z-10"
             >
-              <div className="inline-flex p-6 rounded-full bg-slate-900/50 backdrop-blur-xl border border-white/10 mb-6">
+              <div className="inline-flex p-6 rounded-full bg-slate-100 dark:bg-slate-900/50 backdrop-blur-xl border border-slate-200 dark:border-white/10 mb-6">
                 <Orbit className="w-12 h-12 text-slate-400 animate-pulse" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-2">Concept not found in this galaxy</h3>
-              <p className="text-slate-400">Try adjusting your search or explore the main paths below.</p>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Concept not found in this galaxy</h3>
+              <p className="text-slate-600 dark:text-slate-400">Try adjusting your search or explore the main paths below.</p>
               <button 
                 onClick={() => setSearch('')}
                 className="mt-6 px-6 py-2 bg-sapphire-600 hover:bg-sapphire-500 text-white rounded-lg transition-all font-medium hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]"
@@ -318,13 +318,13 @@ const LearningPath = () => {
                       <div className="absolute inset-0 bg-white blur-xl opacity-0 group-hover:opacity-20 transition-opacity rounded-full" />
                     </div>
                     <div>
-                      <span className="text-[10px] font-black uppercase tracking-[0.3em] text-sapphire-400 mb-1 block">
+                      <span className="text-[10px] font-black uppercase tracking-[0.3em] text-sapphire-600 dark:text-sapphire-400 mb-1 block">
                         Galaxy {pIdx + 1}
                       </span>
-                      <h2 className="text-3xl font-bold text-white">{path.title}</h2>
+                      <h2 className="text-3xl font-bold text-slate-900 dark:text-white">{path.title}</h2>
                     </div>
                   </div>
-                  <p className="text-slate-400 max-w-md text-sm md:text-right">
+                  <p className="text-slate-600 dark:text-slate-400 max-w-md text-sm md:text-right">
                     {path.description}
                   </p>
                 </motion.div>

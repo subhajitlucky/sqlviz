@@ -21,7 +21,7 @@ const BTreeVisualizer = () => {
   ];
 
   return (
-    <div className="w-full h-64 bg-slate-950 rounded-xl border border-slate-800 relative overflow-hidden p-4">
+    <div className="w-full h-64 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 relative overflow-hidden p-4 transition-colors">
       <svg className="w-full h-full" viewBox="0 0 100 100">
         {connections.map((conn, i) => {
           const from = nodes.find(n => n.id === conn.from);
@@ -30,7 +30,8 @@ const BTreeVisualizer = () => {
             <motion.line
               key={i}
               x1={from.x} y1={from.y + 5} x2={to.x} y2={to.y - 5}
-              stroke="#1e293b"
+              stroke="currentColor"
+              className="text-slate-200 dark:text-slate-800"
               strokeWidth="0.5"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}
@@ -48,24 +49,34 @@ const BTreeVisualizer = () => {
             <rect
               x={node.x - 8} y={node.y - 4} width={16} height={8}
               rx="2"
-              fill="#0f172a"
-              stroke="#38bdf8"
+              fill="currentColor"
+              className="text-white dark:text-slate-900"
+              stroke="currentColor"
               strokeWidth="0.5"
             />
             <text
               x={node.x} y={node.y + 1}
               textAnchor="middle"
-              fill="#e2e8f0"
+              fill="currentColor"
               fontSize="3"
               fontWeight="bold"
-              className="font-mono"
+              className="font-mono text-slate-700 dark:text-slate-200"
             >
               {node.label}
             </text>
+            {/* Outline rect for the sapphire border */}
+            <rect
+              x={node.x - 8} y={node.y - 4} width={16} height={8}
+              rx="2"
+              fill="none"
+              stroke="currentColor"
+              className="text-sapphire-500 dark:text-sapphire-400"
+              strokeWidth="0.5"
+            />
           </motion.g>
         ))}
       </svg>
-      <div className="absolute bottom-2 right-2 text-[8px] font-mono text-slate-500 uppercase tracking-widest">
+      <div className="absolute bottom-2 right-2 text-[8px] font-mono text-slate-400 dark:text-slate-500 uppercase tracking-widest">
         Balanced Tree Hierarchy
       </div>
     </div>
