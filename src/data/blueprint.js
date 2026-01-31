@@ -116,7 +116,7 @@ export const concepts = [
     difficulty: "Beginner",
     definition: "Data Manipulation Language. Conceptual flow of adding, changing, or removing records.",
     performance: "Triggers index updates and Write-Ahead Log (WAL) entries, adding latency.",
-    visualType: "dml",
+    visualType: "acid",
     exampleQuery: "INSERT INTO stars VALUES (1, 'Sirius');"
   },
 

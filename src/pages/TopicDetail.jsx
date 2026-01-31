@@ -1,10 +1,35 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Book, Zap, Database, Play, BarChart3, AlertCircle, Code, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Book, Zap, Database, Play, BarChart3, AlertCircle, Code, ChevronRight, ChevronLeft } from 'lucide-react';
 import { concepts } from '../data/blueprint';
 
+// --- Visualizers ---
+import BTreeVisualizer from '../components/visualizers/BTreeVisualizer';
+import JoinVisualizer from '../components/visualizers/JoinVisualizer';
+import ACIDVisualizer from '../components/visualizers/ACIDVisualizer';
+import ScanVisualizer from '../components/visualizers/ScanVisualizer';
+import IndexSeekVisualizer from '../components/visualizers/IndexSeekVisualizer';
+
 // --- Visual Components ---
+
+const VisualizerSelector = ({ type, id }) => {
+  switch (type) {
+    case 'tree':
+      return <BTreeVisualizer />;
+    case 'join':
+    case 'algorithm':
+      return <JoinVisualizer />;
+    case 'acid':
+      return <ACIDVisualizer />;
+    case 'scan':
+      return <ScanVisualizer />;
+    case 'search':
+      return <IndexSeekVisualizer />;
+    default:
+      return <ExecutionFlow type={type} />;
+  }
+};
 
 const TableVisualizer = ({ id }) => {
   const rows = [
@@ -131,7 +156,11 @@ const QueryExample = ({ query }) => {
 
 const TopicDetail = () => {
   const { id } = useParams();
-  const concept = concepts.find(c => c.id === id);
+  const conceptIndex = useMemo(() => concepts.findIndex(c => c.id === id), [id]);
+  const concept = concepts[conceptIndex];
+
+  const prevConcept = conceptIndex > 0 ? concepts[conceptIndex - 1] : null;
+  const nextConcept = conceptIndex < concepts.length - 1 ? concepts[conceptIndex + 1] : null;
 
   if (!concept) {
     return (
@@ -230,7 +259,7 @@ const TopicDetail = () => {
               <h4 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest flex items-center">
                 <Play size={14} className="mr-2" /> Execution Flow
               </h4>
-              <ExecutionFlow type={concept.visualType} />
+              <VisualizerSelector type={concept.visualType} id={concept.id} />
             </div>
 
             {/* Metadata Card */}
@@ -261,6 +290,37 @@ const TopicDetail = () => {
 
           </div>
         </div>
+
+        {/* Navigation Footer */}
+        <footer className="mt-20 pt-8 border-t border-slate-100 dark:border-slate-900">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+            {prevConcept ? (
+              <Link 
+                to={`/concept/${prevConcept.id}`}
+                className="w-full sm:w-auto group flex items-center p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-sapphire-500/50 transition-all hover:bg-slate-50 dark:hover:bg-slate-900/50"
+              >
+                <ChevronLeft className="w-5 h-5 mr-4 text-slate-400 group-hover:text-sapphire-500 transition-colors" />
+                <div className="text-left">
+                  <div className="text-[10px] text-slate-500 uppercase tracking-widest mb-1">Previous Topic</div>
+                  <div className="text-sm font-bold text-slate-900 dark:text-slate-200 group-hover:text-sapphire-600 dark:group-hover:text-sapphire-400">{prevConcept.title}</div>
+                </div>
+              </Link>
+            ) : <div />}
+
+            {nextConcept ? (
+              <Link 
+                to={`/concept/${nextConcept.id}`}
+                className="w-full sm:w-auto group flex items-center p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-sapphire-500/50 transition-all hover:bg-slate-50 dark:hover:bg-slate-900/50"
+              >
+                <div className="text-right">
+                  <div className="text-[10px] text-slate-500 uppercase tracking-widest mb-1">Next Topic</div>
+                  <div className="text-sm font-bold text-slate-900 dark:text-slate-200 group-hover:text-sapphire-600 dark:group-hover:text-sapphire-400">{nextConcept.title}</div>
+                </div>
+                <ChevronRight className="w-5 h-5 ml-4 text-slate-400 group-hover:text-sapphire-500 transition-colors" />
+              </Link>
+            ) : <div />}
+          </div>
+        </footer>
       </div>
     </div>
   );
