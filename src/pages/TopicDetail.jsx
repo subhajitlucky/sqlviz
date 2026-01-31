@@ -40,24 +40,26 @@ const TableVisualizer = ({ id }) => {
   ];
 
   return (
-    <div className="w-full bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 overflow-hidden font-mono text-[11px] transition-colors shadow-sm">
-      <div className="grid grid-cols-4 bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-800 p-2 text-slate-500 uppercase tracking-tighter">
-        <div>ID</div><div>Name</div><div>Magnitude</div><div>Type</div>
+    <div className="w-full bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 overflow-x-auto font-mono text-[11px] transition-colors shadow-sm">
+      <div className="min-w-[400px]">
+        <div className="grid grid-cols-4 bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-800 p-2 text-slate-500 uppercase tracking-tighter">
+          <div>ID</div><div>Name</div><div>Magnitude</div><div>Type</div>
+        </div>
+        {rows.map((row, i) => (
+          <motion.div 
+            key={row.id}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: i * 0.1 }}
+            className="grid grid-cols-4 p-2 border-b border-slate-100 dark:border-slate-900/50 text-slate-700 dark:text-slate-300 hover:bg-sapphire-50 dark:hover:bg-sapphire-900/10 transition-colors"
+          >
+            <div className="text-sapphire-600 dark:text-sapphire-500 font-bold">{row.id}</div>
+            <div>{row.name}</div>
+            <div className={row.mag < 0 ? "text-amber-600 dark:text-amber-400" : "text-slate-500 dark:text-slate-400"}>{row.mag}</div>
+            <div className="text-slate-400 dark:text-slate-500">{row.type}</div>
+          </motion.div>
+        ))}
       </div>
-      {rows.map((row, i) => (
-        <motion.div 
-          key={row.id}
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: i * 0.1 }}
-          className="grid grid-cols-4 p-2 border-b border-slate-100 dark:border-slate-900/50 text-slate-700 dark:text-slate-300 hover:bg-sapphire-50 dark:hover:bg-sapphire-900/10 transition-colors"
-        >
-          <div className="text-sapphire-600 dark:text-sapphire-500 font-bold">{row.id}</div>
-          <div>{row.name}</div>
-          <div className={row.mag < 0 ? "text-amber-600 dark:text-amber-400" : "text-slate-500 dark:text-slate-400"}>{row.mag}</div>
-          <div className="text-slate-400 dark:text-slate-500">{row.type}</div>
-        </motion.div>
-      ))}
     </div>
   );
 };
@@ -127,8 +129,8 @@ const QueryExample = ({ query }) => {
   const keywords = ['SELECT', 'FROM', 'WHERE', 'ORDER', 'BY', 'LIMIT', 'OFFSET', 'JOIN', 'ON', 'GROUP', 'HAVING', 'WITH', 'CREATE', 'INDEX', 'ALTER', 'TABLE', 'ADD', 'PRIMARY', 'KEY', 'INSERT', 'INTO', 'VALUES'];
 
   return (
-    <div className="bg-slate-50 dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 font-mono text-sm leading-relaxed group shadow-inner transition-colors">
-      <div className="flex items-center justify-between mb-4 border-b border-slate-200 dark:border-slate-900 pb-2">
+    <div className="bg-slate-50 dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 font-mono text-sm leading-relaxed group shadow-inner transition-colors overflow-x-auto">
+      <div className="flex items-center justify-between mb-4 border-b border-slate-200 dark:border-slate-900 pb-2 min-w-[300px]">
         <div className="flex space-x-1.5">
           <div className="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-slate-800"></div>
           <div className="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-slate-800"></div>
@@ -136,7 +138,7 @@ const QueryExample = ({ query }) => {
         </div>
         <span className="text-[10px] text-slate-400 dark:text-slate-600 uppercase tracking-widest">SQL EXECUTOR</span>
       </div>
-      <p className="text-slate-600 dark:text-slate-400">
+      <p className="text-slate-600 dark:text-slate-400 min-w-[300px] whitespace-pre-wrap md:whitespace-normal">
         {parts.map((part, i) => (
           <span key={i} className={keywords.includes(part.toUpperCase()) ? "text-sapphire-600 dark:text-sapphire-400 font-bold" : "text-slate-800 dark:text-slate-300"}>
             {part}{' '}

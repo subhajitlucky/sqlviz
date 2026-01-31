@@ -108,29 +108,29 @@ const TopicCard = ({ concept, index }) => {
     >
       <Link 
         to={`/topic/${concept.id}`}
-        className="group flex flex-col h-full p-5 rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/40 backdrop-blur-xl hover:border-sapphire-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-500 relative overflow-hidden ring-1 ring-inset ring-slate-200/50 dark:ring-white/5"
+        className="group flex flex-col h-full p-6 md:p-5 rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/40 backdrop-blur-xl hover:border-sapphire-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-500 relative overflow-hidden ring-1 ring-inset ring-slate-200/50 dark:ring-white/5"
       >
         {/* Sapphire Pulse Hover Effect */}
         <div className="absolute inset-0 bg-sapphire-500/0 group-hover:bg-sapphire-500/5 transition-colors duration-500" />
         <div className="absolute -inset-full bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-[-35deg] group-hover:animate-[shimmer_1.5s_infinite] pointer-events-none" />
 
-        <div className="relative z-10">
+        <div className="relative z-10 flex flex-col h-full">
           <div className="flex justify-between items-start mb-4">
             <div className="p-3 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-white/5 group-hover:bg-sapphire-500 group-hover:text-white group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-              <Icon className="w-5 h-5 text-slate-600 dark:text-slate-300 group-hover:text-white" />
+              <Icon className="w-6 h-6 md:w-5 md:h-5 text-slate-600 dark:text-slate-300 group-hover:text-white" />
             </div>
             <DifficultyBadge difficulty={concept.difficulty} />
           </div>
           
-          <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-sapphire-600 dark:group-hover:text-sapphire-400 transition-colors mb-2">
+          <h3 className="text-lg md:text-base font-bold text-slate-900 dark:text-white group-hover:text-sapphire-600 dark:group-hover:text-sapphire-400 transition-colors mb-2">
             {concept.title}
           </h3>
           
-          <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mb-4 flex-grow">
+          <p className="text-sm md:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mb-4 flex-grow">
             {concept.definition}
           </p>
           
-          <div className="flex items-center text-xs font-semibold text-sapphire-600 dark:text-sapphire-400 group-hover:text-sapphire-500 dark:group-hover:text-sapphire-300">
+          <div className="flex items-center text-sm md:text-xs font-semibold text-sapphire-600 dark:text-sapphire-400 group-hover:text-sapphire-500 dark:group-hover:text-sapphire-300 mt-auto">
             Launch Module <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
           </div>
         </div>
