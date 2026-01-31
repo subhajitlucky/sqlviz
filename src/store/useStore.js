@@ -1,50 +1,43 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-export const useStore = create((set) => ({
-  theme: 'dark',
-  toggleTheme: () => set((state) => ({ theme: state.theme === 'dark' ? 'light' : 'dark' })),
-  
-  currentPath: null,
-  setCurrentPath: (path) => set({ currentPath: path }),
-  
-  playgroundState: {
-    tables: [
-      { 
-        name: 'users', 
-        columns: ['id', 'name', 'age', 'email'], 
-        data: [
-          { id: 1, name: 'Alice', age: 24, email: 'alice@cosmos.io' },
-          { id: 2, name: 'Bob', age: 29, email: 'bob@cosmos.io' },
-          { id: 3, name: 'Charlie', age: 31, email: 'charlie@cosmos.io' },
-          { id: 4, name: 'David', age: 22, email: 'david@cosmos.io' },
-          { id: 5, name: 'Eve', age: 27, email: 'eve@cosmos.io' }
+export const useStore = create(
+  persist(
+    (set) => ({
+      theme: 'dark',
+      toggleTheme: () => set((state) => ({ theme: state.theme === 'dark' ? 'light' : 'dark' })),
+      
+      playgroundState: {
+        query: 'SELECT * FROM users WHERE age > 25',
+        tables: [
+          {
+            name: 'users',
+            columns: ['id', 'name', 'age', 'city'],
+            data: [
+              { id: 1, name: 'Alice', age: 25, city: 'New York' },
+              { id: 2, name: 'Bob', age: 30, city: 'London' },
+              { id: 3, name: 'Charlie', age: 35, city: 'Tokyo' },
+              { id: 4, name: 'David', age: 28, city: 'Paris' },
+              { id: 5, name: 'Eve', age: 22, city: 'Berlin' },
+            ]
+          },
+          {
+            name: 'orders',
+            columns: ['id', 'user_id', 'amount', 'status'],
+            data: [
+              { id: 101, user_id: 1, amount: 250, status: 'Completed' },
+              { id: 102, user_id: 2, amount: 450, status: 'Pending' },
+              { id: 103, user_id: 1, amount: 120, status: 'Completed' },
+            ]
+          }
         ]
       },
-      { 
-        name: 'orders', 
-        columns: ['id', 'user_id', 'amount'], 
-        data: [
-          { id: 101, user_id: 1, amount: 250 },
-          { id: 102, user_id: 1, amount: 450 },
-          { id: 103, user_id: 2, amount: 150 },
-          { id: 104, user_id: 5, amount: 300 }
-        ]
-      }
-    ],
-    query: 'SELECT * FROM users WHERE age > 25',
-    executionSteps: [],
-    isExecuting: false,
-  },
-  
-  setQuery: (query) => set((state) => ({ 
-    playgroundState: { ...state.playgroundState, query } 
-  })),
-
-  setIsExecuting: (isExecuting) => set((state) => ({
-    playgroundState: { ...state.playgroundState, isExecuting }
-  })),
-  
-  setExecutionSteps: (steps) => set((state) => ({
-    playgroundState: { ...state.playgroundState, executionSteps: steps }
-  })),
-}));
+      setQuery: (query) => set((state) => ({ 
+        playgroundState: { ...state.playgroundState, query } 
+      })),
+    }),
+    {
+      name: 'sql-cosmos-storage',
+    }
+  )
+);
