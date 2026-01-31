@@ -13,24 +13,9 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  // Prevent hydration mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  // Robust theme application
-  useEffect(() => {
-    if (!mounted) return;
-    const root = window.document.documentElement;
-    console.log('Applying theme class:', theme);
-    if (theme === 'dark') {
-      root.classList.add('dark');
-      root.style.colorScheme = 'dark';
-    } else {
-      root.classList.remove('dark');
-      root.style.colorScheme = 'light';
-    }
-  }, [theme, mounted]);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
@@ -39,9 +24,11 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen flex flex-col bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300">
+      {/* THEME WRAPPER: This div now controls everything. No more reliance on <html> tag. */}
+      <div className={`${theme === 'dark' ? 'dark' : ''} min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300`}>
+        
         {/* Navigation */}
-        <nav className="border-b border-[var(--border-primary)] bg-white/70 dark:bg-slate-950/70 backdrop-blur-md sticky top-0 z-50">
+        <nav className="border-b border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-16 items-center">
               <Link to="/" className="flex items-center space-x-2 z-50" onClick={closeMenu}>
@@ -61,9 +48,11 @@ function App() {
                   <Terminal className="w-4 h-4" />
                   <span>Playground</span>
                 </Link>
+                
+                {/* THEME TOGGLE BUTTON */}
                 <button 
                   onClick={toggleTheme}
-                  className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400"
+                  className="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700"
                   aria-label="Toggle theme"
                 >
                   {theme === 'dark' ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5" />}
@@ -74,13 +63,13 @@ function App() {
               <div className="flex md:hidden items-center space-x-2">
                 <button 
                   onClick={toggleTheme}
-                  className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400"
+                  className="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700"
                 >
                   {theme === 'dark' ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5" />}
                 </button>
                 <button 
                   onClick={toggleMenu}
-                  className="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors z-50"
+                  className="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors z-50"
                 >
                   {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                 </button>
@@ -131,7 +120,7 @@ function App() {
         </main>
 
         {/* Footer */}
-        <footer className="border-t border-[var(--border-primary)] py-12 bg-[var(--bg-primary)] transition-colors">
+        <footer className="border-t border-slate-200 dark:border-slate-800 py-12 bg-white dark:bg-slate-950 transition-colors">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <p className="text-slate-500 dark:text-slate-400 text-sm italic font-light">"Visualizing the core of your data."</p>
             <p className="mt-4 text-slate-400 dark:text-slate-600 text-xs font-mono uppercase tracking-widest">© 2026 SQL Cosmos • Built by OpenClaw</p>

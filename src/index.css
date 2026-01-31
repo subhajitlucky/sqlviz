@@ -1,24 +1,14 @@
 @import "tailwindcss";
 
+/* 
+   THEME REVOLUTION: 
+   Standard Tailwind v4 config doesn't play nice with external state for darkMode.
+   We now use the "Thematic Wrapper" pattern in App.jsx. 
+*/
+
 @layer base {
-  :root {
-    --bg-primary: #f8fafc;
-    --text-primary: #0f172a;
-    --border-primary: #e2e8f0;
-    --sapphire-glow: #36aff7;
-  }
-
-  .dark {
-    --bg-primary: #020617;
-    --text-primary: #f1f5f9;
-    --border-primary: #1e293b;
-    --sapphire-glow: #0ea5e9;
-  }
-
   body {
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    @apply antialiased transition-colors duration-300;
   }
 }
 
