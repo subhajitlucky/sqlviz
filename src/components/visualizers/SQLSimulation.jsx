@@ -1,157 +1,188 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, RotateCcw, Database, Cpu, BarChart3, Search, Sparkles } from 'lucide-react';
+import { Play, RotateCcw, Database, Cpu, BarChart3, Search, Code, Table as TableIcon, ArrowDown } from 'lucide-react';
 
 const SQLSimulation = () => {
-  const [step, setStep] = useState('idle'); // idle, parsing, optimizing, executing, finished
-  const [planType, setPlanType] = useState(null); // 'index' or 'scan'
+  const [phase, setPhase] = useState('input'); // input, result, engine
+  const [planType, setPlanType] = useState('index');
 
-  const startSim = (type) => {
+  const startSimulation = (type) => {
     setPlanType(type);
-    setStep('parsing');
-    setTimeout(() => setStep('optimizing'), 1000);
-    setTimeout(() => setStep('executing'), 2500);
-    setTimeout(() => setStep('finished'), 4500);
+    setPhase('result');
+    // Result shows for 1.5s, then automatically triggers engine explanation
+    setTimeout(() => setPhase('engine'), 1500);
   };
 
   const reset = () => {
-    setStep('idle');
-    setPlanType(null);
+    setPhase('input');
   };
 
-  const containerVariants = {
-    idle: { opacity: 1 },
-    parsing: { scale: 1 },
-    optimizing: { scale: 1.02 },
-    executing: { scale: 1 },
-    finished: { scale: 1 }
-  };
+  const queryText = planType === 'index' 
+    ? "SELECT * FROM stars WHERE id = 1;" 
+    : "SELECT * FROM stars WHERE mag > 2.0;";
+
+  const tableData = planType === 'index' 
+    ? [{ id: 1, name: 'Sirius', mag: -1.46 }]
+    : [{ id: 2, name: 'Canopus', mag: -0.74 }, { id: 4, name: 'Arcturus', mag: -0.05 }];
 
   return (
-    <div className="relative w-full min-h-[350px] flex flex-col items-center justify-center bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden p-8 transition-all">
+    <div className="w-full min-h-[450px] flex flex-col bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden transition-all">
       {/* Simulation Header */}
-      <div className="absolute top-0 left-0 right-0 px-6 py-3 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
+      <div className="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <div className="w-2 h-2 rounded-full bg-sapphire-500 animate-pulse" />
-          <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">Live Engine Simulation</span>
+          <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">The Declarative Process</span>
         </div>
-        {step !== 'idle' && (
-          <button onClick={reset} className="text-slate-400 hover:text-sapphire-500 transition-colors">
-            <RotateCcw size={14} />
+        {phase !== 'input' && (
+          <button onClick={reset} className="text-slate-400 hover:text-sapphire-500 transition-colors flex items-center space-x-1 uppercase text-[10px] font-black">
+            <RotateCcw size={12} />
+            <span>Restart</span>
           </button>
         )}
       </div>
 
-      <AnimatePresence mode="wait">
-        {step === 'idle' ? (
-          <motion.div 
-            key="idle"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            className="flex flex-col items-center space-y-8 text-center"
-          >
-            <div className="p-4 rounded-3xl bg-sapphire-500/10 text-sapphire-600 dark:text-sapphire-400">
-              <Database size={48} strokeWidth={1.5} />
+      <div className="p-8 flex-grow flex flex-col">
+        {/* STEP 1: THE SQL CONTRACT */}
+        <section className="mb-8">
+          <div className="flex items-center space-x-2 mb-4">
+            <div className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-500">
+              <Code size={14} />
             </div>
-            <div>
-              <h4 className="text-lg font-black text-slate-900 dark:text-white mb-2 tracking-tight">Interactive Declarative Contract</h4>
-              <p className="text-sm text-slate-500 dark:text-slate-400 max-w-xs">Select a requirement to see how the engine handles the "How" automatically.</p>
+            <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400">1. The Declarative Contract (The "What")</h4>
+          </div>
+          
+          <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 font-mono text-sm shadow-inner relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+              <Database size={40} />
             </div>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button 
-                onClick={() => startSim('index')}
-                className="px-6 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl font-black text-xs uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl"
-              >
-                Query with Index
-              </button>
-              <button 
-                onClick={() => startSim('scan')}
-                className="px-6 py-3 border-2 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-50 dark:hover:bg-slate-800 transition-all"
-              >
-                Full Table Scan
-              </button>
-            </div>
-          </motion.div>
-        ) : (
-          <motion.div 
-            key="active"
-            variants={containerVariants}
-            animate={step}
-            className="w-full flex flex-col items-center justify-center space-y-12 py-10"
-          >
-            {/* Visual Pipeline */}
-            <div className="flex items-center justify-between w-full max-w-md relative">
-              {/* Connector Lines */}
-              <div className="absolute top-1/2 left-0 w-full h-1 bg-slate-100 dark:bg-slate-800 -translate-y-1/2 -z-10 rounded-full overflow-hidden">
-                <motion.div 
-                  initial={{ left: '-100%' }}
-                  animate={{ left: step === 'finished' ? '100%' : '0%' }}
-                  transition={{ duration: 4, ease: "linear" }}
-                  className="absolute top-0 w-full h-full bg-gradient-to-r from-transparent via-sapphire-500 to-transparent"
-                />
-              </div>
-
-              {/* Node 1: Parser */}
-              <div className="relative flex flex-col items-center">
-                <div className={`w-14 h-14 rounded-2xl border-2 transition-all flex items-center justify-center ${step === 'parsing' ? 'bg-sapphire-600 border-sapphire-400 text-white shadow-[0_0_20px_rgba(37,99,235,0.5)] scale-110' : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-400'}`}>
-                  <Search size={24} />
-                </div>
-                <span className="absolute -bottom-6 text-[8px] font-black uppercase tracking-widest text-slate-400">Parse</span>
-              </div>
-
-              {/* Node 2: Optimizer */}
-              <div className="relative flex flex-col items-center">
-                <div className={`w-14 h-14 rounded-2xl border-2 transition-all flex items-center justify-center ${step === 'optimizing' ? 'bg-amber-500 border-amber-300 text-white shadow-[0_0_20px_rgba(245,158,11,0.5)] scale-110' : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-400'}`}>
-                  <Cpu size={24} />
-                </div>
-                <span className="absolute -bottom-6 text-[8px] font-black uppercase tracking-widest text-slate-400">Optimize</span>
-              </div>
-
-              {/* Node 3: Execution */}
-              <div className="relative flex flex-col items-center">
-                <div className={`w-14 h-14 rounded-2xl border-2 transition-all flex items-center justify-center ${step === 'executing' ? 'bg-emerald-500 border-emerald-300 text-white shadow-[0_0_20px_rgba(16,185,129,0.5)] scale-110' : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-400'}`}>
-                  <Play size={24} className="fill-current" />
-                </div>
-                <span className="absolute -bottom-6 text-[8px] font-black uppercase tracking-widest text-slate-400">Execute</span>
-              </div>
-            </div>
-
-            {/* Status Message */}
-            <div className="text-center h-12">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={step}
-                  initial={{ opacity: 0, y: 5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -5 }}
-                  className="flex flex-col items-center"
+            <p className="text-white relative z-10">
+              <span className="text-sapphire-400 font-bold">SELECT</span> * <br/>
+              <span className="text-sapphire-400 font-bold">FROM</span> stars <br/>
+              <span className="text-sapphire-400 font-bold">WHERE</span> {planType === 'index' ? 'id = 1' : 'mag > 2.0'};
+            </p>
+            {phase === 'input' && (
+              <div className="mt-6 flex gap-3">
+                <button 
+                  onClick={() => startSimulation('index')}
+                  className="px-4 py-2 bg-sapphire-600 hover:bg-sapphire-500 text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-sapphire-500/20 transition-all active:scale-95"
                 >
-                  <span className="text-sm font-bold text-slate-900 dark:text-white">
-                    {step === 'parsing' && "Deconstructing SQL Contract..."}
-                    {step === 'optimizing' && (planType === 'index' ? "Optimizer chose INDEX SEEK (Cost: 0.004)" : "Optimizer chose SEQ SCAN (Cost: 45.2)")}
-                    {step === 'executing' && (planType === 'index' ? "Navigating B-Tree for ID..." : "Scanning blocks 0-1042...")}
-                    {step === 'finished' && "Data materialization complete!"}
-                  </span>
-                  {step === 'finished' && (
-                    <motion.button 
-                      initial={{ opacity: 0 }} 
-                      animate={{ opacity: 1 }} 
-                      onClick={reset}
-                      className="text-[10px] font-black text-sapphire-600 dark:text-sapphire-400 mt-2 uppercase tracking-widest"
-                    >
-                      Run Another Scenario
-                    </motion.button>
-                  )}
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                  Run (Indexed)
+                </button>
+                <button 
+                  onClick={() => startSimulation('scan')}
+                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-[10px] font-black uppercase tracking-widest transition-all active:scale-95"
+                >
+                  Run (Full Scan)
+                </button>
+              </div>
+            )}
+          </div>
+        </section>
 
-      {/* Decorative Sparkle */}
-      <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-sapphire-500/10 blur-3xl rounded-full pointer-events-none" />
+        {/* STEP 2: THE MATERIALIZED RESULT */}
+        <AnimatePresence>
+          {phase !== 'input' && (
+            <motion.section 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-8"
+            >
+              <div className="flex items-center space-x-2 mb-4">
+                <div className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-500">
+                  <TableIcon size={14} />
+                </div>
+                <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400">2. Result Set (Immediate Outcome)</h4>
+              </div>
+              <div className="bg-white dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-xl">
+                <table className="w-full text-left font-mono text-[10px]">
+                  <thead className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+                    <tr>
+                      <th className="px-4 py-2 text-slate-400 uppercase">ID</th>
+                      <th className="px-4 py-2 text-slate-400 uppercase">Name</th>
+                      <th className="px-4 py-2 text-slate-400 uppercase">Mag</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {tableData.map((row, i) => (
+                      <motion.tr 
+                        key={i}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.1 }}
+                        className="border-b border-slate-50 dark:border-slate-800/50"
+                      >
+                        <td className="px-4 py-2 text-sapphire-500 font-bold">{row.id}</td>
+                        <td className="px-4 py-2 text-slate-900 dark:text-slate-300">{row.name}</td>
+                        <td className="px-4 py-2 text-slate-400">{row.mag}</td>
+                      </motion.tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </motion.section>
+          )}
+        </AnimatePresence>
+
+        {/* STEP 3: THE ENGINE PROCESS */}
+        <AnimatePresence>
+          {phase === 'engine' && (
+            <motion.section 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="relative"
+            >
+              <div className="flex items-center space-x-2 mb-4">
+                <div className="p-1.5 rounded-lg bg-amber-500/10 text-amber-500">
+                  <Cpu size={14} />
+                </div>
+                <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400">3. Under the Hood (The "How")</h4>
+              </div>
+              
+              <div className="bg-slate-50 dark:bg-slate-800/30 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 relative">
+                <div className="flex justify-between items-center max-w-sm mx-auto relative px-4">
+                  {/* Connector */}
+                  <div className="absolute top-1/2 left-0 w-full h-0.5 bg-slate-200 dark:bg-slate-700 -translate-y-1/2 -z-0" />
+                  
+                  {[
+                    { icon: Search, label: 'Parse', color: 'bg-sapphire-500', delay: 0 },
+                    { icon: Cpu, label: 'Optimize', color: 'bg-amber-500', delay: 1 },
+                    { icon: Play, label: 'Execute', color: 'bg-emerald-500', delay: 2 }
+                  ].map((node, i) => (
+                    <motion.div 
+                      key={i}
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ delay: node.delay * 0.5 }}
+                      className="relative z-10 flex flex-col items-center"
+                    >
+                      <div className={`w-10 h-10 rounded-xl ${node.color} text-white flex items-center justify-center shadow-lg`}>
+                        <node.icon size={18} />
+                      </div>
+                      <span className="mt-2 text-[8px] font-black uppercase tracking-tighter text-slate-400">{node.label}</span>
+                    </motion.div>
+                  ))}
+                </div>
+
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.5 }}
+                  className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800 text-center"
+                >
+                  <p className="text-xs font-bold text-slate-900 dark:text-white mb-1 uppercase tracking-tight">
+                    {planType === 'index' ? "Strategy: Index Seek" : "Strategy: Sequential Scan"}
+                  </p>
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400">
+                    {planType === 'index' 
+                      ? "The optimizer found a B-Tree index on 'id'. Estimated cost: 0.004 units." 
+                      : "No index covers 'mag'. Falling back to full table scan. Estimated cost: 45.2 units."}
+                  </p>
+                </motion.div>
+              </div>
+            </motion.section>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 };
