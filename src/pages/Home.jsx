@@ -1,102 +1,103 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Database, Zap, ArrowRight, Layers, Cpu, Share2, Terminal } from 'lucide-react';
+import { Database, Zap, ArrowRight, Layers, Cpu, Share2, Terminal, Sparkles, ShieldCheck, Box } from 'lucide-react';
 
 const Home = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: 0.3 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1 }
+  };
+
   return (
-    <div className="relative overflow-hidden bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
-      {/* Background Blobs */}
-      <div className="absolute top-0 -left-4 w-72 h-72 bg-sapphire-400 dark:bg-sapphire-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 dark:opacity-20 animate-blob"></div>
-      <div className="absolute top-0 -right-4 w-72 h-72 bg-blue-400 dark:bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 dark:opacity-20 animate-blob animation-delay-2000"></div>
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 relative">
-        <div className="text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight mb-6 text-slate-900 dark:text-white px-2">
-              Visualize the <span className="text-sapphire-600 dark:text-sapphire-400">Core</span> <br className="hidden sm:block" />
-              of Your Data
-            </h1>
-            <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-10 px-4">
-              Master SQL through interactive mental models. From B-Trees to Isolation Levels, see how your database actually works under the hood.
-            </p>
+    <div className="flex-grow relative flex flex-col items-center justify-center overflow-hidden">
+      {/* Dynamic Background Elements */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-sapphire-500/10 dark:bg-sapphire-500/20 rounded-full blur-[120px] animate-blob" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 dark:bg-blue-500/20 rounded-full blur-[120px] animate-blob animation-delay-2000" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
+        <motion.div 
+          className="text-center"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {/* Badge */}
+          <motion.div variants={itemVariants} className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-sapphire-100 dark:bg-sapphire-900/30 border border-sapphire-200 dark:border-sapphire-800 text-sapphire-700 dark:text-sapphire-300 text-xs font-bold uppercase tracking-widest mb-8">
+            <Sparkles className="w-3 h-3" />
+            <span>The Future of SQL Learning</span>
           </motion.div>
 
+          {/* Hero Title */}
+          <motion.h1 
+            variants={itemVariants}
+            className="text-5xl md:text-8xl font-black tracking-tight text-slate-900 dark:text-white leading-tight mb-8"
+          >
+            Master the <br />
+            <span className="bg-gradient-to-r from-sapphire-600 to-blue-500 bg-clip-text text-transparent">
+              SQL Cosmos
+            </span>
+          </motion.h1>
+
+          {/* Description */}
+          <motion.p 
+            variants={itemVariants}
+            className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto mb-12 font-medium"
+          >
+            Don't just write queries. Visualize the execution path, understand the architecture, and conquer complex data structures through interactive mental models.
+          </motion.p>
+
+          {/* Action Buttons */}
           <motion.div 
-            className="flex flex-col sm:flex-row justify-center gap-4 mb-20"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row items-center justify-center gap-6"
           >
-            <Link to="/path" className="px-8 py-4 bg-sapphire-600 hover:bg-sapphire-700 text-white rounded-lg font-bold flex items-center justify-center transition-all shadow-lg shadow-sapphire-500/20">
-              Start Learning <ArrowRight className="ml-2 w-5 h-5" />
+            <Link 
+              to="/path" 
+              className="group relative px-10 py-5 bg-sapphire-600 hover:bg-sapphire-700 text-white rounded-2xl font-black text-lg flex items-center transition-all transform hover:scale-105 shadow-2xl shadow-sapphire-500/40"
+            >
+              Start Your Journey
+              <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link to="/playground" className="px-8 py-4 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-900 dark:text-white rounded-lg font-bold flex items-center justify-center transition-all border border-slate-200 dark:border-slate-700 shadow-sm">
-              Try Playground <Terminal className="ml-2 w-5 h-5" />
+            <Link 
+              to="/playground" 
+              className="px-10 py-5 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-900 dark:text-white rounded-2xl font-black text-lg flex items-center transition-all border-2 border-slate-200 dark:border-slate-800 shadow-xl transform hover:scale-105"
+            >
+              Open Playground
+              <Terminal className="ml-3 w-6 h-6 text-sapphire-500" />
             </Link>
           </motion.div>
 
-          {/* Execution Flow Visualization Preview */}
-          <motion.div
-            className="relative max-w-4xl mx-auto p-4 md:p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm shadow-xl overflow-hidden"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4 }}
+          {/* Features Grid */}
+          <motion.div 
+            variants={itemVariants}
+            className="mt-32 grid grid-cols-1 md:grid-cols-3 gap-8"
           >
-            <div className="flex items-center space-x-2 mb-6 border-b border-slate-100 dark:border-slate-800 pb-2">
-              <div className="w-3 h-3 rounded-full bg-red-500"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500"></div>
-              <span className="text-[10px] md:text-xs text-slate-400 dark:text-slate-500 font-mono ml-2">query_optimizer.v1</span>
-            </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 py-4">
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex flex-col items-center">
-                <div className="p-3 rounded-full bg-sapphire-50 dark:bg-sapphire-900/30 mb-3">
-                  <Layers className="w-6 h-6 md:w-8 md:h-8 text-sapphire-600 dark:text-sapphire-400" />
+            {[
+              { icon: Layers, title: "Query Parsing", desc: "See how your SQL is broken down into relational algebra." },
+              { icon: Cpu, title: "Execution Plans", desc: "Watch the optimizer choose between Index Seeks and Seq Scans." },
+              { icon: ShieldCheck, title: "Isolation Levels", desc: "Simulate race conditions and understand transaction safety." }
+            ].map((feature, i) => (
+              <div key={i} className="p-8 rounded-3xl bg-white/50 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200 dark:border-slate-800 text-left hover:border-sapphire-500 transition-colors group">
+                <div className="w-14 h-14 rounded-2xl bg-sapphire-500/10 flex items-center justify-center mb-6 group-hover:bg-sapphire-500 group-hover:text-white transition-all">
+                  <feature.icon className="w-7 h-7 text-sapphire-600 dark:text-sapphire-400 group-hover:text-inherit" />
                 </div>
-                <span className="text-xs md:text-sm font-mono font-bold text-slate-700 dark:text-slate-300">SQL Parser</span>
-                <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-700 mt-4 rounded-full overflow-hidden">
-                  <motion.div 
-                    className="h-full bg-sapphire-500 dark:bg-sapphire-400"
-                    animate={{ width: ["0%", "100%", "0%"] }}
-                    transition={{ duration: 3, repeat: Infinity }}
-                  />
-                </div>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">{feature.title}</h3>
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{feature.desc}</p>
               </div>
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex flex-col items-center">
-                <div className="p-3 rounded-full bg-sapphire-50 dark:bg-sapphire-900/30 mb-3">
-                  <Cpu className="w-6 h-6 md:w-8 md:h-8 text-sapphire-600 dark:text-sapphire-400" />
-                </div>
-                <span className="text-xs md:text-sm font-mono font-bold text-slate-700 dark:text-slate-300">Planner</span>
-                <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-700 mt-4 rounded-full overflow-hidden">
-                   <motion.div 
-                    className="h-full bg-sapphire-500 dark:bg-sapphire-400"
-                    animate={{ width: ["0%", "100%", "0%"] }}
-                    transition={{ duration: 3, repeat: Infinity, delay: 1 }}
-                  />
-                </div>
-              </div>
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex flex-col items-center">
-                <div className="p-3 rounded-full bg-sapphire-50 dark:bg-sapphire-900/30 mb-3">
-                  <Share2 className="w-6 h-6 md:w-8 md:h-8 text-sapphire-600 dark:text-sapphire-400" />
-                </div>
-                <span className="text-xs md:text-sm font-mono font-bold text-slate-700 dark:text-slate-300">Execution</span>
-                <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-700 mt-4 rounded-full overflow-hidden">
-                   <motion.div 
-                    className="h-full bg-sapphire-500 dark:bg-sapphire-400"
-                    animate={{ width: ["0%", "100%", "0%"] }}
-                    transition={{ duration: 3, repeat: Infinity, delay: 2 }}
-                  />
-                </div>
-              </div>
-            </div>
+            ))}
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

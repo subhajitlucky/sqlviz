@@ -36,17 +36,19 @@ function App() {
 
   return (
     <Router>
-      {/* THEME WRAPPER: Root level classes are now handled in useEffect, but we keep the class here for local scope safety */}
+      {/* THEME WRAPPER: Root level classes are now handled in index.css body layer */}
       <div className={`${theme === 'dark' ? 'dark' : ''} min-h-screen flex flex-col transition-colors duration-300`}>
         
         {/* Navigation */}
-        <nav className="border-b border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md sticky top-0 z-50">
+        <nav className="border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between h-16 items-center">
-              <Link to="/" className="flex items-center space-x-2 z-50" onClick={closeMenu}>
-                <Database className="w-8 h-8 text-sapphire-600 dark:text-sapphire-400" />
-                <span className="text-xl font-bold bg-gradient-to-r from-sapphire-600 to-blue-700 dark:from-sapphire-400 dark:to-blue-600 bg-clip-text text-transparent">
-                  SQL COSMOS
+            <div className="flex justify-between h-20 items-center">
+              <Link to="/" className="flex items-center space-x-3 z-50" onClick={closeMenu}>
+                <div className="p-2 rounded-xl bg-sapphire-600">
+                  <Database className="w-6 h-6 text-white" />
+                </div>
+                <span className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white">
+                  SQL<span className="text-sapphire-600 dark:text-sapphire-400">COSMOS</span>
                 </span>
               </Link>
 
@@ -102,18 +104,18 @@ function App() {
                   <Link 
                     to="/path" 
                     onClick={closeMenu}
-                    className="flex items-center space-x-3 p-4 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-sapphire-50 dark:hover:bg-sapphire-900/20"
+                    className="flex items-center space-x-3 p-4 rounded-2xl text-slate-600 dark:text-slate-300 hover:bg-sapphire-50 dark:hover:bg-sapphire-900/30 transition-all font-bold"
                   >
-                    <BookOpen className="w-5 h-5" />
-                    <span className="font-semibold">Learning Path</span>
+                    <BookOpen className="w-5 h-5 text-sapphire-600" />
+                    <span>Learning Path</span>
                   </Link>
                   <Link 
                     to="/playground" 
                     onClick={closeMenu}
-                    className="flex items-center space-x-3 p-4 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-sapphire-50 dark:hover:bg-sapphire-900/20"
+                    className="flex items-center space-x-3 p-4 rounded-2xl text-slate-600 dark:text-slate-300 hover:bg-sapphire-50 dark:hover:bg-sapphire-900/30 transition-all font-bold"
                   >
-                    <Terminal className="w-5 h-5" />
-                    <span className="font-semibold">Playground</span>
+                    <Terminal className="w-5 h-5 text-sapphire-600" />
+                    <span>Playground</span>
                   </Link>
                 </div>
               </motion.div>

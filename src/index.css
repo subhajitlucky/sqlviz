@@ -1,18 +1,6 @@
 @import "tailwindcss";
 
-/* 
-   THEME REVOLUTION: 
-   Standard Tailwind v4 config doesn't play nice with external state for darkMode.
-   We now use the "Thematic Wrapper" pattern in App.jsx. 
-*/
-
 @variant dark (&:where(.dark, .dark *));
-
-@layer base {
-  body {
-    @apply antialiased transition-colors duration-300 bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100;
-  }
-}
 
 @theme {
   --color-sapphire-50: #f0f7ff;
@@ -28,32 +16,32 @@
   --color-sapphire-950: #07294a;
 }
 
-@keyframes shimmer {
-  0% { transform: translateX(-100%) skewX(-35deg); }
-  100% { transform: translateX(200%) skewX(-35deg); }
+@layer base {
+  * {
+    @apply border-slate-200 dark:border-slate-800;
+  }
+  
+  body {
+    @apply antialiased transition-colors duration-300 bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
 }
 
-.shimmer-sweep {
-  position: relative;
-  overflow: hidden;
+@keyframes blob {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
 }
 
-.shimmer-sweep::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    to right,
-    transparent,
-    rgba(255, 255, 255, 0.05),
-    transparent
-  );
-  transform: translateX(-100%) skewX(-35deg);
+.animate-blob {
+  animation: blob 7s infinite;
 }
 
-.group:hover .shimmer-sweep::after {
-  animation: shimmer 1.5s infinite;
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
 }
