@@ -10,8 +10,10 @@ import JoinVisualizer from '../components/visualizers/JoinVisualizer';
 import ACIDVisualizer from '../components/visualizers/ACIDVisualizer';
 import ScanVisualizer from '../components/visualizers/ScanVisualizer';
 import IndexSeekVisualizer from '../components/visualizers/IndexSeekVisualizer';
+import SQLSimulation from '../components/visualizers/SQLSimulation';
 
 const VisualizerSelector = ({ type, id }) => {
+  if (id === 'what-is-sql') return <SQLSimulation />;
   switch (type) {
     case 'tree': return <BTreeVisualizer />;
     case 'join':
