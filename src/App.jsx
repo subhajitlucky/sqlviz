@@ -17,6 +17,15 @@ function App() {
     setMounted(true);
   }, []);
 
+  // Sync theme with document element
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme]);
+
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
 
@@ -24,8 +33,8 @@ function App() {
 
   return (
     <Router>
-      {/* THEME WRAPPER: This div now controls everything. No more reliance on <html> tag. */}
-      <div className={`${theme === 'dark' ? 'dark' : ''} min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300`}>
+      {/* THEME WRAPPER: Root level classes are now handled in useEffect, but we keep the class here for local scope safety */}
+      <div className={`${theme === 'dark' ? 'dark' : ''} min-h-screen flex flex-col transition-colors duration-300`}>
         
         {/* Navigation */}
         <nav className="border-b border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md sticky top-0 z-50">

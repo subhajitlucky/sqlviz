@@ -8,7 +8,7 @@
 
 @layer base {
   body {
-    @apply antialiased transition-colors duration-300;
+    @apply antialiased transition-colors duration-300 bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100;
   }
 }
 
