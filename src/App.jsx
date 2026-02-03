@@ -54,14 +54,22 @@ function App() {
 
               {/* Desktop Menu */}
               <div className="hidden md:flex items-center space-x-8">
-                <Link to="/path" className="flex items-center space-x-1 text-slate-600 dark:text-slate-300 hover:text-sapphire-600 dark:hover:text-sapphire-400 transition-colors">
-                  <BookOpen className="w-4 h-4" />
-                  <span>Learning Path</span>
-                </Link>
-                <Link to="/playground" className="flex items-center space-x-1 text-slate-600 dark:text-slate-300 hover:text-sapphire-600 dark:hover:text-sapphire-400 transition-colors">
-                  <Terminal className="w-4 h-4" />
-                  <span>Playground</span>
-                </Link>
+                {[
+                  { path: '/path', label: 'Learning Path', icon: BookOpen },
+                  { path: '/playground', label: 'Playground', icon: Terminal }
+                ].map((item) => (
+                  <Link 
+                    key={item.path}
+                    to={item.path} 
+                    className="group relative flex items-center space-x-2 text-sm font-black uppercase tracking-widest text-slate-500 hover:text-slate-900 dark:hover:text-white transition-all"
+                  >
+                    <item.icon className="w-4 h-4 transition-transform group-hover:-rotate-12" />
+                    <span>{item.label}</span>
+                    <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sapphire-600 transition-all group-hover:w-full" />
+                  </Link>
+                ))}
+                
+                <div className="h-6 w-px bg-slate-200 dark:border-slate-800" />
                 
                 {/* THEME TOGGLE BUTTON */}
                 <button 

@@ -44,10 +44,10 @@ export const concepts = [
     title: "What is SQL",
     path: "basics",
     difficulty: "Beginner",
-    definition: "Structured Query Language (SQL) is the standard language for interacting with Relational Database Management Systems (RDBMS).",
-    performance: "Declarative nature allows the engine to optimize execution without user intervention.",
+    definition: "Structured Query Language (SQL) is more than just a syntax—it is a declarative contract. Instead of telling the computer 'how' to find data (procedural), you describe 'what' data you need (declarative).",
+    performance: "The 'Declarative Power' allows the Query Optimizer to rewrite your request into thousands of possible execution paths, choosing the most efficient one based on statistics, indexes, and hardware availability.",
     visualType: "flow",
-    exampleQuery: "SELECT * FROM universe;"
+    exampleQuery: "SELECT name FROM stars WHERE magnitude < 2.0;"
   },
   {
     id: "tables-rows-columns",

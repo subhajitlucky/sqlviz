@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Book, Zap, Database, Play, BarChart3, AlertCircle, Code, ChevronRight, ChevronLeft } from 'lucide-react';
+import { ArrowLeft, Book, Zap, Database, Play, BarChart3, AlertCircle, Code, ChevronRight, ChevronLeft, Sparkles, Cpu } from 'lucide-react';
 import { concepts } from '../data/blueprint';
 
 // --- Visualizers ---
@@ -11,23 +11,15 @@ import ACIDVisualizer from '../components/visualizers/ACIDVisualizer';
 import ScanVisualizer from '../components/visualizers/ScanVisualizer';
 import IndexSeekVisualizer from '../components/visualizers/IndexSeekVisualizer';
 
-// --- Visual Components ---
-
 const VisualizerSelector = ({ type, id }) => {
   switch (type) {
-    case 'tree':
-      return <BTreeVisualizer />;
+    case 'tree': return <BTreeVisualizer />;
     case 'join':
-    case 'algorithm':
-      return <JoinVisualizer />;
-    case 'acid':
-      return <ACIDVisualizer />;
-    case 'scan':
-      return <ScanVisualizer />;
-    case 'search':
-      return <IndexSeekVisualizer />;
-    default:
-      return <ExecutionFlow type={type} />;
+    case 'algorithm': return <JoinVisualizer />;
+    case 'acid': return <ACIDVisualizer />;
+    case 'scan': return <ScanVisualizer />;
+    case 'search': return <IndexSeekVisualizer />;
+    default: return <ExecutionFlow type={type} />;
   }
 };
 
@@ -40,25 +32,41 @@ const TableVisualizer = ({ id }) => {
   ];
 
   return (
-    <div className="w-full bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 overflow-x-auto font-mono text-[11px] transition-colors shadow-sm">
-      <div className="min-w-[400px]">
-        <div className="grid grid-cols-4 bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-800 p-2 text-slate-500 uppercase tracking-tighter">
-          <div>ID</div><div>Name</div><div>Magnitude</div><div>Type</div>
+    <div className="w-full bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-2xl transition-all">
+      <div className="bg-slate-50 dark:bg-slate-800 px-4 py-2 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
+        <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Memory Snapshot: stars</span>
+        <div className="flex space-x-1">
+          <div className="w-2 h-2 rounded-full bg-slate-200 dark:bg-slate-700" />
+          <div className="w-2 h-2 rounded-full bg-slate-200 dark:bg-slate-700" />
         </div>
-        {rows.map((row, i) => (
-          <motion.div 
-            key={row.id}
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: i * 0.1 }}
-            className="grid grid-cols-4 p-2 border-b border-slate-100 dark:border-slate-900/50 text-slate-700 dark:text-slate-300 hover:bg-sapphire-50 dark:hover:bg-sapphire-900/10 transition-colors"
-          >
-            <div className="text-sapphire-600 dark:text-sapphire-500 font-bold">{row.id}</div>
-            <div>{row.name}</div>
-            <div className={row.mag < 0 ? "text-amber-600 dark:text-amber-400" : "text-slate-500 dark:text-slate-400"}>{row.mag}</div>
-            <div className="text-slate-400 dark:text-slate-500">{row.type}</div>
-          </motion.div>
-        ))}
+      </div>
+      <div className="overflow-x-auto p-4">
+        <table className="w-full text-left font-mono text-[11px]">
+          <thead>
+            <tr className="text-slate-400 border-b border-slate-100 dark:border-slate-800">
+              <th className="pb-2 font-black uppercase">ID</th>
+              <th className="pb-2 font-black uppercase">Name</th>
+              <th className="pb-2 font-black uppercase">Mag</th>
+              <th className="pb-2 font-black uppercase">Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, i) => (
+              <motion.tr 
+                key={row.id}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: i * 0.1 }}
+                className="group border-b border-slate-50 last:border-0 dark:border-slate-800/50 hover:bg-sapphire-500/5 transition-colors"
+              >
+                <td className="py-2 text-sapphire-600 dark:text-sapphire-400 font-bold">{row.id}</td>
+                <td className="py-2 text-slate-900 dark:text-slate-200 font-medium">{row.name}</td>
+                <td className={`py-2 ${row.mag < 0 ? "text-amber-500" : "text-slate-400"}`}>{row.mag}</td>
+                <td className="py-2 text-slate-400 dark:text-slate-500">{row.type}</td>
+              </motion.tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
@@ -66,59 +74,54 @@ const TableVisualizer = ({ id }) => {
 
 const ExecutionFlow = ({ type }) => {
   return (
-    <div className="relative w-full h-48 flex items-center justify-center bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800/50 overflow-hidden shadow-sm transition-colors">
-      <div className="absolute inset-0 opacity-[0.03] dark:opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+    <div className="relative w-full h-56 flex items-center justify-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden transition-all group">
+      <div className="absolute inset-0 opacity-[0.05] dark:opacity-20 pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-full bg-grid-slate-900/[0.04] bg-[bottom_left_-4px]" />
+      </div>
       
-      {/* Dynamic Flow Visual */}
-      <div className="flex items-center space-x-8 z-10">
+      <div className="flex items-center space-x-12 z-10 scale-90 md:scale-100">
         <motion.div 
-          animate={{ scale: [1, 1.05, 1], borderColor: ['#e2e8f0', '#3b82f6', '#e2e8f0'] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-16 h-16 rounded-full border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-center text-sapphire-600 dark:text-sapphire-400 shadow-sm"
+          animate={{ y: [0, -5, 0], filter: ['drop-shadow(0 0 0px #3b82f6)', 'drop-shadow(0 0 10px #3b82f6)', 'drop-shadow(0 0 0px #3b82f6)'] }}
+          transition={{ duration: 3, repeat: Infinity }}
+          className="w-20 h-20 rounded-3xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex flex-col items-center justify-center text-sapphire-600 dark:text-sapphire-400 shadow-xl"
         >
-          <Database size={24} />
+          <Database size={28} />
+          <span className="text-[8px] mt-1 font-black uppercase">IO</span>
         </motion.div>
         
-        <div className="relative w-24 h-2">
-          <div className="absolute inset-0 bg-slate-100 dark:bg-slate-800 rounded-full"></div>
+        <div className="relative w-24 h-3 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden border border-slate-200 dark:border-slate-700">
           <motion.div 
-            animate={{ left: ['0%', '100%'], opacity: [0, 1, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-            className="absolute top-0 w-4 h-full bg-sapphire-500 dark:bg-sapphire-400 rounded-full shadow-[0_0_10px_#3b82f6]"
-          ></motion.div>
+            animate={{ left: ['-20%', '120%'] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-0 w-8 h-full bg-gradient-to-r from-transparent via-sapphire-500 to-transparent"
+          />
         </div>
 
         <motion.div 
           animate={{ rotate: 360 }}
-          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-          className="w-16 h-16 rounded-xl border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-center text-amber-500 dark:text-amber-400 shadow-sm"
+          transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+          className="w-24 h-24 rounded-full border-2 border-amber-500/30 bg-white dark:bg-slate-800 flex flex-col items-center justify-center text-amber-500 shadow-xl"
         >
-          <Zap size={24} />
+          <Cpu size={32} />
+          <span className="text-[8px] mt-1 font-black uppercase tracking-widest">Plan</span>
         </motion.div>
 
-        <div className="relative w-24 h-2">
-          <div className="absolute inset-0 bg-slate-100 dark:bg-slate-800 rounded-full"></div>
+        <div className="relative w-24 h-3 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden border border-slate-200 dark:border-slate-700">
           <motion.div 
-            animate={{ left: ['0%', '100%'], opacity: [0, 1, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "linear", delay: 0.75 }}
-            className="absolute top-0 w-4 h-full bg-sapphire-500 dark:bg-sapphire-400 rounded-full shadow-[0_0_10px_#3b82f6]"
-          ></motion.div>
+            animate={{ left: ['-20%', '120%'] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            className="absolute top-0 w-8 h-full bg-gradient-to-r from-transparent via-emerald-500 to-transparent"
+          />
         </div>
 
         <motion.div 
-          initial={{ y: 0 }}
-          animate={{ y: [-2, 2, -2] }}
-          transition={{ duration: 3, repeat: Infinity }}
-          className="w-16 h-16 rounded-full border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shadow-sm"
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="w-20 h-20 rounded-3xl border-2 border-emerald-500/20 bg-white dark:bg-slate-800 flex flex-col items-center justify-center text-emerald-500 shadow-xl"
         >
-          <BarChart3 size={24} />
+          <BarChart3 size={28} />
+          <span className="text-[8px] mt-1 font-black uppercase">Result</span>
         </motion.div>
-      </div>
-
-      <div className="absolute bottom-4 left-0 right-0 flex justify-around text-[9px] font-mono text-slate-400 dark:text-slate-500 uppercase tracking-widest">
-        <span>Storage</span>
-        <span>Optimization</span>
-        <span>Results</span>
       </div>
     </div>
   );
@@ -129,32 +132,23 @@ const QueryExample = ({ query }) => {
   const keywords = ['SELECT', 'FROM', 'WHERE', 'ORDER', 'BY', 'LIMIT', 'OFFSET', 'JOIN', 'ON', 'GROUP', 'HAVING', 'WITH', 'CREATE', 'INDEX', 'ALTER', 'TABLE', 'ADD', 'PRIMARY', 'KEY', 'INSERT', 'INTO', 'VALUES'];
 
   return (
-    <div className="bg-slate-50 dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 font-mono text-sm leading-relaxed group shadow-inner transition-colors overflow-x-auto">
-      <div className="flex items-center justify-between mb-4 border-b border-slate-200 dark:border-slate-900 pb-2 min-w-[300px]">
-        <div className="flex space-x-1.5">
-          <div className="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-slate-800"></div>
-          <div className="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-slate-800"></div>
-          <div className="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-slate-800"></div>
-        </div>
-        <span className="text-[10px] text-slate-400 dark:text-slate-600 uppercase tracking-widest">SQL EXECUTOR</span>
+    <div className="bg-slate-900 p-8 rounded-2xl border border-slate-800 font-mono text-base leading-relaxed relative group shadow-2xl overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-sapphire-600 to-blue-400 opacity-50" />
+      <div className="flex items-center space-x-2 mb-6 opacity-50">
+        <div className="w-3 h-3 rounded-full bg-red-500/50" />
+        <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
+        <div className="w-3 h-3 rounded-full bg-green-500/50" />
       </div>
-      <p className="text-slate-600 dark:text-slate-400 min-w-[300px] whitespace-pre-wrap md:whitespace-normal">
+      <p className="text-slate-300">
         {parts.map((part, i) => (
-          <span key={i} className={keywords.includes(part.toUpperCase()) ? "text-sapphire-600 dark:text-sapphire-400 font-bold" : "text-slate-800 dark:text-slate-300"}>
+          <span key={i} className={keywords.includes(part.toUpperCase()) ? "text-sapphire-400 font-black" : "text-white"}>
             {part}{' '}
           </span>
         ))}
       </p>
-      <motion.div 
-        initial={{ width: 0 }}
-        whileInView={{ width: '100%' }}
-        className="h-0.5 bg-sapphire-500/30 mt-4 rounded-full"
-      ></motion.div>
     </div>
   );
 };
-
-// --- Main Page Component ---
 
 const TopicDetail = () => {
   const { id } = useParams();
@@ -164,164 +158,147 @@ const TopicDetail = () => {
   const prevConcept = conceptIndex > 0 ? concepts[conceptIndex - 1] : null;
   const nextConcept = conceptIndex < concepts.length - 1 ? concepts[conceptIndex + 1] : null;
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
+
   if (!concept) {
     return (
-      <div className="min-h-[60vh] flex flex-col items-center justify-center text-slate-500 dark:bg-slate-950">
-        <AlertCircle size={48} className="mb-4 text-slate-300 dark:text-slate-800" />
-        <h2 className="text-xl font-bold text-slate-900 dark:text-white">Concept Orbit Not Found</h2>
-        <Link to="/path" className="mt-4 text-sapphire-600 dark:text-sapphire-400 hover:underline">Return to Learning Path</Link>
+      <div className="min-h-[60vh] flex flex-col items-center justify-center">
+        <AlertCircle size={48} className="mb-4 text-slate-800" />
+        <h2 className="text-2xl font-black text-white">Orbit Lost</h2>
+        <Link to="/path" className="mt-4 text-sapphire-400 hover:underline">Return to Sector Map</Link>
       </div>
     );
   }
 
   return (
-    <div className="bg-slate-50 dark:bg-slate-950 min-h-screen text-slate-900 dark:text-slate-200 selection:bg-sapphire-500/30 transition-colors duration-300">
-      <div className="max-w-6xl mx-auto px-6 py-12">
-        
-        {/* Header Navigation */}
-        <nav className="mb-12 flex items-center justify-between">
-          <Link to="/path" className="group flex items-center text-sm text-slate-500 dark:text-slate-500 hover:text-sapphire-600 dark:hover:text-sapphire-400 transition-colors">
+    <div className="min-h-screen relative overflow-hidden flex flex-col">
+      {/* Background Blobs */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-sapphire-600/5 rounded-full blur-[120px] -z-10 animate-blob" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[120px] -z-10 animate-blob animation-delay-4000" />
+
+      <div className="max-w-7xl mx-auto px-6 py-16 flex-grow">
+        <nav className="mb-16 flex items-center justify-between">
+          <Link to="/path" className="group flex items-center text-xs font-black uppercase tracking-widest text-slate-500 hover:text-sapphire-500 transition-all">
             <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" /> 
             Back to Map
           </Link>
-          <div className="flex items-center space-x-2 text-[10px] font-mono text-slate-400 dark:text-slate-600 uppercase tracking-tighter">
-            <span>INDEX: {concept.path}</span>
-            <ChevronRight size={10} />
-            <span className="text-slate-600 dark:text-slate-400">{concept.id}</span>
+          <div className="flex items-center space-x-3 px-4 py-1.5 rounded-full bg-white/5 border border-white/5 backdrop-blur-md">
+            <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">{concept.path}</span>
+            <ChevronRight size={10} className="text-slate-700" />
+            <span className="text-[10px] font-black text-sapphire-400 uppercase tracking-widest">{concept.id}</span>
           </div>
         </nav>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          
-          {/* Left Column: Content */}
-          <div className="lg:col-span-7 space-y-12">
-            <motion.header
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
-              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-sapphire-50 dark:bg-sapphire-950/30 border border-sapphire-100 dark:border-sapphire-900/50 mb-6">
-                <div className="w-1.5 h-1.5 rounded-full bg-sapphire-600 dark:bg-sapphire-400 animate-pulse"></div>
-                <span className="text-[10px] font-bold text-sapphire-600 dark:text-sapphire-400 uppercase tracking-widest">{concept.difficulty}</span>
-              </div>
-              <h1 className="text-5xl font-black tracking-tight text-slate-900 dark:bg-gradient-to-br dark:from-white dark:via-slate-200 dark:to-slate-500 dark:bg-clip-text dark:text-transparent mb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+          <div className="lg:col-span-7 space-y-16">
+            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
+              <motion.div className="inline-flex items-center space-x-2 px-3 py-1 rounded-lg bg-sapphire-500/10 border border-sapphire-500/20 mb-8">
+                <Sparkles size={12} className="text-sapphire-400" />
+                <span className="text-[10px] font-black text-sapphire-400 uppercase tracking-[0.2em]">{concept.difficulty}</span>
+              </motion.div>
+              <h1 className="text-6xl md:text-8xl font-black text-slate-900 dark:text-white leading-none mb-8 tracking-tighter">
                 {concept.title}
               </h1>
-              <p className="text-xl text-slate-600 dark:text-slate-400 leading-relaxed font-light">
+              <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 font-medium leading-relaxed max-w-2xl">
                 {concept.definition}
               </p>
-            </motion.header>
+            </motion.div>
 
-            {/* Performance Panel */}
-            <motion.section 
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              className="p-8 rounded-2xl bg-slate-50 dark:bg-gradient-to-br dark:from-slate-900 dark:to-slate-950 border border-slate-200 dark:border-slate-800 relative overflow-hidden group shadow-sm"
-            >
-              <div className="absolute top-0 right-0 p-8 opacity-[0.03] dark:opacity-5 group-hover:opacity-10 transition-opacity">
-                <Zap size={120} />
-              </div>
-              <div className="flex items-center space-x-3 mb-6">
-                <div className="p-2 rounded-lg bg-sapphire-100 dark:bg-sapphire-500/10 text-sapphire-600 dark:text-sapphire-400">
-                  <Zap size={20} />
+            <motion.section initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="relative group">
+              <div className="absolute -inset-4 bg-gradient-to-br from-sapphire-600/10 to-transparent rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative p-10 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl">
+                <div className="flex items-center space-x-4 mb-8">
+                  <div className="p-3 rounded-2xl bg-sapphire-600 text-white shadow-lg shadow-sapphire-500/40">
+                    <Zap size={24} />
+                  </div>
+                  <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Intelligence Briefing</h3>
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white">Performance Implications</h3>
+                <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-bold border-l-4 border-sapphire-600 pl-8">
+                  {concept.performance}
+                </p>
               </div>
-              <p className="text-slate-600 dark:text-slate-400 leading-relaxed italic border-l-2 border-sapphire-200 dark:border-sapphire-900/50 pl-6">
-                "{concept.performance}"
-              </p>
             </motion.section>
 
-            {/* Query Section */}
-            <section className="space-y-6">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <div className="p-2 rounded-lg bg-emerald-100 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-                    <Code size={20} />
-                  </div>
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">Query Pattern</h3>
+            <section className="space-y-8">
+              <div className="flex items-center space-x-4">
+                <div className="p-3 rounded-2xl bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
+                  <Code size={24} />
                 </div>
+                <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Syntactic Pattern</h3>
               </div>
               <QueryExample query={concept.exampleQuery} />
             </section>
           </div>
 
-          {/* Right Column: Visuals */}
-          <div className="lg:col-span-5 space-y-8">
-            
-            {/* Table Visualizer */}
-            <div className="space-y-4">
-              <h4 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest flex items-center">
-                <Database size={14} className="mr-2" /> Data Representation
-              </h4>
+          <div className="lg:col-span-5 space-y-12">
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">Data Snapshot</h4>
+                <Database size={14} className="text-slate-700" />
+              </div>
               <TableVisualizer id={concept.id} />
             </div>
 
-            {/* Animated Flow */}
-            <div className="space-y-4">
-              <h4 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest flex items-center">
-                <Play size={14} className="mr-2" /> Execution Flow
-              </h4>
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">Engine Simulation</h4>
+                <Play size={14} className="text-slate-700" />
+              </div>
               <VisualizerSelector type={concept.visualType} id={concept.id} />
             </div>
 
-            {/* Metadata Card */}
-            <div className="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/30 backdrop-blur-sm shadow-sm">
-              <div className="flex items-center space-x-3 mb-6 border-b border-slate-200 dark:border-slate-800 pb-4">
-                <BarChart3 size={18} className="text-sapphire-600 dark:text-sapphire-400" />
-                <span className="text-sm font-bold uppercase tracking-tighter text-slate-900 dark:text-slate-200">Cosmic Metadata</span>
+            <div className="p-10 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-2xl shadow-2xl relative overflow-hidden group">
+              <div className="absolute top-0 right-0 -mr-16 -mt-16 w-48 h-48 bg-sapphire-600/10 rounded-full blur-[60px] group-hover:bg-sapphire-600/20 transition-all" />
+              <div className="flex items-center space-x-4 mb-10 pb-6 border-b border-slate-100 dark:border-slate-800">
+                <BarChart3 size={24} className="text-sapphire-600" />
+                <span className="text-lg font-black uppercase tracking-tighter text-slate-900 dark:text-white">Relational Metadata</span>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-1">
-                  <span className="text-[10px] text-slate-400 dark:text-slate-600 uppercase font-mono">Storage Engine</span>
-                  <p className="text-xs font-mono text-slate-700 dark:text-slate-300">InnoDB / WiredTiger</p>
-                </div>
-                <div className="space-y-1">
-                  <span className="text-[10px] text-slate-400 dark:text-slate-600 uppercase font-mono">Access Pattern</span>
-                  <p className="text-xs font-mono text-slate-700 dark:text-slate-300">Random I/O</p>
-                </div>
-                <div className="space-y-1">
-                  <span className="text-[10px] text-slate-400 dark:text-slate-600 uppercase font-mono">Complexity</span>
-                  <p className="text-xs font-mono text-slate-700 dark:text-slate-300">{concept.difficulty === 'Expert' ? 'O(N²)' : 'O(log N)'}</p>
-                </div>
-                <div className="space-y-1">
-                  <span className="text-[10px] text-slate-400 dark:text-slate-600 uppercase font-mono">Consistency</span>
-                  <p className="text-xs font-mono text-slate-700 dark:text-slate-300">ACID Compliant</p>
-                </div>
+              <div className="grid grid-cols-2 gap-y-10 gap-x-6">
+                {[
+                  { label: "Storage Engine", val: "InnoDB / WiredTiger" },
+                  { label: "Access Method", val: "Random I/O" },
+                  { label: "Complexity", val: concept.difficulty === 'Expert' ? 'O(N²)' : 'O(log N)' },
+                  { label: "Consistency", val: "ACID Compliant" }
+                ].map((item, i) => (
+                  <div key={i}>
+                    <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-2">{item.label}</span>
+                    <p className="text-sm font-mono font-bold text-sapphire-600 dark:text-sapphire-400">{item.val}</p>
+                  </div>
+                ))}
               </div>
             </div>
-
           </div>
         </div>
 
-        {/* Navigation Footer */}
-        <footer className="mt-20 pt-8 border-t border-slate-200 dark:border-slate-900">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-            {prevConcept ? (
-              <Link 
-                to={`/topic/${prevConcept.id}`}
-                className="w-full sm:w-auto group flex items-center p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-sapphire-500/50 transition-all hover:bg-slate-50 dark:hover:bg-slate-900/50"
-              >
-                <ChevronLeft className="w-5 h-5 mr-4 text-slate-400 group-hover:text-sapphire-500 transition-colors" />
-                <div className="text-left">
-                  <div className="text-[10px] text-slate-500 uppercase tracking-widest mb-1">Previous Topic</div>
-                  <div className="text-sm font-bold text-slate-900 dark:text-slate-200 group-hover:text-sapphire-600 dark:group-hover:text-sapphire-400">{prevConcept.title}</div>
+        <footer className="mt-32 pt-12 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between gap-8">
+          {prevConcept && (
+            <Link to={`/topic/${prevConcept.id}`} className="group p-8 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-sapphire-500 transition-all shadow-xl">
+              <div className="flex items-center space-x-6">
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800 group-hover:bg-sapphire-600 group-hover:text-white transition-all">
+                  <ChevronLeft size={24} />
                 </div>
-              </Link>
-            ) : <div />}
-
-            {nextConcept ? (
-              <Link 
-                to={`/topic/${nextConcept.id}`}
-                className="w-full sm:w-auto group flex items-center p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-sapphire-500/50 transition-all hover:bg-slate-50 dark:hover:bg-slate-900/50"
-              >
-                <div className="text-right">
-                  <div className="text-[10px] text-slate-500 uppercase tracking-widest mb-1">Next Topic</div>
-                  <div className="text-sm font-bold text-slate-900 dark:text-slate-200 group-hover:text-sapphire-600 dark:group-hover:text-sapphire-400">{nextConcept.title}</div>
+                <div>
+                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Previous Concept</span>
+                  <div className="text-lg font-black text-slate-900 dark:text-white">{prevConcept.title}</div>
                 </div>
-                <ChevronRight className="w-5 h-5 ml-4 text-slate-400 group-hover:text-sapphire-500 transition-colors" />
-              </Link>
-            ) : <div />}
-          </div>
+              </div>
+            </Link>
+          )}
+          {nextConcept && (
+            <Link to={`/topic/${nextConcept.id}`} className="group p-8 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-sapphire-500 transition-all shadow-xl text-right">
+              <div className="flex items-center justify-end space-x-6">
+                <div>
+                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Next Concept</span>
+                  <div className="text-lg font-black text-slate-900 dark:text-white">{nextConcept.title}</div>
+                </div>
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800 group-hover:bg-sapphire-600 group-hover:text-white transition-all">
+                  <ChevronRight size={24} />
+                </div>
+              </div>
+            </Link>
+          )}
         </footer>
       </div>
     </div>
