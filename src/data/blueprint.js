@@ -34,6 +34,12 @@ export const paths = [
     title: "Optimized Trajectories",
     description: "Avoiding common pitfalls and slow query patterns.",
     concepts: ["index-misuse", "over-indexing", "write-amplification", "pagination-pitfalls", "n-plus-one", "slow-query-patterns"]
+  },
+  {
+    id: "distributed",
+    title: "Distributed Frontier",
+    description: "How databases maintain consistency across the network.",
+    concepts: ["two-phase-commit", "cap-theorem", "replication-lag"]
   }
 ];
 
@@ -378,5 +384,37 @@ export const concepts = [
     performance: "Disables index usage and creates massive Cartesian products in memory.",
     visualType: "pattern",
     exampleQuery: "SELECT * FROM stars WHERE name LIKE '%sirius';"
+  },
+
+  // DISTRIBUTED
+  {
+    id: "two-phase-commit",
+    title: "Two-Phase Commit (2PC)",
+    path: "distributed",
+    difficulty: "Expert",
+    definition: "A distributed algorithm used to ensure all participating nodes in a transaction either commit or roll back.",
+    performance: "Ensures Atomicity across services but introduces significant latency due to multiple network round-trips and locking.",
+    visualType: "2pc",
+    exampleQuery: "-- Distributed Transaction Flow"
+  },
+  {
+    id: "cap-theorem",
+    title: "CAP Theorem",
+    path: "distributed",
+    difficulty: "Advanced",
+    definition: "The principle that a distributed system can only provide two of three guarantees: Consistency, Availability, and Partition Tolerance.",
+    performance: "Choosing between 'Strong Consistency' (slower) vs 'Eventual Consistency' (faster) defines your system's scale limits.",
+    visualType: "flow",
+    exampleQuery: "-- Theoretical Trade-off"
+  },
+  {
+    id: "replication-lag",
+    title: "Replication Lag",
+    path: "distributed",
+    difficulty: "Intermediate",
+    definition: "The delay between a write on the Primary node and its appearance on the Read Replica.",
+    performance: "Can cause 'Inconsistent Reads' where a user writes data but cannot see it immediately on a different page.",
+    visualType: "network",
+    exampleQuery: "-- Primary -> Replica Sync"
   }
 ];
