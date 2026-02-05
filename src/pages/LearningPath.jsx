@@ -28,11 +28,17 @@ import {
   Flame,
   Clock,
   ExternalLink,
-  Sparkles
+  Sparkles,
+  Terminal,
+  ActivitySquare,
+  HardDrive,
+  CpuChip,
+  ShieldCheck,
+  Network
 } from 'lucide-react';
 
 const IconMap = {
-  'what-is-sql': Orbit,
+  'what-is-sql': Binary,
   'tables-rows-columns': TableIcon,
   'primary-keys': Hash,
   'select-basics': Layout,
@@ -46,46 +52,50 @@ const IconMap = {
   'table-scan': FileSearch,
   'composite-indexes': Share2,
   'covering-indexes': Star,
-  'unique-indexes': Zap,
+  'unique-indexes': ShieldCheck,
   'joins-basics': GitMerge,
   'join-algorithms': Cpu,
   'subqueries': Layers,
   'ctes': Box,
   'group-by': Box,
-  'aggregations': Activity,
+  'aggregations': ActivitySquare,
   'having': Filter,
-  'query-planner': Cpu,
-  'execution-plans': FileSearch,
+  'query-planner': CpuChip,
+  'execution-plans': Terminal,
   'cost-estimation': Activity,
   'cardinality': Hash,
   'selectivity': Filter,
   'index-misuse': AlertTriangle,
   'over-indexing': Flame,
-  'write-amplification': Activity,
+  'write-amplification': HardDrive,
   'pagination-pitfalls': Clock,
-  'n-plus-one': Share2,
+  'n-plus-one': Network,
   'slow-query-patterns': AlertTriangle,
+  'two-phase-commit': Network,
+  'cap-theorem': Share2,
+  'replication-lag': Clock,
 };
 
 const PathIcon = {
   'basics': Database,
-  'indexing': Layers,
-  'relationships': Share2,
-  'aggregation': Zap,
+  'indexing': HardDrive,
+  'relationships': GitMerge,
+  'aggregation': ActivitySquare,
   'internals': Cpu,
-  'performance': Activity
+  'performance': Zap,
+  'distributed': Network
 };
 
 const DifficultyBadge = ({ difficulty }) => {
   const colors = {
-    'Beginner': 'text-emerald-600 bg-emerald-50 dark:bg-emerald-500/10 dark:text-emerald-400 border-emerald-100 dark:border-emerald-500/20',
-    'Intermediate': 'text-sapphire-600 bg-sapphire-50 dark:bg-sapphire-500/10 dark:text-sapphire-400 border-sapphire-100 dark:border-sapphire-500/20',
-    'Advanced': 'text-amber-600 bg-amber-50 dark:bg-amber-500/10 dark:text-amber-400 border-amber-100 dark:border-amber-500/20',
-    'Expert': 'text-rose-600 bg-rose-50 dark:bg-rose-500/10 dark:text-rose-400 border-rose-100 dark:border-rose-500/20',
+    'Beginner': 'text-sql-green border-sql-green/20 bg-sql-green/5',
+    'Intermediate': 'text-sql-blue border-sql-blue/20 bg-sql-blue/5',
+    'Advanced': 'text-sql-gold border-sql-gold/20 bg-sql-gold/5',
+    'Expert': 'text-rose-500 border-rose-500/20 bg-rose-500/5',
   };
   
   return (
-    <span className={`px-2.5 py-0.5 rounded-lg text-[9px] font-black uppercase tracking-widest border ${colors[difficulty] || colors['Beginner']}`}>
+    <span className={`px-2 py-0.5 border text-[8px] font-black uppercase tracking-[0.2em] ${colors[difficulty] || colors['Beginner']}`}>
       {difficulty}
     </span>
   );
@@ -97,36 +107,37 @@ const TopicCard = ({ concept, index }) => {
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.05 }}
+      transition={{ delay: index * 0.03 }}
       className="h-full"
     >
       <Link 
         to={`/topic/${concept.id}`}
-        className="group block h-full p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-sapphire-500 dark:hover:border-sapphire-500 transition-all shadow-xl hover:shadow-sapphire-500/10 relative overflow-hidden"
+        className="group block h-full p-6 bg-db-surface/40 backdrop-blur-sm border border-db-border hover:border-sql-cyan transition-all relative overflow-hidden shadow-2xl"
       >
-        <div className="absolute top-0 right-0 -mr-8 -mt-8 w-24 h-24 bg-sapphire-500/5 rounded-full blur-2xl group-hover:bg-sapphire-500/15 transition-all" />
+        {/* Terminal Scanline Effect */}
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,128,0.06))] bg-[length:100%_2px,2px_100%]" />
         
         <div className="relative z-10 flex flex-col h-full">
-          <div className="flex justify-between items-start mb-8">
-            <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 group-hover:bg-sapphire-600 group-hover:text-white transition-all shadow-inner">
-              <Icon size={24} />
+          <div className="flex justify-between items-start mb-6">
+            <div className="w-10 h-10 flex items-center justify-center border border-db-border bg-db-panel text-slate-500 group-hover:text-sql-cyan group-hover:border-sql-cyan transition-colors">
+              <Icon size={20} />
             </div>
             <DifficultyBadge difficulty={concept.difficulty} />
           </div>
           
-          <h3 className="text-xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">
-            {concept.concept_title || concept.title}
+          <h3 className="text-sm font-black text-white mb-2 tracking-widest uppercase group-hover:text-sql-cyan transition-colors">
+            {concept.title}
           </h3>
           
-          <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-8 font-medium leading-relaxed">
+          <p className="text-[11px] text-slate-500 line-clamp-2 mb-6 font-mono leading-relaxed uppercase">
             {concept.definition}
           </p>
           
-          <div className="mt-auto flex items-center text-[10px] font-black uppercase tracking-[0.2em] text-sapphire-600 dark:text-sapphire-400 group-hover:translate-x-2 transition-all">
-            Initialize Module <ChevronRight size={12} className="ml-1" />
+          <div className="mt-auto flex items-center text-[9px] font-black uppercase tracking-[0.2em] text-slate-600 group-hover:text-sql-cyan transition-all">
+            &gt; INIT_MODULE <ChevronRight size={10} className="ml-1 group-hover:translate-x-1 transition-transform" />
           </div>
         </div>
       </Link>
@@ -160,52 +171,48 @@ const LearningPath = () => {
 
   return (
     <div className="min-h-screen relative flex flex-col" ref={containerRef}>
-      <AnimatedStarField />
-      
-      {/* Immersive Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-[10%] left-0 w-[800px] h-[800px] bg-sapphire-600/5 rounded-full blur-[150px] animate-blob" />
-        <div className="absolute bottom-[10%] right-0 w-[800px] h-[800px] bg-blue-600/5 rounded-full blur-[150px] animate-blob animation-delay-4000" />
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#232735_1px,transparent_1px)] [background-size:32px_32px]" />
       </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-24 flex-grow w-full">
+      
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 flex-grow w-full">
         
         {/* Header */}
-        <header className="max-w-4xl mx-auto text-center mb-32">
+        <header className="max-w-4xl mx-auto text-center mb-24">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl mb-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="inline-flex items-center space-x-3 px-4 py-1.5 rounded-full bg-db-surface border border-db-border text-sql-cyan text-[10px] font-black uppercase tracking-[0.3em] mb-10 shadow-[0_0_15px_rgba(0,229,255,0.05)]"
           >
-            <Sparkles size={14} className="text-sapphire-400" />
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/70">Relational Universe Explorer</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-sql-green animate-pulse" />
+            <span>Navigation Terminal: Path_Map</span>
           </motion.div>
 
           <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-6xl md:text-9xl font-black text-slate-900 dark:text-white tracking-tighter leading-none mb-12"
+            className="text-5xl md:text-8xl font-black text-white tracking-tighter leading-none mb-12 uppercase"
           >
-            The <span className="bg-gradient-to-r from-sapphire-600 via-blue-500 to-indigo-400 bg-clip-text text-transparent">Cosmos</span> Map
+            SYSTEM <span className="text-transparent bg-clip-text bg-gradient-to-b from-sql-cyan to-sql-blue">INDEX</span>
           </motion.h1>
           
-          <div className="relative max-w-2xl mx-auto group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-sapphire-600 to-blue-500 rounded-3xl blur opacity-20 group-focus-within:opacity-40 transition-all duration-1000" />
+          <div className="relative max-w-xl mx-auto group">
+            <div className="absolute inset-0 bg-sql-cyan/5 blur-xl opacity-0 group-focus-within:opacity-100 transition-opacity" />
             <div className="relative">
-              <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-6 h-6 text-slate-500" />
+              <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600 group-focus-within:text-sql-cyan transition-colors" />
               <input 
                 type="text"
-                placeholder="Search galaxies, concepts, or keywords..."
+                placeholder="SEARCH_COSMOS_OBJECTS..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-16 pr-8 py-6 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl text-lg text-slate-900 dark:text-white focus:outline-none focus:border-sapphire-600 transition-all shadow-2xl"
+                className="w-full pl-12 pr-6 py-4 bg-db-surface/60 border border-db-border text-xs font-black tracking-widest text-white focus:outline-none focus:border-sql-cyan transition-all uppercase placeholder:text-slate-700"
               />
             </div>
           </div>
         </header>
 
-        {/* Galaxies */}
-        <div className="space-y-40">
+        {/* Galaxies (Sectors) */}
+        <div className="space-y-32">
           {paths.map((path, pIdx) => {
             const pathConcepts = groupedConcepts[path.id];
             if (pathConcepts.length === 0) return null;
@@ -214,29 +221,28 @@ const LearningPath = () => {
             return (
               <section key={path.id} className="relative">
                 <motion.div 
-                  initial={{ opacity: 0, x: -40 }}
+                  initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 px-2"
+                  className="flex flex-col md:flex-row md:items-start justify-between mb-12 gap-8 border-l-2 border-db-border pl-8"
                 >
-                  <div className="flex items-center gap-8">
-                    <div className="w-20 h-20 rounded-3xl bg-sapphire-600 flex items-center justify-center text-white shadow-[0_20px_40px_-10px_rgba(37,99,235,0.4)]">
-                      <Icon size={36} />
+                  <div className="flex items-start gap-6">
+                    <div className="w-14 h-14 bg-db-panel border border-db-border flex items-center justify-center text-sql-cyan shadow-xl">
+                      <Icon size={28} />
                     </div>
                     <div>
-                      <div className="flex items-center space-x-3 mb-2">
-                        <span className="w-8 h-px bg-sapphire-600 opacity-50" />
-                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-sapphire-600">Galaxy {pIdx + 1}</span>
+                      <div className="flex items-center space-x-2 mb-1">
+                        <span className="text-[9px] font-black uppercase tracking-[0.4em] text-slate-600">Sector_0{pIdx + 1}</span>
                       </div>
-                      <h2 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tight">{path.title}</h2>
+                      <h2 className="text-2xl md:text-4xl font-black text-white tracking-widest uppercase">{path.title}</h2>
                     </div>
                   </div>
-                  <p className="text-lg text-slate-500 dark:text-slate-400 max-w-md font-medium leading-relaxed">
-                    {path.description}
+                  <p className="text-xs text-slate-500 max-w-sm font-mono leading-relaxed uppercase">
+                    &gt; {path.description}
                   </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-1">
                   {pathConcepts.map((concept, cIdx) => (
                     <TopicCard key={concept.id} concept={concept} index={cIdx} />
                   ))}
@@ -248,10 +254,15 @@ const LearningPath = () => {
 
         {!hasResults && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-40">
-            <Orbit size={64} className="mx-auto text-slate-800 animate-pulse mb-8" />
-            <h3 className="text-3xl font-black text-white mb-4">Galaxy Hidden in Shadows</h3>
-            <p className="text-slate-500 text-lg mb-12">Adjust your trajectory or return to the main sectors.</p>
-            <button onClick={() => setSearch('')} className="px-8 py-4 bg-sapphire-600 text-white rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-sapphire-500/20">Reset Navigation</button>
+            <Terminal size={48} className="mx-auto text-db-border animate-pulse mb-6" />
+            <h3 className="text-xl font-black text-white mb-2 uppercase tracking-widest">Target Not Found</h3>
+            <p className="text-slate-600 text-xs mb-10 font-mono">OBJECT_NOT_IN_INDEX: CHECK_QUERY_SYNTAX</p>
+            <button 
+              onClick={() => setSearch('')} 
+              className="px-8 py-3 bg-db-surface border border-db-border text-[10px] font-black text-sql-cyan uppercase tracking-widest hover:bg-db-panel transition-all"
+            >
+              Reset_Terminal
+            </button>
           </motion.div>
         )}
       </div>
