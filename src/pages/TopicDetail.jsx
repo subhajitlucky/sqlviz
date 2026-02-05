@@ -24,8 +24,7 @@ import {
   Zap,
   GitMerge,
   ShieldCheck,
-  Network,
-  CpuChip
+  Network
 } from 'lucide-react';
 import { concepts } from '../data/blueprint';
 
@@ -37,6 +36,7 @@ import ScanVisualizer from '../components/visualizers/ScanVisualizer';
 import IndexSeekVisualizer from '../components/visualizers/IndexSeekVisualizer';
 import SQLSimulation from '../components/visualizers/SQLSimulation';
 import TwoPhaseCommitVisualizer from '../components/visualizers/advanced/TwoPhaseCommitVisualizer';
+import ReplicationLagVisualizer from '../components/visualizers/advanced/ReplicationLagVisualizer';
 
 const VisualizerSelector = ({ type, id }) => {
   if (id === 'what-is-sql') return <SQLSimulation />;
@@ -48,6 +48,7 @@ const VisualizerSelector = ({ type, id }) => {
     case 'scan': return <ScanVisualizer />;
     case 'search': return <IndexSeekVisualizer />;
     case '2pc': return <TwoPhaseCommitVisualizer />;
+    case 'network': return <ReplicationLagVisualizer />;
     default: return <ExecutionFlow type={type} />;
   }
 };

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, RotateCcw, Database, Cpu, BarChart3, Search, Code, Table as TableIcon, ArrowDown, CpuChip, TerminalSquare, HardDrive } from 'lucide-react';
+import { Play, RotateCcw, Database, Cpu, BarChart3, Search, Code, Table as TableIcon, ArrowDown, TerminalSquare, HardDrive } from 'lucide-react';
 
 const SQLSimulation = () => {
   const [phase, setPhase] = useState('input'); // input, result, engine
@@ -137,7 +137,7 @@ const SQLSimulation = () => {
             >
               <div className="flex items-center space-x-3 mb-6">
                 <div className="p-1.5 border border-db-border bg-db-surface text-sql-gold">
-                  <CpuChip size={14} />
+                  <Cpu size={14} />
                 </div>
                 <h4 className="text-[9px] font-black tracking-widest text-slate-600">03. ENGINE_INTERNALS (HOW)</h4>
               </div>

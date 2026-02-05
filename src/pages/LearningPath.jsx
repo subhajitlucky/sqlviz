@@ -32,7 +32,6 @@ import {
   Terminal,
   ActivitySquare,
   HardDrive,
-  CpuChip,
   ShieldCheck,
   Network
 } from 'lucide-react';
@@ -60,7 +59,7 @@ const IconMap = {
   'group-by': Box,
   'aggregations': ActivitySquare,
   'having': Filter,
-  'query-planner': CpuChip,
+  'query-planner': Cpu,
   'execution-plans': Terminal,
   'cost-estimation': Activity,
   'cardinality': Hash,
