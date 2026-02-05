@@ -47,29 +47,28 @@ function App() {
                 <div className="p-2 rounded-xl bg-sapphire-600">
                   <Database className="w-6 h-6 text-white" />
                 </div>
-                <span className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white">
-                  SQL<span className="text-sapphire-600 dark:text-sapphire-400">COSMOS</span>
+                <span className="text-2xl font-black tracking-tighter text-white">
+                  SQL<span className="text-sql-cyan">COSMOS</span>
                 </span>
               </Link>
 
               {/* Desktop Menu */}
               <div className="hidden md:flex items-center space-x-8">
                 {[
-                  { path: '/path', label: 'Learning Path', icon: BookOpen },
-                  { path: '/playground', label: 'Playground', icon: Terminal }
+                  { path: '/path', label: 'PATH_MAP', icon: BookOpen },
+                  { path: '/playground', label: 'TERMINAL', icon: Terminal }
                 ].map((item) => (
                   <Link 
                     key={item.path}
                     to={item.path} 
-                    className="group relative flex items-center space-x-2 text-sm font-black uppercase tracking-widest text-slate-500 hover:text-slate-900 dark:hover:text-white transition-all"
+                    className="group relative flex items-center space-x-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 hover:text-sql-cyan transition-all"
                   >
-                    <item.icon className="w-4 h-4 transition-transform group-hover:-rotate-12" />
+                    <item.icon className="w-3 h-3" />
                     <span>{item.label}</span>
-                    <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sapphire-600 transition-all group-hover:w-full" />
                   </Link>
                 ))}
                 
-                <div className="h-6 w-px bg-slate-200 dark:border-slate-800" />
+                <div className="h-4 w-px bg-db-border" />
                 
                 {/* THEME TOGGLE BUTTON */}
                 <button 
