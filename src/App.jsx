@@ -22,8 +22,10 @@ function App() {
     const root = window.document.documentElement;
     if (theme === 'dark') {
       root.classList.add('dark');
+      root.classList.remove('light');
       root.style.colorScheme = 'dark';
     } else {
+      root.classList.add('light');
       root.classList.remove('dark');
       root.style.colorScheme = 'light';
     }
@@ -47,7 +49,7 @@ function App() {
                 <div className="p-2 rounded-xl bg-sapphire-600">
                   <Database className="w-6 h-6 text-white" />
                 </div>
-                <span className="text-2xl font-black tracking-tighter text-white">
+                <span className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white">
                   SQL<span className="text-sql-cyan">COSMOS</span>
                 </span>
               </Link>

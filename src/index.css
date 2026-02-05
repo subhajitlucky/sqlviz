@@ -16,7 +16,7 @@
 
 @layer base {
   body {
-    @apply bg-db-black text-slate-400 font-sans selection:bg-sql-cyan/30;
+    @apply bg-white dark:bg-db-black text-slate-900 dark:text-slate-400 font-sans selection:bg-sql-cyan/30;
     background-image: 
       radial-gradient(circle at 50% 0%, rgba(51, 103, 145, 0.15) 0%, transparent 50%),
       linear-gradient(rgba(13, 14, 18, 0.8) 1px, transparent 1px),
