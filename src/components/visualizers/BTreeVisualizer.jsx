@@ -21,8 +21,8 @@ const BTreeVisualizer = () => {
   ];
 
   return (
-    <div className="w-full h-64 bg-slate-100 dark:bg-slate-950 rounded-xl border border-slate-300 dark:border-slate-800 relative overflow-hidden p-4 transition-colors">
-      <svg className="w-full h-full" viewBox="0 0 100 100">
+    <div className="w-full h-64 bg-db-black border border-db-border relative overflow-hidden p-4 shadow-2xl transition-all">
+      <svg className="w-full h-full relative z-10" viewBox="0 0 100 100">
         {connections.map((conn, i) => {
           const from = nodes.find(n => n.id === conn.from);
           const to = nodes.find(n => n.id === conn.to);
@@ -31,26 +31,25 @@ const BTreeVisualizer = () => {
               key={i}
               x1={from.x} y1={from.y + 5} x2={to.x} y2={to.y - 5}
               stroke="currentColor"
-              className="text-slate-300 dark:text-slate-800"
-              strokeWidth="0.5"
+              className="text-db-border"
+              strokeWidth="0.3"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}
-              transition={{ duration: 1, delay: i * 0.2 }}
+              transition={{ duration: 1, delay: i * 0.1 }}
             />
           );
         })}
         {nodes.map((node, i) => (
           <motion.g
             key={node.id}
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: 'spring', delay: i * 0.1 }}
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.05 }}
           >
             <rect
               x={node.x - 8} y={node.y - 4} width={16} height={8}
-              rx="2"
               fill="currentColor"
-              className="text-white dark:text-slate-900"
+              className="text-db-surface"
               stroke="currentColor"
               strokeWidth="0.5"
             />
@@ -58,26 +57,33 @@ const BTreeVisualizer = () => {
               x={node.x} y={node.y + 1}
               textAnchor="middle"
               fill="currentColor"
-              fontSize="3"
-              fontWeight="bold"
-              className="font-mono text-slate-700 dark:text-slate-200"
+              fontSize="3.5"
+              fontWeight="black"
+              className="font-mono text-slate-400 tracking-tighter"
             >
               {node.label}
             </text>
-            {/* Outline rect for the sapphire border */}
             <rect
               x={node.x - 8} y={node.y - 4} width={16} height={8}
-              rx="2"
               fill="none"
               stroke="currentColor"
-              className="text-sapphire-500 dark:text-sapphire-400"
+              className="text-db-border group-hover:text-sql-cyan transition-colors"
               strokeWidth="0.5"
             />
+            {/* Connection ports */}
+            <circle cx={node.x} cy={node.y-4} r="0.5" className="fill-sql-cyan/30" />
+            <circle cx={node.x} cy={node.y+4} r="0.5" className="fill-sql-cyan/30" />
           </motion.g>
         ))}
       </svg>
-      <div className="absolute bottom-2 right-2 text-[8px] font-mono text-slate-400 dark:text-slate-500 uppercase tracking-widest">
-        Balanced Tree Hierarchy
+      
+      <div className="absolute top-4 left-4 font-mono uppercase">
+        <div className="text-[8px] text-slate-600 tracking-widest font-black">BTREE_INDEX_MAP</div>
+        <div className="text-[10px] text-sql-gold font-bold">MODE: BALANCED</div>
+      </div>
+
+      <div className="absolute bottom-4 right-4 font-mono text-[8px] text-slate-600 font-black tracking-[0.2em] flex items-center bg-db-surface px-2 py-1 border border-db-border">
+        FANOUT_FACTOR: 3
       </div>
     </div>
   );
