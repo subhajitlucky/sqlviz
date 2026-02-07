@@ -26,8 +26,31 @@ import SQLSimulation from '../components/visualizers/SQLSimulation';
 import TwoPhaseCommitVisualizer from '../components/visualizers/advanced/TwoPhaseCommitVisualizer';
 import ReplicationLagVisualizer from '../components/visualizers/advanced/ReplicationLagVisualizer';
 
+// --- Internal Architectural Visualizers ---
+import SQLPrism from '../components/visualizers/internal/SQLPrism';
+import StorageBlockVisualizer from '../components/visualizers/internal/StorageBlockVisualizer';
+import BTreeInternal from '../components/visualizers/internal/BTreeInternal';
+import IndexSeekVsScan from '../components/visualizers/internal/IndexSeekVsScan';
+import HashJoinVisualizer from '../components/visualizers/internal/HashJoinVisualizer';
+import NestedLoopJoin from '../components/visualizers/internal/NestedLoopJoin';
+import SelectivityFilter from '../components/visualizers/internal/SelectivityFilter';
+import WriteAmplification from '../components/visualizers/internal/WriteAmplification';
+import TwoPhaseCommitInternal from '../components/visualizers/internal/TwoPhaseCommit';
+import ReplicationLagInternal from '../components/visualizers/internal/ReplicationLag';
+
 const VisualizerSelector = ({ type, id }) => {
-  if (id === 'what-is-sql') return <SQLSimulation />;
+  // Mapping topics to their purpose-built simulations
+  if (id === 'what-is-sql') return <SQLPrism />;
+  if (id === 'tables-rows-columns') return <StorageBlockVisualizer />;
+  if (id === 'b-tree-structure') return <BTreeInternal />;
+  if (id === 'index-seek-vs-scan') return <IndexSeekVsScan />;
+  if (id === 'join-algorithms') return <HashJoinVisualizer />;
+  if (id === 'joins-basics') return <NestedLoopJoin />;
+  if (id === 'selectivity') return <SelectivityFilter />;
+  if (id === 'write-amplification') return <WriteAmplification />;
+  if (id === 'two-phase-commit') return <TwoPhaseCommitInternal />;
+  if (id === 'replication-lag') return <ReplicationLagInternal />;
+
   switch (type) {
     case 'tree': return <BTreeVisualizer />;
     case 'join':
@@ -37,7 +60,7 @@ const VisualizerSelector = ({ type, id }) => {
     case 'search': return <IndexSeekVisualizer />;
     case '2pc': return <TwoPhaseCommitVisualizer />;
     case 'network': return <ReplicationLagVisualizer />;
-    default: return <ExecutionFlow type={type} />;
+    default: return <ExecutionFlow />;
   }
 };
 
