@@ -136,7 +136,7 @@ const Playground = () => {
 
       <div className="flex-grow grid grid-cols-1 lg:grid-cols-12 gap-0 relative z-10">
         {/* Sidebar / Table Explorer (Col 1-2) */}
-        <div className="hidden lg:flex lg:col-span-2 flex-col border-r border-slate-200 dark:border-db-border bg-slate-50/80 dark:bg-db-surface/80 backdrop-blur-xl p-4 space-y-8 font-mono">
+        <div className="hidden lg:flex lg:col-span-2 flex-col border-r border-slate-200 dark:border-db-border bg-slate-50 dark:bg-db-surface p-4 space-y-8 font-mono">
           <div className="flex items-center space-x-2 text-slate-900 dark:text-white font-black text-[10px] uppercase tracking-widest border-b border-slate-200 dark:border-db-border pb-4">
             <HardDrive className="w-3 h-3 text-sql-blue dark:text-sql-cyan" />
             <span>SCHEMA_BROWSER</span>
@@ -162,7 +162,7 @@ const Playground = () => {
 
         {/* Editor Area (Col 3-7) */}
         <div className="lg:col-span-5 flex flex-col border-r border-slate-200 dark:border-db-border bg-white dark:bg-db-surface shadow-2xl relative">
-          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-db-border bg-slate-50/50 dark:bg-db-panel/50">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-db-border bg-slate-50 dark:bg-db-panel">
             <div className="flex items-center space-x-6">
               <button 
                 onClick={() => setActiveTab('editor')}
@@ -189,7 +189,7 @@ const Playground = () => {
             </button>
           </div>
 
-          <div className="flex-grow relative overflow-hidden bg-slate-100/30 dark:bg-black/40">
+          <div className="flex-grow relative overflow-hidden bg-slate-100 dark:bg-black">
             {/* Terminal Scanline Effect */}
             <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,128,0.06))] bg-[length:100%_2px,2px_100%]" />
             
@@ -218,7 +218,7 @@ const Playground = () => {
                   exit={{ opacity: 0, y: -10 }}
                   className="p-8 font-mono text-[10px] overflow-y-auto h-full space-y-8"
                 >
-                  <div className="mb-10 p-4 border border-slate-200 dark:border-db-border bg-slate-100 dark:bg-db-panel text-sql-blue/80 dark:text-sql-cyan/80 flex items-center shadow-inner relative">
+                  <div className="mb-10 p-4 border border-slate-200 dark:border-db-border bg-slate-100 dark:bg-db-panel text-sql-blue dark:text-sql-cyan flex items-center shadow-inner relative">
                     <div className="absolute top-0 left-0 w-full h-[1px] bg-sql-blue/20 dark:bg-sql-cyan/20 shadow-[0_0_10px_#00e5ff]" />
                     <TerminalSquare className="w-4 h-4 mr-3" />
                     <span className="font-black uppercase tracking-widest text-[9px]">DEBUG:: EXPLAIN ANALYZE {localQuery}</span>
@@ -264,8 +264,8 @@ const Playground = () => {
         </div>
 
         {/* Visualization Area (Col 8-12) */}
-        <div className="lg:col-span-5 flex flex-col bg-slate-50/20 dark:bg-db-panel/20 backdrop-blur-sm overflow-hidden relative">
-          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-db-border bg-slate-100/20 dark:bg-db-black/20">
+        <div className="lg:col-span-5 flex flex-col bg-slate-50 dark:bg-db-panel overflow-hidden relative">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-db-border bg-slate-100 dark:bg-db-black">
              <div className="flex items-center space-x-3">
                <CpuChip className="w-4 h-4 text-slate-400 dark:text-slate-600" />
                <span className="text-[9px] font-black uppercase tracking-[0.4em] text-slate-400 dark:text-slate-600">COMPUTE_VISUALIZER_V4.0</span>
@@ -279,9 +279,9 @@ const Playground = () => {
                   key={table.name} 
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="border border-slate-200 dark:border-db-border bg-white/40 dark:bg-db-surface/40 backdrop-blur-xl shadow-2xl relative overflow-hidden"
+                  className="border border-slate-200 dark:border-db-border bg-white dark:bg-db-surface shadow-2xl relative overflow-hidden"
                 >
-                  <div className="bg-slate-50/80 dark:bg-db-panel/80 px-4 py-3 flex items-center justify-between border-b border-slate-200 dark:border-db-border">
+                  <div className="bg-slate-50 dark:bg-db-panel px-4 py-3 flex items-center justify-between border-b border-slate-200 dark:border-db-border">
                     <div className="flex items-center space-x-2">
                       <TableIcon className="w-3 h-3 text-sql-blue dark:text-sql-cyan" />
                       <span className="text-[10px] font-black tracking-[0.2em] text-slate-900 dark:text-white uppercase">{table.name}</span>
@@ -293,7 +293,7 @@ const Playground = () => {
                   <div className="overflow-x-auto font-mono uppercase">
                     <table className="w-full text-[10px] text-left">
                       <thead>
-                        <tr className="bg-slate-100/40 dark:bg-db-black/40 text-slate-400 dark:text-slate-600 text-[9px] border-b border-slate-200 dark:border-db-border">
+                        <tr className="bg-slate-100 dark:bg-db-black text-slate-400 dark:text-slate-600 text-[9px] border-b border-slate-200 dark:border-db-border">
                           {table.columns.map(col => <th key={col} className="px-4 py-3 font-black tracking-tighter">{col}</th>)}
                         </tr>
                       </thead>
@@ -330,7 +330,7 @@ const Playground = () => {
                 <motion.div 
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  className="w-full max-w-lg border border-sql-green/30 bg-white/80 dark:bg-db-black/80 backdrop-blur-2xl shadow-[0_0_40px_rgba(0,255,157,0.1)] relative"
+                  className="w-full max-w-lg border border-sql-green/30 bg-white dark:bg-db-black backdrop-blur-2xl shadow-[0_0_40px_rgba(0,255,157,0.1)] relative"
                 >
                   <div className="bg-sql-green/10 border-b border-sql-green/20 px-4 py-3 flex items-center justify-between text-sql-green">
                     <div className="flex items-center space-x-3">
@@ -342,7 +342,7 @@ const Playground = () => {
                   <div className="max-h-64 overflow-auto custom-scrollbar font-mono uppercase">
                     <table className="w-full text-[10px] text-left">
                       <thead>
-                        <tr className="bg-slate-50/40 dark:bg-db-panel/40 text-slate-400 dark:text-slate-600 text-[9px] border-b border-slate-200 dark:border-db-border">
+                        <tr className="bg-slate-50 dark:bg-db-panel text-slate-400 dark:text-slate-600 text-[9px] border-b border-slate-200 dark:border-db-border">
                           {Object.keys(resultRows[0]).map(col => <th key={col} className="px-4 py-3 tracking-tighter">{col}</th>)}
                         </tr>
                       </thead>

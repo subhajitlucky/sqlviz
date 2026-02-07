@@ -322,9 +322,9 @@ const TopicDetail = () => {
 
         <footer className="mt-40 pt-16 border-t border-slate-200 dark:border-db-border flex flex-col md:flex-row justify-between gap-1">
           {prevConcept && (
-            <Link to={`/topic/${prevConcept.id}`} className="group p-8 border border-slate-200 dark:border-db-border bg-slate-50/40 dark:bg-db-surface/40 hover:bg-white dark:hover:bg-db-panel hover:border-sql-blue dark:hover:border-sql-cyan transition-all flex-1">
+            <Link to={`/topic/${prevConcept.id}`} className="group p-8 border border-slate-200 dark:border-db-border bg-slate-50 dark:bg-db-surface hover:bg-white dark:hover:bg-db-panel hover:border-sql-blue dark:hover:border-sql-cyan transition-all flex-1">
               <div className="flex items-center space-x-6">
-                <ChevronLeft size={24} className="text-slate-300 dark:text-slate-700 group-hover:text-sql-blue dark:group-hover:text-sql-cyan transition-colors" />
+                <ChevronLeft size={24} className="text-slate-400 dark:text-slate-700 group-hover:text-sql-blue dark:group-hover:text-sql-cyan transition-colors" />
                 <div>
                   <span className="text-[8px] font-black text-slate-400 dark:text-slate-600 uppercase tracking-widest">Previous_Node</span>
                   <div className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest mt-1">{prevConcept.title}</div>
@@ -333,13 +333,13 @@ const TopicDetail = () => {
             </Link>
           )}
           {nextConcept && (
-            <Link to={`/topic/${nextConcept.id}`} className="group p-8 border border-slate-200 dark:border-db-border bg-slate-50/40 dark:bg-db-surface/40 hover:bg-white dark:hover:bg-db-panel hover:border-sql-blue dark:hover:border-sql-cyan transition-all flex-1 text-right">
+            <Link to={`/topic/${nextConcept.id}`} className="group p-8 border border-slate-200 dark:border-db-border bg-slate-50 dark:bg-db-surface hover:bg-white dark:hover:bg-db-panel hover:border-sql-blue dark:hover:border-sql-cyan transition-all flex-1 text-right">
               <div className="flex items-center justify-end space-x-6">
                 <div>
                   <span className="text-[8px] font-black text-slate-400 dark:text-slate-600 uppercase tracking-widest">Next_Node</span>
                   <div className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest mt-1">{nextConcept.title}</div>
                 </div>
-                <ChevronRight size={24} className="text-slate-300 dark:text-slate-700 group-hover:text-sql-blue dark:group-hover:text-sql-cyan transition-colors" />
+                <ChevronRight size={24} className="text-slate-400 dark:text-slate-700 group-hover:text-sql-blue dark:group-hover:text-sql-cyan transition-colors" />
               </div>
             </Link>
           )}

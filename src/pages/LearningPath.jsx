@@ -181,7 +181,7 @@ const LearningPath = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="inline-flex items-center space-x-3 px-4 py-1.5 rounded-full bg-db-surface border border-db-border text-sql-cyan text-[10px] font-black uppercase tracking-[0.3em] mb-10 shadow-[0_0_15px_rgba(0,229,255,0.05)]"
+            className="inline-flex items-center space-x-3 px-4 py-1.5 rounded-full bg-slate-100 dark:bg-db-surface border border-slate-200 dark:border-db-border text-sql-blue dark:text-sql-cyan text-[10px] font-black uppercase tracking-[0.3em] mb-10 shadow-[0_0_15px_rgba(0,229,255,0.05)]"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-sql-green animate-pulse" />
             <span>Navigation Terminal: Path_Map</span>
