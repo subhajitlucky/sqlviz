@@ -37,7 +37,7 @@ const Home = () => {
           {/* Core Title */}
           <motion.h1 
             variants={itemVariants}
-            className="text-6xl md:text-9xl font-black tracking-tighter text-white leading-[0.9] mb-10"
+            className="text-6xl md:text-9xl font-black tracking-tighter text-slate-900 dark:text-white leading-[0.9] mb-10"
           >
             THE DATA <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-b from-sql-cyan to-sql-blue drop-shadow-[0_0_30px_rgba(0,229,255,0.2)]">
@@ -48,7 +48,7 @@ const Home = () => {
           {/* Monospace Description */}
           <motion.p 
             variants={itemVariants}
-            className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-16 font-mono leading-relaxed"
+            className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-16 font-mono leading-relaxed"
           >
             &gt; Initializing visual model of the relational universe... <br />
             &gt; Mapping B-Tree traversal paths... <br />
@@ -72,7 +72,7 @@ const Home = () => {
             
             <Link 
               to="/playground" 
-              className="px-12 py-6 bg-db-surface hover:bg-db-panel text-white rounded-none skew-x-[-12deg] font-black text-xl flex items-center transition-all border border-db-border shadow-xl group"
+              className="px-12 py-6 bg-slate-100 dark:bg-db-surface hover:bg-slate-200 dark:hover:bg-db-panel text-slate-900 dark:text-white rounded-none skew-x-[-12deg] font-black text-xl flex items-center transition-all border border-slate-200 dark:border-db-border shadow-xl group"
             >
               <span className="skew-x-[12deg] flex items-center">
                 OPEN_TERMINAL
@@ -91,12 +91,12 @@ const Home = () => {
               { icon: Layers, title: "02. STORAGE_MODELS", desc: "Physical data layout across B-Tree nodes and memory pages." },
               { icon: Cpu, title: "03. DISTRIBUTED_LOGIC", desc: "Distributed consensus algorithms and multi-node synchronization." }
             ].map((feature, i) => (
-              <div key={i} className="p-10 bg-db-surface/40 backdrop-blur-sm border border-db-border/50 text-left hover:bg-db-panel/60 transition-all group">
-                <div className="w-12 h-12 rounded-lg bg-db-panel flex items-center justify-center mb-8 border border-db-border group-hover:border-sql-cyan transition-colors">
-                  <feature.icon className="w-6 h-6 text-slate-500 group-hover:text-sql-cyan transition-colors" />
+              <div key={i} className="p-10 bg-slate-50/50 dark:bg-db-surface/40 backdrop-blur-sm border border-slate-200 dark:border-db-border/50 text-left hover:bg-white dark:hover:bg-db-panel/60 transition-all group">
+                <div className="w-12 h-12 rounded-lg bg-slate-100 dark:bg-db-panel flex items-center justify-center mb-8 border border-slate-200 dark:border-db-border group-hover:border-sql-cyan transition-colors">
+                  <feature.icon className="w-6 h-6 text-slate-400 dark:text-slate-500 group-hover:text-sql-cyan transition-colors" />
                 </div>
-                <h3 className="text-xs font-black text-sql-cyan mb-4 tracking-widest">{feature.title}</h3>
-                <p className="text-slate-500 text-sm leading-relaxed font-mono">{feature.desc}</p>
+                <h3 className="text-xs font-black text-sql-blue dark:text-sql-cyan mb-4 tracking-widest">{feature.title}</h3>
+                <p className="text-slate-600 dark:text-slate-500 text-sm leading-relaxed font-mono">{feature.desc}</p>
               </div>
             ))}
           </motion.div>

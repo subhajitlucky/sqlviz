@@ -114,28 +114,28 @@ const TopicCard = ({ concept, index }) => {
     >
       <Link 
         to={`/topic/${concept.id}`}
-        className="group block h-full p-6 bg-db-surface/40 backdrop-blur-sm border border-db-border hover:border-sql-cyan transition-all relative overflow-hidden shadow-2xl"
+        className="group block h-full p-6 bg-white/40 dark:bg-db-surface/40 backdrop-blur-sm border border-slate-200 dark:border-db-border hover:border-sql-blue dark:hover:border-sql-cyan transition-all relative overflow-hidden shadow-2xl"
       >
         {/* Terminal Scanline Effect */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,128,0.06))] bg-[length:100%_2px,2px_100%]" />
         
         <div className="relative z-10 flex flex-col h-full">
           <div className="flex justify-between items-start mb-6">
-            <div className="w-10 h-10 flex items-center justify-center border border-db-border bg-db-panel text-slate-500 group-hover:text-sql-cyan group-hover:border-sql-cyan transition-colors">
+            <div className="w-10 h-10 flex items-center justify-center border border-slate-200 dark:border-db-border bg-slate-50 dark:bg-db-panel text-slate-400 dark:text-slate-500 group-hover:text-sql-blue dark:group-hover:text-sql-cyan group-hover:border-sql-blue dark:group-hover:border-sql-cyan transition-colors">
               <Icon size={20} />
             </div>
             <DifficultyBadge difficulty={concept.difficulty} />
           </div>
           
-          <h3 className="text-sm font-black text-white mb-2 tracking-widest uppercase group-hover:text-sql-cyan transition-colors">
+          <h3 className="text-sm font-black text-slate-900 dark:text-white mb-2 tracking-widest uppercase group-hover:text-sql-blue dark:group-hover:text-sql-cyan transition-colors">
             {concept.title}
           </h3>
           
-          <p className="text-[11px] text-slate-500 line-clamp-2 mb-6 font-mono leading-relaxed uppercase">
+          <p className="text-[11px] text-slate-600 dark:text-slate-500 line-clamp-2 mb-6 font-mono leading-relaxed uppercase">
             {concept.definition}
           </p>
           
-          <div className="mt-auto flex items-center text-[9px] font-black uppercase tracking-[0.2em] text-slate-600 group-hover:text-sql-cyan transition-all">
+          <div className="mt-auto flex items-center text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600 group-hover:text-sql-blue dark:group-hover:text-sql-cyan transition-all">
             &gt; INIT_MODULE <ChevronRight size={10} className="ml-1 group-hover:translate-x-1 transition-transform" />
           </div>
         </div>
@@ -190,7 +190,7 @@ const LearningPath = () => {
           <motion.h1 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-8xl font-black text-white tracking-tighter leading-none mb-12 uppercase"
+            className="text-5xl md:text-8xl font-black text-slate-900 dark:text-white tracking-tighter leading-none mb-12 uppercase"
           >
             SYSTEM <span className="text-transparent bg-clip-text bg-gradient-to-b from-sql-cyan to-sql-blue">INDEX</span>
           </motion.h1>
@@ -198,13 +198,13 @@ const LearningPath = () => {
           <div className="relative max-w-xl mx-auto group">
             <div className="absolute inset-0 bg-sql-cyan/5 blur-xl opacity-0 group-focus-within:opacity-100 transition-opacity" />
             <div className="relative">
-              <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600 group-focus-within:text-sql-cyan transition-colors" />
+              <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-slate-600 group-focus-within:text-sql-cyan transition-colors" />
               <input 
                 type="text"
                 placeholder="SEARCH_COSMOS_OBJECTS..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-12 pr-6 py-4 bg-db-surface/60 border border-db-border text-xs font-black tracking-widest text-white focus:outline-none focus:border-sql-cyan transition-all uppercase placeholder:text-slate-700"
+                className="w-full pl-12 pr-6 py-4 bg-slate-50/60 dark:bg-db-surface/60 border border-slate-200 dark:border-db-border text-xs font-black tracking-widest text-slate-900 dark:text-white focus:outline-none focus:border-sql-blue dark:focus:border-sql-cyan transition-all uppercase placeholder:text-slate-300 dark:placeholder:text-slate-700"
               />
             </div>
           </div>
@@ -223,20 +223,20 @@ const LearningPath = () => {
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  className="flex flex-col md:flex-row md:items-start justify-between mb-12 gap-8 border-l-2 border-db-border pl-8"
+                  className="flex flex-col md:flex-row md:items-start justify-between mb-12 gap-8 border-l-2 border-slate-200 dark:border-db-border pl-8"
                 >
                   <div className="flex items-start gap-6">
-                    <div className="w-14 h-14 bg-db-panel border border-db-border flex items-center justify-center text-sql-cyan shadow-xl">
+                    <div className="w-14 h-14 bg-slate-50 dark:bg-db-panel border border-slate-200 dark:border-db-border flex items-center justify-center text-sql-blue dark:text-sql-cyan shadow-xl">
                       <Icon size={28} />
                     </div>
                     <div>
                       <div className="flex items-center space-x-2 mb-1">
-                        <span className="text-[9px] font-black uppercase tracking-[0.4em] text-slate-600">Sector_0{pIdx + 1}</span>
+                        <span className="text-[9px] font-black uppercase tracking-[0.4em] text-slate-400 dark:text-slate-600">Sector_0{pIdx + 1}</span>
                       </div>
-                      <h2 className="text-2xl md:text-4xl font-black text-white tracking-widest uppercase">{path.title}</h2>
+                      <h2 className="text-2xl md:text-4xl font-black text-slate-900 dark:text-white tracking-widest uppercase">{path.title}</h2>
                     </div>
                   </div>
-                  <p className="text-xs text-slate-500 max-w-sm font-mono leading-relaxed uppercase">
+                  <p className="text-xs text-slate-600 dark:text-slate-500 max-w-sm font-mono leading-relaxed uppercase">
                     &gt; {path.description}
                   </p>
                 </motion.div>

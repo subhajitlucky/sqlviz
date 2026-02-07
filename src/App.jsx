@@ -46,11 +46,11 @@ function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-20 items-center">
               <Link to="/" className="flex items-center space-x-3 z-50" onClick={closeMenu}>
-                <div className="p-2 rounded-xl bg-sapphire-600">
+                <div className="p-2 rounded-xl bg-sql-blue dark:bg-sapphire-600">
                   <Database className="w-6 h-6 text-white" />
                 </div>
                 <span className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white">
-                  SQL<span className="text-sql-cyan">COSMOS</span>
+                  SQL<span className="text-sql-blue dark:text-sql-cyan">COSMOS</span>
                 </span>
               </Link>
 
@@ -63,14 +63,14 @@ function App() {
                   <Link 
                     key={item.path}
                     to={item.path} 
-                    className="group relative flex items-center space-x-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 hover:text-sql-cyan transition-all"
+                    className="group relative flex items-center space-x-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 hover:text-sql-blue dark:hover:text-sql-cyan transition-all"
                   >
                     <item.icon className="w-3 h-3" />
                     <span>{item.label}</span>
                   </Link>
                 ))}
                 
-                <div className="h-4 w-px bg-db-border" />
+                <div className="h-4 w-px bg-slate-200 dark:bg-db-border" />
                 
                 {/* THEME TOGGLE BUTTON */}
                 <button 
@@ -113,17 +113,17 @@ function App() {
                   <Link 
                     to="/path" 
                     onClick={closeMenu}
-                    className="flex items-center space-x-3 p-4 rounded-2xl text-slate-600 dark:text-slate-300 hover:bg-sapphire-50 dark:hover:bg-sapphire-900/30 transition-all font-bold"
+                    className="flex items-center space-x-3 p-4 rounded-2xl text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-sapphire-900/30 transition-all font-bold"
                   >
-                    <BookOpen className="w-5 h-5 text-sapphire-600" />
+                    <BookOpen className="w-5 h-5 text-sql-blue dark:text-sapphire-600" />
                     <span>Learning Path</span>
                   </Link>
                   <Link 
                     to="/playground" 
                     onClick={closeMenu}
-                    className="flex items-center space-x-3 p-4 rounded-2xl text-slate-600 dark:text-slate-300 hover:bg-sapphire-50 dark:hover:bg-sapphire-900/30 transition-all font-bold"
+                    className="flex items-center space-x-3 p-4 rounded-2xl text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-sapphire-900/30 transition-all font-bold"
                   >
-                    <Terminal className="w-5 h-5 text-sapphire-600" />
+                    <Terminal className="w-5 h-5 text-sql-blue dark:text-sapphire-600" />
                     <span>Playground</span>
                   </Link>
                 </div>

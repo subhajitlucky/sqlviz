@@ -62,18 +62,18 @@ const TableVisualizer = ({ id }) => {
   ];
 
   return (
-    <div className="w-full bg-db-surface/60 border border-db-border rounded-none shadow-2xl overflow-hidden font-mono uppercase transition-all">
-      <div className="bg-db-panel px-4 py-2 border-b border-db-border flex justify-between items-center">
-        <span className="text-[9px] font-black tracking-widest text-slate-500">MEMORY_DUMP: stars</span>
+    <div className="w-full bg-white/60 dark:bg-db-surface/60 border border-slate-200 dark:border-db-border rounded-none shadow-2xl overflow-hidden font-mono uppercase transition-all">
+      <div className="bg-slate-50 dark:bg-db-panel px-4 py-2 border-b border-slate-200 dark:border-db-border flex justify-between items-center">
+        <span className="text-[9px] font-black tracking-widest text-slate-400 dark:text-slate-500">MEMORY_DUMP: stars</span>
         <div className="flex space-x-1">
-          <div className="w-1.5 h-1.5 rounded-full bg-sql-cyan/20" />
-          <div className="w-1.5 h-1.5 rounded-full bg-sql-cyan/20" />
+          <div className="w-1.5 h-1.5 rounded-full bg-sql-blue/20 dark:bg-sql-cyan/20" />
+          <div className="w-1.5 h-1.5 rounded-full bg-sql-blue/20 dark:bg-sql-cyan/20" />
         </div>
       </div>
       <div className="overflow-x-auto p-4">
         <table className="w-full text-left text-[10px]">
           <thead>
-            <tr className="text-slate-600 border-b border-db-border/50">
+            <tr className="text-slate-400 dark:text-slate-600 border-b border-slate-100 dark:border-db-border/50">
               <th className="pb-2 font-black tracking-tighter">ID</th>
               <th className="pb-2 font-black tracking-tighter">NAME</th>
               <th className="pb-2 font-black tracking-tighter">MAG</th>
@@ -87,12 +87,12 @@ const TableVisualizer = ({ id }) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: i * 0.05 }}
-                className="group border-b border-db-border/30 last:border-0 hover:bg-sql-cyan/5 transition-colors"
+                className="group border-b border-slate-100 dark:border-db-border/30 last:border-0 hover:bg-sql-blue/5 dark:hover:bg-sql-cyan/5 transition-colors"
               >
-                <td className="py-2 text-sql-cyan font-bold">{row.id}</td>
-                <td className="py-2 text-slate-300">{row.name}</td>
-                <td className={`py-2 ${row.mag < 0 ? "text-sql-gold" : "text-slate-500"}`}>{row.mag}</td>
-                <td className="py-2 text-slate-600">{row.type}</td>
+                <td className="py-2 text-sql-blue dark:text-sql-cyan font-bold">{row.id}</td>
+                <td className="py-2 text-slate-700 dark:text-slate-300">{row.name}</td>
+                <td className={`py-2 ${row.mag < 0 ? "text-sql-gold" : "text-slate-400 dark:text-slate-500"}`}>{row.mag}</td>
+                <td className="py-2 text-slate-400 dark:text-slate-600">{row.type}</td>
               </motion.tr>
             ))}
           </tbody>
@@ -211,9 +211,9 @@ const TopicDetail = () => {
   if (!concept) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center font-mono">
-        <AlertCircle size={48} className="mb-6 text-db-border animate-pulse" />
-        <h2 className="text-2xl font-black text-white uppercase tracking-widest">Target_Null: Object_Not_Found</h2>
-        <Link to="/path" className="mt-6 text-sql-cyan text-xs uppercase tracking-widest hover:underline">Return to System_Map</Link>
+        <AlertCircle size={48} className="mb-6 text-slate-200 dark:text-db-border animate-pulse" />
+        <h2 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-widest">Target_Null: Object_Not_Found</h2>
+        <Link to="/path" className="mt-6 text-sql-blue dark:text-sql-cyan text-xs uppercase tracking-widest hover:underline">Return to System_Map</Link>
       </div>
     );
   }
@@ -227,14 +227,14 @@ const TopicDetail = () => {
 
       <div className="max-w-7xl mx-auto px-6 py-16 flex-grow w-full relative z-10">
         <nav className="mb-20 flex items-center justify-between">
-          <Link to="/path" className="group flex items-center text-[10px] font-black uppercase tracking-[0.3em] text-slate-600 hover:text-sql-cyan transition-all">
+          <Link to="/path" className="group flex items-center text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 dark:text-slate-600 hover:text-sql-blue dark:hover:text-sql-cyan transition-all">
             <ArrowLeft className="w-3 h-3 mr-3 group-hover:-translate-x-1 transition-transform" /> 
             &lt; Return_To_Index
           </Link>
-          <div className="flex items-center space-x-4 px-5 py-2 bg-db-surface border border-db-border uppercase">
-            <span className="text-[9px] font-black text-slate-600 tracking-widest">Path: {concept.path}</span>
-            <div className="w-1 h-1 rounded-full bg-db-border" />
-            <span className="text-[9px] font-black text-sql-cyan tracking-widest">{concept.id}</span>
+          <div className="flex items-center space-x-4 px-5 py-2 bg-slate-50 dark:bg-db-surface border border-slate-200 dark:border-db-border uppercase">
+            <span className="text-[9px] font-black text-slate-400 dark:text-slate-600 tracking-widest">Path: {concept.path}</span>
+            <div className="w-1 h-1 rounded-full bg-slate-200 dark:bg-db-border" />
+            <span className="text-[9px] font-black text-sql-blue dark:text-sql-cyan tracking-widest">{concept.id}</span>
           </div>
         </nav>
 
@@ -243,26 +243,26 @@ const TopicDetail = () => {
             <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}>
               <DifficultyBadge difficulty={concept.difficulty} />
               
-              <h1 className="text-6xl md:text-9xl font-black text-white leading-none mt-10 mb-10 tracking-tighter uppercase drop-shadow-[0_0_20px_rgba(255,255,255,0.05)]">
+              <h1 className="text-6xl md:text-9xl font-black text-slate-900 dark:text-white leading-none mt-10 mb-10 tracking-tighter uppercase drop-shadow-[0_0_20px_rgba(255,255,255,0.05)]">
                 {concept.title}
               </h1>
-              <p className="text-xl md:text-2xl text-slate-400 font-mono leading-relaxed max-w-2xl uppercase">
+              <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 font-mono leading-relaxed max-w-2xl uppercase">
                 &gt; {concept.definition}
               </p>
             </motion.div>
 
             <motion.section initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="relative group">
-              <div className="p-10 bg-db-surface/40 border border-db-border relative overflow-hidden shadow-2xl">
+              <div className="p-10 bg-slate-50/40 dark:bg-db-surface/40 border border-slate-200 dark:border-db-border relative overflow-hidden shadow-2xl">
                 {/* Tech bar decoration */}
-                <div className="absolute top-0 left-0 w-1 h-full bg-sql-cyan shadow-[0_0_15px_#00e5ff]" />
+                <div className="absolute top-0 left-0 w-1 h-full bg-sql-blue dark:bg-sql-cyan shadow-[0_0_15px_#00e5ff]" />
                 
                 <div className="flex items-center space-x-4 mb-8">
-                  <div className="p-2 border border-sql-cyan/20 bg-sql-cyan/5 text-sql-cyan">
+                  <div className="p-2 border border-sql-blue/20 dark:border-sql-cyan/20 bg-sql-blue/5 dark:bg-sql-cyan/5 text-sql-blue dark:text-sql-cyan">
                     <Terminal size={20} />
                   </div>
-                  <h3 className="text-xs font-black text-white uppercase tracking-[0.3em]">Core_Optimization_Protocol</h3>
+                  <h3 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-[0.3em]">Core_Optimization_Protocol</h3>
                 </div>
-                <p className="text-lg text-slate-300 leading-relaxed font-bold uppercase tracking-tight italic">
+                <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed font-bold uppercase tracking-tight italic">
                   "{concept.performance}"
                 </p>
               </div>
@@ -270,10 +270,10 @@ const TopicDetail = () => {
 
             <section className="space-y-10">
               <div className="flex items-center space-x-4">
-                <div className="p-2 border border-db-border bg-db-panel text-slate-500">
+                <div className="p-2 border border-slate-200 dark:border-db-border bg-slate-50 dark:bg-db-panel text-slate-400 dark:text-slate-500">
                   <Code size={20} />
                 </div>
-                <h3 className="text-xs font-black text-white uppercase tracking-[0.3em]">SYNTAX_MODEL</h3>
+                <h3 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-[0.3em]">SYNTAX_MODEL</h3>
               </div>
               <QueryExample query={concept.exampleQuery} />
             </section>
@@ -282,26 +282,26 @@ const TopicDetail = () => {
           <div className="lg:col-span-5 space-y-16">
             <div className="space-y-6">
               <div className="flex items-center justify-between px-2">
-                <h4 className="text-[9px] font-black text-slate-600 uppercase tracking-[0.4em]">Data_Schema_Snapshot</h4>
-                <Database size={12} className="text-db-border" />
+                <h4 className="text-[9px] font-black text-slate-400 dark:text-slate-600 uppercase tracking-[0.4em]">Data_Schema_Snapshot</h4>
+                <Database size={12} className="text-slate-200 dark:text-db-border" />
               </div>
               <TableVisualizer id={concept.id} />
             </div>
 
             <div className="space-y-6">
               <div className="flex items-center justify-between px-2">
-                <h4 className="text-[9px] font-black text-slate-600 uppercase tracking-[0.4em]">Engine_Compute_Visual</h4>
-                <Play size={12} className="text-db-border" />
+                <h4 className="text-[9px] font-black text-slate-400 dark:text-slate-600 uppercase tracking-[0.4em]">Engine_Compute_Visual</h4>
+                <Play size={12} className="text-slate-200 dark:text-db-border" />
               </div>
               <div className="relative">
                 <VisualizerSelector type={concept.visualType} id={concept.id} />
               </div>
             </div>
 
-            <div className="p-10 border border-db-border bg-db-surface/60 backdrop-blur-2xl shadow-2xl relative overflow-hidden font-mono uppercase">
-              <div className="flex items-center space-x-4 mb-10 pb-6 border-b border-db-border">
-                <Binary size={20} className="text-sql-cyan" />
-                <span className="text-xs font-black tracking-widest text-white">System_Metadata</span>
+            <div className="p-10 border border-slate-200 dark:border-db-border bg-white/60 dark:bg-db-surface/60 backdrop-blur-2xl shadow-2xl relative overflow-hidden font-mono uppercase">
+              <div className="flex items-center space-x-4 mb-10 pb-6 border-b border-slate-200 dark:border-db-border">
+                <Binary size={20} className="text-sql-blue dark:text-sql-cyan" />
+                <span className="text-xs font-black tracking-widest text-slate-900 dark:text-white">System_Metadata</span>
               </div>
               <div className="grid grid-cols-2 gap-y-10 gap-x-6">
                 {[
@@ -311,8 +311,8 @@ const TopicDetail = () => {
                   { label: "Status", val: "ACID_SYNC" }
                 ].map((item, i) => (
                   <div key={i}>
-                    <span className="text-[8px] font-black text-slate-600 tracking-widest block mb-2">{item.label}</span>
-                    <p className="text-[10px] font-bold text-sql-cyan tracking-tighter">{item.val}</p>
+                    <span className="text-[8px] font-black text-slate-400 dark:text-slate-600 tracking-widest block mb-2">{item.label}</span>
+                    <p className="text-[10px] font-bold text-sql-blue dark:text-sql-cyan tracking-tighter">{item.val}</p>
                   </div>
                 ))}
               </div>
@@ -320,26 +320,26 @@ const TopicDetail = () => {
           </div>
         </div>
 
-        <footer className="mt-40 pt-16 border-t border-db-border flex flex-col md:flex-row justify-between gap-1">
+        <footer className="mt-40 pt-16 border-t border-slate-200 dark:border-db-border flex flex-col md:flex-row justify-between gap-1">
           {prevConcept && (
-            <Link to={`/topic/${prevConcept.id}`} className="group p-8 border border-db-border bg-db-surface/40 hover:bg-db-panel hover:border-sql-cyan transition-all flex-1">
+            <Link to={`/topic/${prevConcept.id}`} className="group p-8 border border-slate-200 dark:border-db-border bg-slate-50/40 dark:bg-db-surface/40 hover:bg-white dark:hover:bg-db-panel hover:border-sql-blue dark:hover:border-sql-cyan transition-all flex-1">
               <div className="flex items-center space-x-6">
-                <ChevronLeft size={24} className="text-slate-700 group-hover:text-sql-cyan transition-colors" />
+                <ChevronLeft size={24} className="text-slate-300 dark:text-slate-700 group-hover:text-sql-blue dark:group-hover:text-sql-cyan transition-colors" />
                 <div>
-                  <span className="text-[8px] font-black text-slate-600 uppercase tracking-widest">Previous_Node</span>
-                  <div className="text-sm font-black text-white uppercase tracking-widest mt-1">{prevConcept.title}</div>
+                  <span className="text-[8px] font-black text-slate-400 dark:text-slate-600 uppercase tracking-widest">Previous_Node</span>
+                  <div className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest mt-1">{prevConcept.title}</div>
                 </div>
               </div>
             </Link>
           )}
           {nextConcept && (
-            <Link to={`/topic/${nextConcept.id}`} className="group p-8 border border-db-border bg-db-surface/40 hover:bg-db-panel hover:border-sql-cyan transition-all flex-1 text-right">
+            <Link to={`/topic/${nextConcept.id}`} className="group p-8 border border-slate-200 dark:border-db-border bg-slate-50/40 dark:bg-db-surface/40 hover:bg-white dark:hover:bg-db-panel hover:border-sql-blue dark:hover:border-sql-cyan transition-all flex-1 text-right">
               <div className="flex items-center justify-end space-x-6">
                 <div>
-                  <span className="text-[8px] font-black text-slate-600 uppercase tracking-widest">Next_Node</span>
-                  <div className="text-sm font-black text-white uppercase tracking-widest mt-1">{nextConcept.title}</div>
+                  <span className="text-[8px] font-black text-slate-400 dark:text-slate-600 uppercase tracking-widest">Next_Node</span>
+                  <div className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest mt-1">{nextConcept.title}</div>
                 </div>
-                <ChevronRight size={24} className="text-slate-700 group-hover:text-sql-cyan transition-colors" />
+                <ChevronRight size={24} className="text-slate-300 dark:text-slate-700 group-hover:text-sql-blue dark:group-hover:text-sql-cyan transition-colors" />
               </div>
             </Link>
           )}
