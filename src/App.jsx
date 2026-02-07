@@ -22,16 +22,10 @@ function App() {
     const root = window.document.documentElement;
     if (theme === 'dark') {
       root.classList.add('dark');
-      root.classList.remove('light');
       root.style.colorScheme = 'dark';
-      document.body.classList.add('dark');
-      document.body.classList.remove('light');
     } else {
-      root.classList.add('light');
       root.classList.remove('dark');
       root.style.colorScheme = 'light';
-      document.body.classList.add('light');
-      document.body.classList.remove('dark');
     }
   }, [theme]);
 
@@ -42,19 +36,18 @@ function App() {
 
   return (
     <Router>
-      {/* THEME WRAPPER: Root level classes are now handled in index.css body layer */}
-      <div className={`${theme === 'dark' ? 'dark' : ''} min-h-screen flex flex-col transition-colors duration-300`}>
+      <div className="min-h-screen flex flex-col transition-colors duration-300">
         
         {/* Navigation */}
-        <nav className="border-b border-slate-200 dark:border-db-border bg-white dark:bg-db-black sticky top-0 z-50">
+        <nav className="border-b border-border bg-background/80 backdrop-blur-xl sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-20 items-center">
               <Link to="/" className="flex items-center space-x-3 z-50" onClick={closeMenu}>
-                <div className="p-2 rounded-xl bg-sql-blue">
-                  <Database className="w-6 h-6 text-white" />
+                <div className="p-2 rounded-xl bg-primary">
+                  <Database className="w-6 h-6 text-primary-foreground" />
                 </div>
-                <span className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white">
-                  SQL<span className="text-sql-blue dark:text-sql-cyan">COSMOS</span>
+                <span className="text-2xl font-black tracking-tighter text-foreground">
+                  SQL<span className="text-primary">COSMOS</span>
                 </span>
               </Link>
 
@@ -67,19 +60,19 @@ function App() {
                   <Link 
                     key={item.path}
                     to={item.path} 
-                    className="group relative flex items-center space-x-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 hover:text-sql-blue dark:hover:text-sql-cyan transition-all"
+                    className="group relative flex items-center space-x-2 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-primary transition-all"
                   >
                     <item.icon className="w-3 h-3" />
                     <span>{item.label}</span>
                   </Link>
                 ))}
                 
-                <div className="h-4 w-px bg-slate-200 dark:bg-db-border" />
+                <div className="h-4 w-px bg-border" />
                 
                 {/* THEME TOGGLE BUTTON */}
                 <button 
                   onClick={toggleTheme}
-                  className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-db-panel transition-colors text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-db-border"
+                  className="p-2 rounded-full hover:bg-muted transition-colors text-muted-foreground border border-border"
                   aria-label="Toggle theme"
                 >
                   {theme === 'dark' ? <Sun className="w-5 h-5 text-sql-gold" /> : <Moon className="w-5 h-5" />}
@@ -90,13 +83,13 @@ function App() {
               <div className="flex md:hidden items-center space-x-2">
                 <button 
                   onClick={toggleTheme}
-                  className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-db-panel transition-colors text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-db-border"
+                  className="p-2 rounded-full hover:bg-muted transition-colors text-muted-foreground border border-border"
                 >
                   {theme === 'dark' ? <Sun className="w-5 h-5 text-sql-gold" /> : <Moon className="w-5 h-5" />}
                 </button>
                 <button 
                   onClick={toggleMenu}
-                  className="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-db-panel transition-colors z-50"
+                  className="p-2 rounded-lg text-foreground hover:bg-muted transition-colors z-50"
                 >
                   {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                 </button>
@@ -111,23 +104,23 @@ function App() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="absolute top-16 left-0 right-0 bg-white dark:bg-db-surface border-b border-slate-200 dark:border-db-border md:hidden shadow-xl z-40"
+                className="absolute top-16 left-0 right-0 bg-background border-b border-border md:hidden shadow-xl z-40"
               >
                 <div className="flex flex-col p-4 space-y-2">
                   <Link 
                     to="/path" 
                     onClick={closeMenu}
-                    className="flex items-center space-x-3 p-4 rounded-2xl text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-db-panel transition-all font-bold"
+                    className="flex items-center space-x-3 p-4 rounded-2xl text-foreground hover:bg-muted transition-all font-bold"
                   >
-                    <BookOpen className="w-5 h-5 text-sql-blue dark:text-sql-cyan" />
+                    <BookOpen className="w-5 h-5 text-primary" />
                     <span>Learning Path</span>
                   </Link>
                   <Link 
                     to="/playground" 
                     onClick={closeMenu}
-                    className="flex items-center space-x-3 p-4 rounded-2xl text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-db-panel transition-all font-bold"
+                    className="flex items-center space-x-3 p-4 rounded-2xl text-foreground hover:bg-muted transition-all font-bold"
                   >
-                    <Terminal className="w-5 h-5 text-sql-blue dark:text-sql-cyan" />
+                    <Terminal className="w-5 h-5 text-primary" />
                     <span>Playground</span>
                   </Link>
                 </div>
@@ -147,10 +140,10 @@ function App() {
         </main>
 
         {/* Footer */}
-        <footer className="border-t border-slate-200 dark:border-db-border py-12 bg-white dark:bg-db-black transition-colors">
+        <footer className="border-t border-border py-12 bg-background transition-colors">
           <div className="max-w-7xl mx-auto px-4 text-center">
-            <p className="text-slate-500 dark:text-slate-400 text-sm italic font-light">"Visualizing the core of your data."</p>
-            <p className="mt-4 text-slate-400 dark:text-slate-600 text-xs font-mono uppercase tracking-widest">© 2026 SQL Cosmos • Built by OpenClaw</p>
+            <p className="text-muted-foreground text-sm italic font-light">"Visualizing the core of your data."</p>
+            <p className="mt-4 text-muted-foreground/60 text-xs font-mono uppercase tracking-widest">© 2026 SQL Cosmos • Built by OpenClaw</p>
           </div>
         </footer>
       </div>

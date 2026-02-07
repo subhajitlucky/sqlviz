@@ -2,11 +2,9 @@ import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { paths, concepts } from '../data/blueprint';
-import AnimatedStarField from '../components/AnimatedStarField';
 import { 
   Search, 
   ChevronRight, 
-  Orbit, 
   Database, 
   Layers, 
   Share2, 
@@ -27,8 +25,6 @@ import {
   AlertTriangle,
   Flame,
   Clock,
-  ExternalLink,
-  Sparkles,
   Terminal,
   ActivitySquare,
   HardDrive,
@@ -90,7 +86,7 @@ const DifficultyBadge = ({ difficulty }) => {
     'Beginner': 'text-sql-green border-sql-green/20 bg-sql-green/5',
     'Intermediate': 'text-sql-blue border-sql-blue/20 bg-sql-blue/5',
     'Advanced': 'text-sql-gold border-sql-gold/20 bg-sql-gold/5',
-    'Expert': 'text-rose-500 border-rose-500/20 bg-rose-500/5',
+    'Expert': 'text-destructive border-destructive/20 bg-destructive/5',
   };
   
   return (
@@ -114,25 +110,25 @@ const TopicCard = ({ concept, index }) => {
     >
       <Link 
         to={`/topic/${concept.id}`}
-        className="group block h-full p-6 bg-white dark:bg-[#0d0e12] border border-slate-200 dark:border-[#232735] hover:border-sql-blue dark:hover:border-[#00e5ff] transition-all relative overflow-hidden shadow-xl"
+        className="group block h-full p-6 bg-card border border-border hover:border-primary transition-all relative overflow-hidden shadow-sm hover:shadow-xl"
       >
         <div className="relative z-10 flex flex-col h-full">
           <div className="flex justify-between items-start mb-6">
-            <div className="w-10 h-10 flex items-center justify-center border border-slate-200 dark:border-[#232735] bg-slate-50 dark:bg-[#14161f] text-slate-400 dark:text-slate-500 group-hover:text-sql-blue dark:group-hover:text-[#00e5ff] group-hover:border-sql-blue dark:group-hover:border-[#00e5ff] transition-colors">
+            <div className="w-10 h-10 flex items-center justify-center border border-border bg-muted text-muted-foreground group-hover:text-primary group-hover:border-primary transition-colors">
               <Icon size={20} />
             </div>
             <DifficultyBadge difficulty={concept.difficulty} />
           </div>
           
-          <h3 className="text-sm font-black text-slate-900 dark:text-white mb-2 tracking-widest uppercase group-hover:text-sql-blue dark:group-hover:text-[#00e5ff] transition-colors">
+          <h3 className="text-sm font-black text-foreground mb-2 tracking-widest uppercase group-hover:text-primary transition-colors">
             {concept.title}
           </h3>
           
-          <p className="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2 mb-6 font-mono leading-relaxed uppercase">
+          <p className="text-[11px] text-muted-foreground line-clamp-2 mb-6 font-mono leading-relaxed uppercase">
             {concept.definition}
           </p>
           
-          <div className="mt-auto flex items-center text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 group-hover:text-sql-blue dark:group-hover:text-[#00e5ff] transition-all">
+          <div className="mt-auto flex items-center text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground group-hover:text-primary transition-all">
             &gt; INIT_MODULE <ChevronRight size={10} className="ml-1 group-hover:translate-x-1 transition-transform" />
           </div>
         </div>
@@ -143,7 +139,6 @@ const TopicCard = ({ concept, index }) => {
 
 const LearningPath = () => {
   const [search, setSearch] = useState('');
-  const containerRef = useRef(null);
   
   const filteredConcepts = useMemo(() => {
     if (!search.trim()) return concepts;
@@ -166,11 +161,7 @@ const LearningPath = () => {
   const hasResults = filteredConcepts.length > 0;
 
   return (
-    <div className="min-h-screen relative flex flex-col" ref={containerRef}>
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#232735_1px,transparent_1px)] [background-size:32px_32px]" />
-      </div>
-      
+    <div className="min-h-screen relative flex flex-col">
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 flex-grow w-full">
         
         {/* Header */}
@@ -178,7 +169,7 @@ const LearningPath = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="inline-flex items-center space-x-3 px-4 py-1.5 rounded-full bg-slate-100 dark:bg-[#0d0e12] border border-slate-200 dark:border-[#232735] text-sql-blue dark:text-[#00e5ff] text-[10px] font-black uppercase tracking-[0.3em] mb-10 shadow-[0_0_15px_rgba(0,229,255,0.05)]"
+            className="inline-flex items-center space-x-3 px-4 py-1.5 rounded-full bg-muted border border-border text-primary text-[10px] font-black uppercase tracking-[0.3em] mb-10"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-sql-green animate-pulse" />
             <span>Navigation Terminal: Path_Map</span>
@@ -187,27 +178,27 @@ const LearningPath = () => {
           <motion.h1 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-8xl font-black text-slate-900 dark:text-white tracking-tighter leading-none mb-12 uppercase"
+            className="text-5xl md:text-8xl font-black text-foreground tracking-tighter leading-none mb-12 uppercase"
           >
-            SYSTEM <span className="text-transparent bg-clip-text bg-gradient-to-b from-sql-cyan to-sql-blue">INDEX</span>
+            SYSTEM <span className="text-transparent bg-clip-text bg-gradient-to-b from-primary to-sql-blue">INDEX</span>
           </motion.h1>
           
           <div className="relative max-w-xl mx-auto group">
-            <div className="absolute inset-0 bg-sql-cyan/5 blur-xl opacity-0 group-focus-within:opacity-100 transition-opacity" />
+            <div className="absolute inset-0 bg-primary/5 blur-xl opacity-0 group-focus-within:opacity-100 transition-opacity" />
             <div className="relative">
-              <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-slate-600 group-focus-within:text-sql-cyan transition-colors" />
+              <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
               <input 
                 type="text"
                 placeholder="SEARCH_COSMOS_OBJECTS..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-12 pr-6 py-4 bg-slate-50 dark:bg-[#0d0e12] border border-slate-200 dark:border-[#232735] text-xs font-black tracking-widest text-slate-900 dark:text-white focus:outline-none focus:border-sql-blue dark:focus:border-[#00e5ff] transition-all uppercase placeholder:text-slate-300 dark:placeholder:text-slate-700"
+                className="w-full pl-12 pr-6 py-4 bg-muted border border-border text-xs font-black tracking-widest text-foreground focus:outline-none focus:border-primary transition-all uppercase placeholder:text-muted-foreground/50"
               />
             </div>
           </div>
         </header>
 
-        {/* Galaxies (Sectors) */}
+        {/* Sectors */}
         <div className="space-y-32">
           {paths.map((path, pIdx) => {
             const pathConcepts = groupedConcepts[path.id];
@@ -220,25 +211,25 @@ const LearningPath = () => {
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  className="flex flex-col md:flex-row md:items-start justify-between mb-12 gap-8 border-l-2 border-slate-200 dark:border-[#232735] pl-8"
+                  className="flex flex-col md:flex-row md:items-start justify-between mb-12 gap-8 border-l-2 border-border pl-8"
                 >
                   <div className="flex items-start gap-6">
-                    <div className="w-14 h-14 bg-slate-50 dark:bg-[#14161f] border border-slate-200 dark:border-[#232735] flex items-center justify-center text-sql-blue dark:text-[#00e5ff] shadow-xl">
+                    <div className="w-14 h-14 bg-muted border border-border flex items-center justify-center text-primary shadow-xl">
                       <Icon size={28} />
                     </div>
                     <div>
                       <div className="flex items-center space-x-2 mb-1">
-                        <span className="text-[9px] font-black uppercase tracking-[0.4em] text-slate-400 dark:text-slate-600">Sector_0{pIdx + 1}</span>
+                        <span className="text-[9px] font-black uppercase tracking-[0.4em] text-muted-foreground">Sector_0{pIdx + 1}</span>
                       </div>
-                      <h2 className="text-2xl md:text-4xl font-black text-slate-900 dark:text-white tracking-widest uppercase">{path.title}</h2>
+                      <h2 className="text-2xl md:text-4xl font-black text-foreground tracking-widest uppercase">{path.title}</h2>
                     </div>
                   </div>
-                  <p className="text-xs text-slate-600 dark:text-slate-500 max-w-sm font-mono leading-relaxed uppercase">
+                  <p className="text-xs text-muted-foreground max-w-sm font-mono leading-relaxed uppercase">
                     &gt; {path.description}
                   </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-1">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-px bg-border border border-border shadow-lg">
                   {pathConcepts.map((concept, cIdx) => (
                     <TopicCard key={concept.id} concept={concept} index={cIdx} />
                   ))}
@@ -250,12 +241,12 @@ const LearningPath = () => {
 
         {!hasResults && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-40">
-            <Terminal size={48} className="mx-auto text-db-border animate-pulse mb-6" />
-            <h3 className="text-xl font-black text-white mb-2 uppercase tracking-widest">Target Not Found</h3>
-            <p className="text-slate-600 text-xs mb-10 font-mono">OBJECT_NOT_IN_INDEX: CHECK_QUERY_SYNTAX</p>
+            <Terminal size={48} className="mx-auto text-border animate-pulse mb-6" />
+            <h3 className="text-xl font-black text-foreground mb-2 uppercase tracking-widest">Target Not Found</h3>
+            <p className="text-muted-foreground text-xs mb-10 font-mono">OBJECT_NOT_IN_INDEX: CHECK_QUERY_SYNTAX</p>
             <button 
               onClick={() => setSearch('')} 
-              className="px-8 py-3 bg-db-surface border border-db-border text-[10px] font-black text-sql-cyan uppercase tracking-widest hover:bg-db-panel transition-all"
+              className="px-8 py-3 bg-muted border border-border text-[10px] font-black text-primary uppercase tracking-widest hover:bg-background transition-all"
             >
               Reset_Terminal
             </button>

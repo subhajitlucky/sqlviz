@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
   ArrowLeft, 
   ChevronRight, 
@@ -12,19 +12,7 @@ import {
   Terminal, 
   Cpu, 
   AlertCircle,
-  FileSearch,
-  Activity,
-  Box,
-  Layout,
-  Filter,
-  ArrowUpDown,
   Layers,
-  Share2,
-  Star,
-  Zap,
-  GitMerge,
-  ShieldCheck,
-  Network
 } from 'lucide-react';
 import { concepts } from '../data/blueprint';
 
@@ -53,7 +41,7 @@ const VisualizerSelector = ({ type, id }) => {
   }
 };
 
-const TableVisualizer = ({ id }) => {
+const TableVisualizer = () => {
   const rows = [
     { id: 1, name: 'Sirius', mag: -1.46, type: 'Main' },
     { id: 2, name: 'Canopus', mag: -0.74, type: 'Giant' },
@@ -62,37 +50,37 @@ const TableVisualizer = ({ id }) => {
   ];
 
   return (
-    <div className="w-full bg-white dark:bg-[#0d0e12] border border-slate-200 dark:border-[#232735] rounded-none shadow-2xl overflow-hidden font-mono uppercase transition-all">
-      <div className="bg-slate-50 dark:bg-[#14161f] px-4 py-2 border-b border-slate-200 dark:border-[#232735] flex justify-between items-center">
-        <span className="text-[9px] font-black tracking-widest text-slate-400 dark:text-slate-500">MEMORY_DUMP: stars</span>
+    <div className="w-full bg-card border border-border rounded-none shadow-2xl overflow-hidden font-mono uppercase transition-all">
+      <div className="bg-muted px-4 py-2 border-b border-border flex justify-between items-center">
+        <span className="text-[9px] font-black tracking-widest text-muted-foreground">MEMORY_DUMP: stars</span>
         <div className="flex space-x-1">
-          <div className="w-1.5 h-1.5 rounded-full bg-sql-blue/20 dark:bg-[#00e5ff]/20" />
-          <div className="w-1.5 h-1.5 rounded-full bg-sql-blue/20 dark:bg-[#00e5ff]/20" />
+          <div className="w-1.5 h-1.5 rounded-full bg-primary/20" />
+          <div className="w-1.5 h-1.5 rounded-full bg-primary/20" />
         </div>
       </div>
       <div className="overflow-x-auto p-4">
         <table className="w-full text-left text-[10px]">
           <thead>
-            <tr className="text-slate-400 dark:text-slate-600 border-b border-slate-100 dark:border-[#232735]/50">
+            <tr className="text-muted-foreground border-b border-border/50">
               <th className="pb-2 font-black tracking-tighter">ID</th>
               <th className="pb-2 font-black tracking-tighter">NAME</th>
               <th className="pb-2 font-black tracking-tighter">MAG</th>
               <th className="pb-2 font-black tracking-tighter">TYPE</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-border/30">
             {rows.map((row, i) => (
               <motion.tr 
                 key={row.id}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: i * 0.05 }}
-                className="group border-b border-slate-100 dark:border-[#232735]/30 last:border-0 hover:bg-sql-blue/5 dark:hover:bg-[#00e5ff]/5 transition-colors"
+                className="group hover:bg-primary/5 transition-colors"
               >
-                <td className="py-2 text-sql-blue dark:text-[#00e5ff] font-bold">{row.id}</td>
-                <td className="py-2 text-slate-700 dark:text-slate-300">{row.name}</td>
-                <td className={`py-2 ${row.mag < 0 ? "text-sql-gold" : "text-slate-400 dark:text-slate-500"}`}>{row.mag}</td>
-                <td className="py-2 text-slate-400 dark:text-slate-600">{row.type}</td>
+                <td className="py-2 text-primary font-bold">{row.id}</td>
+                <td className="py-2 text-foreground">{row.name}</td>
+                <td className={`py-2 ${row.mag < 0 ? "text-sql-gold" : "text-muted-foreground"}`}>{row.mag}</td>
+                <td className="py-2 text-muted-foreground">{row.type}</td>
               </motion.tr>
             ))}
           </tbody>
@@ -102,40 +90,37 @@ const TableVisualizer = ({ id }) => {
   );
 };
 
-const ExecutionFlow = ({ type }) => {
+const ExecutionFlow = () => {
   return (
-    <div className="relative w-full h-56 flex items-center justify-center bg-db-surface/40 border border-db-border shadow-2xl overflow-hidden group">
-      <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[radial-gradient(#232735_1px,transparent_1px)] [background-size:16px_16px]" />
-      
+    <div className="relative w-full h-56 flex items-center justify-center bg-muted/30 border border-border shadow-2xl overflow-hidden group">
       <div className="flex items-center space-x-12 z-10 scale-90 md:scale-100">
         <motion.div 
           animate={{ y: [0, -2, 0] }}
           transition={{ duration: 4, repeat: Infinity }}
-          className="w-16 h-16 border border-db-border bg-db-panel flex flex-col items-center justify-center text-sql-blue shadow-xl"
+          className="w-16 h-16 border border-border bg-card flex flex-col items-center justify-center text-primary shadow-xl"
         >
           <Database size={24} />
           <span className="text-[7px] mt-1 font-black uppercase tracking-widest">IO_LAYER</span>
         </motion.div>
         
-        <div className="relative w-20 h-1 bg-db-border rounded-full overflow-hidden">
+        <div className="relative w-20 h-1 bg-border rounded-full overflow-hidden">
           <motion.div 
             animate={{ left: ['-20%', '120%'] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-0 w-8 h-full bg-sql-cyan shadow-[0_0_8px_#00e5ff]"
+            className="absolute top-0 w-8 h-full bg-primary shadow-[0_0_8px_#00e5ff]"
           />
         </div>
 
         <motion.div 
           animate={{ rotate: [0, 90, 180, 270, 360] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="w-20 h-20 rounded-none border border-sql-gold/30 bg-db-panel flex flex-col items-center justify-center text-sql-gold shadow-xl relative"
+          className="w-20 h-20 rounded-none border border-sql-gold/30 bg-card flex flex-col items-center justify-center text-sql-gold shadow-xl relative"
         >
-          <div className="absolute inset-0 border border-sql-gold/10 scale-110" />
           <Cpu size={28} />
           <span className="text-[7px] mt-1 font-black uppercase tracking-widest">EXEC_PLAN</span>
         </motion.div>
 
-        <div className="relative w-20 h-1 bg-db-border rounded-full overflow-hidden">
+        <div className="relative w-20 h-1 bg-border rounded-full overflow-hidden">
           <motion.div 
             animate={{ left: ['-20%', '120%'] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1 }}
@@ -146,7 +131,7 @@ const ExecutionFlow = ({ type }) => {
         <motion.div 
           animate={{ scale: [1, 1.05, 1] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="w-16 h-16 border border-db-border bg-db-panel flex flex-col items-center justify-center text-sql-green shadow-xl"
+          className="w-16 h-16 border border-border bg-card flex flex-col items-center justify-center text-sql-green shadow-xl"
         >
           <Binary size={24} />
           <span className="text-[7px] mt-1 font-black uppercase tracking-widest">RESULT_SET</span>
@@ -161,18 +146,16 @@ const QueryExample = ({ query }) => {
   const keywords = ['SELECT', 'FROM', 'WHERE', 'ORDER', 'BY', 'LIMIT', 'OFFSET', 'JOIN', 'ON', 'GROUP', 'HAVING', 'WITH', 'CREATE', 'INDEX', 'ALTER', 'TABLE', 'ADD', 'PRIMARY', 'KEY', 'INSERT', 'INTO', 'VALUES'];
 
   return (
-    <div className="bg-black/60 p-8 border border-db-border font-mono text-sm leading-relaxed relative group overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-[1px] bg-sql-cyan opacity-30 shadow-[0_0_10px_#00e5ff]" />
-      {/* CRT scanline simulation */}
-      <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,128,0.06))] bg-[length:100%_2px,2px_100%]" />
+    <div className="terminal-box p-8 leading-relaxed group">
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-primary opacity-30 shadow-[0_0_10px_#00e5ff]" />
       
       <div className="flex items-center space-x-2 mb-6 opacity-30">
-        <div className="w-2 h-2 bg-sql-cyan" />
-        <div className="text-[8px] font-black uppercase tracking-widest text-slate-500">Terminal_Input_V1.0.4</div>
+        <div className="w-2 h-2 bg-primary" />
+        <div className="text-[8px] font-black uppercase tracking-widest text-muted-foreground">Terminal_Input_V1.0.4</div>
       </div>
-      <p className="text-slate-400 relative z-10">
+      <p className="text-slate-200 relative z-10 font-mono text-sm">
         {parts.map((part, i) => (
-          <span key={i} className={keywords.includes(part.toUpperCase()) ? "text-sql-cyan font-black" : "text-slate-200"}>
+          <span key={i} className={keywords.includes(part.toUpperCase()) ? "text-primary font-black" : "text-slate-200"}>
             {part}{' '}
           </span>
         ))}
@@ -186,7 +169,7 @@ const DifficultyBadge = ({ difficulty }) => {
     'Beginner': 'text-sql-green border-sql-green/20 bg-sql-green/5',
     'Intermediate': 'text-sql-blue border-sql-blue/20 bg-sql-blue/5',
     'Advanced': 'text-sql-gold border-sql-gold/20 bg-sql-gold/5',
-    'Expert': 'text-rose-500 border-rose-500/20 bg-rose-500/5',
+    'Expert': 'text-destructive border-destructive/20 bg-destructive/5',
   };
   
   return (
@@ -211,30 +194,25 @@ const TopicDetail = () => {
   if (!concept) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center font-mono">
-        <AlertCircle size={48} className="mb-6 text-slate-200 dark:text-db-border animate-pulse" />
-        <h2 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-widest">Target_Null: Object_Not_Found</h2>
-        <Link to="/path" className="mt-6 text-sql-blue dark:text-sql-cyan text-xs uppercase tracking-widest hover:underline">Return to System_Map</Link>
+        <AlertCircle size={48} className="mb-6 text-border animate-pulse" />
+        <h2 className="text-2xl font-black text-foreground uppercase tracking-widest">Target_Null: Object_Not_Found</h2>
+        <Link to="/path" className="mt-6 text-primary text-xs uppercase tracking-widest hover:underline">Return to System_Map</Link>
       </div>
     );
   }
 
   return (
     <div className="min-h-screen relative overflow-hidden flex flex-col">
-      {/* Structural Grid */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-10">
-        <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(rgba(35,39,53,0.5)_1px,transparent_1px),linear-gradient(90deg,rgba(35,39,53,0.5)_1px,transparent_1px)] [background-size:40px_40px]" />
-      </div>
-
       <div className="max-w-7xl mx-auto px-6 py-16 flex-grow w-full relative z-10">
         <nav className="mb-20 flex items-center justify-between">
-          <Link to="/path" className="group flex items-center text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 dark:text-slate-600 hover:text-sql-blue dark:hover:text-sql-cyan transition-all">
+          <Link to="/path" className="group flex items-center text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground hover:text-primary transition-all">
             <ArrowLeft className="w-3 h-3 mr-3 group-hover:-translate-x-1 transition-transform" /> 
             &lt; Return_To_Index
           </Link>
-          <div className="flex items-center space-x-4 px-5 py-2 bg-slate-50 dark:bg-db-surface border border-slate-200 dark:border-db-border uppercase">
-            <span className="text-[9px] font-black text-slate-400 dark:text-slate-600 tracking-widest">Path: {concept.path}</span>
-            <div className="w-1 h-1 rounded-full bg-slate-200 dark:bg-db-border" />
-            <span className="text-[9px] font-black text-sql-blue dark:text-sql-cyan tracking-widest">{concept.id}</span>
+          <div className="flex items-center space-x-4 px-5 py-2 bg-muted border border-border uppercase">
+            <span className="text-[9px] font-black text-muted-foreground tracking-widest">Path: {concept.path}</span>
+            <div className="w-1 h-1 rounded-full bg-border" />
+            <span className="text-[9px] font-black text-primary tracking-widest">{concept.id}</span>
           </div>
         </nav>
 
@@ -243,26 +221,25 @@ const TopicDetail = () => {
             <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}>
               <DifficultyBadge difficulty={concept.difficulty} />
               
-              <h1 className="text-6xl md:text-9xl font-black text-slate-900 dark:text-white leading-none mt-10 mb-10 tracking-tighter uppercase drop-shadow-[0_0_20px_rgba(255,255,255,0.05)]">
+              <h1 className="text-6xl md:text-9xl font-black text-foreground leading-none mt-10 mb-10 tracking-tighter uppercase">
                 {concept.title}
               </h1>
-              <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 font-mono leading-relaxed max-w-2xl uppercase">
+              <p className="text-xl md:text-2xl text-muted-foreground font-mono leading-relaxed max-w-2xl uppercase">
                 &gt; {concept.definition}
               </p>
             </motion.div>
 
             <motion.section initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="relative group">
-              <div className="p-10 bg-slate-50 dark:bg-db-surface border border-slate-200 dark:border-db-border relative overflow-hidden shadow-xl">
-                {/* Tech bar decoration */}
-                <div className="absolute top-0 left-0 w-1 h-full bg-sql-blue dark:bg-sql-cyan shadow-[0_0_15px_#00e5ff]" />
+              <div className="p-10 bg-card border border-border relative overflow-hidden shadow-xl">
+                <div className="absolute top-0 left-0 w-1 h-full bg-primary shadow-[0_0_15px_#00e5ff]" />
                 
                 <div className="flex items-center space-x-4 mb-8">
-                  <div className="p-2 border border-sql-blue/20 dark:border-sql-cyan/20 bg-sql-blue/5 dark:bg-sql-cyan/5 text-sql-blue dark:text-sql-cyan">
+                  <div className="p-2 border border-primary/20 bg-primary/5 text-primary">
                     <Terminal size={20} />
                   </div>
-                  <h3 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-[0.3em]">Core_Optimization_Protocol</h3>
+                  <h3 className="text-xs font-black text-foreground uppercase tracking-[0.3em]">Core_Optimization_Protocol</h3>
                 </div>
-                <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed font-bold uppercase tracking-tight italic">
+                <p className="text-lg text-foreground/80 leading-relaxed font-bold uppercase tracking-tight italic">
                   "{concept.performance}"
                 </p>
               </div>
@@ -270,10 +247,10 @@ const TopicDetail = () => {
 
             <section className="space-y-10">
               <div className="flex items-center space-x-4">
-                <div className="p-2 border border-slate-200 dark:border-[#232735] bg-slate-50 dark:bg-[#14161f] text-slate-400 dark:text-slate-500">
+                <div className="p-2 border border-border bg-muted text-muted-foreground">
                   <Code size={20} />
                 </div>
-                <h3 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-[0.3em]">SYNTAX_MODEL</h3>
+                <h3 className="text-xs font-black text-foreground uppercase tracking-[0.3em]">SYNTAX_MODEL</h3>
               </div>
               <QueryExample query={concept.exampleQuery} />
             </section>
@@ -282,26 +259,26 @@ const TopicDetail = () => {
           <div className="lg:col-span-5 space-y-16">
             <div className="space-y-6">
               <div className="flex items-center justify-between px-2">
-                <h4 className="text-[9px] font-black text-slate-400 dark:text-slate-600 uppercase tracking-[0.4em]">Data_Schema_Snapshot</h4>
-                <Database size={12} className="text-slate-200 dark:text-db-border" />
+                <h4 className="text-[9px] font-black text-muted-foreground uppercase tracking-[0.4em]">Data_Schema_Snapshot</h4>
+                <Database size={12} className="text-border" />
               </div>
-              <TableVisualizer id={concept.id} />
+              <TableVisualizer />
             </div>
 
             <div className="space-y-6">
               <div className="flex items-center justify-between px-2">
-                <h4 className="text-[9px] font-black text-slate-400 dark:text-slate-600 uppercase tracking-[0.4em]">Engine_Compute_Visual</h4>
-                <Play size={12} className="text-slate-200 dark:text-db-border" />
+                <h4 className="text-[9px] font-black text-muted-foreground uppercase tracking-[0.4em]">Engine_Compute_Visual</h4>
+                <Play size={12} className="text-border" />
               </div>
               <div className="relative">
                 <VisualizerSelector type={concept.visualType} id={concept.id} />
               </div>
             </div>
 
-            <div className="p-10 border border-slate-200 dark:border-db-border bg-white dark:bg-db-surface shadow-xl relative overflow-hidden font-mono uppercase">
-              <div className="flex items-center space-x-4 mb-10 pb-6 border-b border-slate-200 dark:border-db-border">
-                <Binary size={20} className="text-sql-blue dark:text-sql-cyan" />
-                <span className="text-xs font-black tracking-widest text-slate-900 dark:text-white">System_Metadata</span>
+            <div className="p-10 border border-border bg-card shadow-xl relative overflow-hidden font-mono uppercase">
+              <div className="flex items-center space-x-4 mb-10 pb-6 border-b border-border">
+                <Binary size={20} className="text-primary" />
+                <span className="text-xs font-black tracking-widest text-foreground">System_Metadata</span>
               </div>
               <div className="grid grid-cols-2 gap-y-10 gap-x-6">
                 {[
@@ -311,8 +288,8 @@ const TopicDetail = () => {
                   { label: "Status", val: "ACID_SYNC" }
                 ].map((item, i) => (
                   <div key={i}>
-                    <span className="text-[8px] font-black text-slate-400 dark:text-slate-600 tracking-widest block mb-2">{item.label}</span>
-                    <p className="text-[10px] font-bold text-sql-blue dark:text-sql-cyan tracking-tighter">{item.val}</p>
+                    <span className="text-[8px] font-black text-muted-foreground tracking-widest block mb-2">{item.label}</span>
+                    <p className="text-[10px] font-bold text-primary tracking-tighter">{item.val}</p>
                   </div>
                 ))}
               </div>
@@ -320,26 +297,26 @@ const TopicDetail = () => {
           </div>
         </div>
 
-        <footer className="mt-40 pt-16 border-t border-slate-200 dark:border-[#232735] flex flex-col md:flex-row justify-between gap-1">
+        <footer className="mt-40 pt-16 border-t border-border flex flex-col md:flex-row justify-between gap-px bg-border">
           {prevConcept && (
-            <Link to={`/topic/${prevConcept.id}`} className="group p-8 border border-slate-200 dark:border-[#232735] bg-slate-50 dark:bg-[#0d0e12] hover:bg-white dark:hover:bg-[#14161f] hover:border-sql-blue dark:hover:border-[#00e5ff] transition-all flex-1">
+            <Link to={`/topic/${prevConcept.id}`} className="group p-8 bg-card hover:bg-muted transition-all flex-1">
               <div className="flex items-center space-x-6">
-                <ChevronLeft size={24} className="text-slate-400 dark:text-slate-700 group-hover:text-sql-blue dark:group-hover:text-[#00e5ff] transition-colors" />
+                <ChevronLeft size={24} className="text-muted-foreground group-hover:text-primary transition-colors" />
                 <div>
-                  <span className="text-[8px] font-black text-slate-400 dark:text-slate-600 uppercase tracking-widest">Previous_Node</span>
-                  <div className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest mt-1">{prevConcept.title}</div>
+                  <span className="text-[8px] font-black text-muted-foreground uppercase tracking-widest">Previous_Node</span>
+                  <div className="text-sm font-black text-foreground uppercase tracking-widest mt-1">{prevConcept.title}</div>
                 </div>
               </div>
             </Link>
           )}
           {nextConcept && (
-            <Link to={`/topic/${nextConcept.id}`} className="group p-8 border border-slate-200 dark:border-[#232735] bg-slate-50 dark:bg-[#0d0e12] hover:bg-white dark:hover:bg-[#14161f] hover:border-sql-blue dark:hover:border-[#00e5ff] transition-all flex-1 text-right">
+            <Link to={`/topic/${nextConcept.id}`} className="group p-8 bg-card hover:bg-muted transition-all flex-1 text-right">
               <div className="flex items-center justify-end space-x-6">
                 <div>
-                  <span className="text-[8px] font-black text-slate-400 dark:text-slate-600 uppercase tracking-widest">Next_Node</span>
-                  <div className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest mt-1">{nextConcept.title}</div>
+                  <span className="text-[8px] font-black text-muted-foreground uppercase tracking-widest">Next_Node</span>
+                  <div className="text-sm font-black text-foreground uppercase tracking-widest mt-1">{nextConcept.title}</div>
                 </div>
-                <ChevronRight size={24} className="text-slate-400 dark:text-slate-700 group-hover:text-sql-blue dark:group-hover:text-[#00e5ff] transition-colors" />
+                <ChevronRight size={24} className="text-muted-foreground group-hover:text-primary transition-colors" />
               </div>
             </Link>
           )}
