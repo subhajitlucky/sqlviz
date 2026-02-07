@@ -116,9 +116,6 @@ const TopicCard = ({ concept, index }) => {
         to={`/topic/${concept.id}`}
         className="group block h-full p-6 bg-white dark:bg-[#0d0e12] border border-slate-200 dark:border-[#232735] hover:border-sql-blue dark:hover:border-[#00e5ff] transition-all relative overflow-hidden shadow-xl"
       >
-        {/* Terminal Scanline Effect */}
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,128,0.06))] bg-[length:100%_2px,2px_100%]" />
-        
         <div className="relative z-10 flex flex-col h-full">
           <div className="flex justify-between items-start mb-6">
             <div className="w-10 h-10 flex items-center justify-center border border-slate-200 dark:border-[#232735] bg-slate-50 dark:bg-[#14161f] text-slate-400 dark:text-slate-500 group-hover:text-sql-blue dark:group-hover:text-[#00e5ff] group-hover:border-sql-blue dark:group-hover:border-[#00e5ff] transition-colors">
