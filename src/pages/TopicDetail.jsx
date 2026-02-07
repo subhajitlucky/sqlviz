@@ -37,6 +37,16 @@ import SelectivityFilter from '../components/visualizers/internal/SelectivityFil
 import WriteAmplification from '../components/visualizers/internal/WriteAmplification';
 import TwoPhaseCommitInternal from '../components/visualizers/internal/TwoPhaseCommit';
 import ReplicationLagInternal from '../components/visualizers/internal/ReplicationLag';
+import ACIDInternal from '../components/visualizers/internal/ACIDInternal';
+import MVCCInternal from '../components/visualizers/internal/MVCCInternal';
+import LocksInternal from '../components/visualizers/internal/LocksInternal';
+import ParallelQueryInternal from '../components/visualizers/internal/ParallelQueryInternal';
+import CTERecursion from '../components/visualizers/internal/CTERecursion';
+import SubqueryInternal from '../components/visualizers/internal/SubqueryInternal';
+import AggregationInternal from '../components/visualizers/internal/AggregationInternal';
+import OrderByInternal from '../components/visualizers/internal/OrderByInternal';
+import LimitOffsetInternal from '../components/visualizers/internal/LimitOffsetInternal';
+import ExecutionPlanInternal from '../components/visualizers/internal/ExecutionPlanInternal';
 
 const VisualizerSelector = ({ type, id }) => {
   // Mapping topics to their purpose-built simulations
@@ -50,6 +60,17 @@ const VisualizerSelector = ({ type, id }) => {
   if (id === 'write-amplification') return <WriteAmplification />;
   if (id === 'two-phase-commit') return <TwoPhaseCommitInternal />;
   if (id === 'replication-lag') return <ReplicationLagInternal />;
+  
+  if (id === 'acid-conceptual') return <ACIDInternal />;
+  if (id === 'mvcc-isolation') return <MVCCInternal />;
+  if (id === 'locks-deadlocks') return <LocksInternal />;
+  if (id === 'parallel-query') return <ParallelQueryInternal />;
+  if (id === 'ctes') return <CTERecursion />;
+  if (id === 'subqueries') return <SubqueryInternal />;
+  if (id === 'aggregations') return <AggregationInternal />;
+  if (id === 'order-by') return <OrderByInternal />;
+  if (id === 'limit-offset') return <LimitOffsetInternal />;
+  if (id === 'execution-plans') return <ExecutionPlanInternal />;
 
   switch (type) {
     case 'tree': return <BTreeVisualizer />;
