@@ -1,16 +1,17 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  --db-black: #050507;
-  --db-surface: #0d0e12;
-  --db-panel: #14161f;
-  --db-border: #232735;
-  --sql-cyan: #00e5ff;
-  --sql-blue: #336791;
-  --sql-gold: #ffcc00;
-  --sql-green: #00ff9d;
+@theme {
+  --color-db-black: #050507;
+  --color-db-surface: #0d0e12;
+  --color-db-panel: #14161f;
+  --color-db-border: #232735;
+  
+  --color-sql-cyan: #00e5ff;
+  --color-sql-blue: #336791;
+  --color-sql-gold: #ffcc00;
+  --color-sql-green: #00ff9d;
+  
+  --font-mono: "JetBrains Mono", "Fira Code", "IBM Plex Mono", monospace;
 }
 
 @layer base {
@@ -34,11 +35,11 @@
 
 @layer components {
   .db-glass {
-    @apply bg-white dark:bg-db-surface/80 backdrop-blur-md border border-slate-200 dark:border-db-border rounded-xl shadow-2xl;
+    @apply bg-white dark:bg-db-surface border border-slate-200 dark:border-db-border rounded-xl shadow-2xl;
   }
   
   .db-terminal {
-    @apply bg-slate-900 dark:bg-black/60 font-mono border border-slate-700 dark:border-db-border rounded-lg overflow-hidden relative;
+    @apply bg-slate-900 dark:bg-black font-mono border border-slate-700 dark:border-db-border rounded-lg overflow-hidden relative;
   }
 
   .sql-syntax-keyword { @apply text-sql-blue dark:text-sql-cyan font-black; }
