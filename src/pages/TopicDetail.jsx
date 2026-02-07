@@ -252,7 +252,7 @@ const TopicDetail = () => {
             </motion.div>
 
             <motion.section initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="relative group">
-              <div className="p-10 bg-slate-50/40 dark:bg-db-surface/40 border border-slate-200 dark:border-db-border relative overflow-hidden shadow-2xl">
+              <div className="p-10 bg-slate-50 dark:bg-db-surface border border-slate-200 dark:border-db-border relative overflow-hidden shadow-xl">
                 {/* Tech bar decoration */}
                 <div className="absolute top-0 left-0 w-1 h-full bg-sql-blue dark:bg-sql-cyan shadow-[0_0_15px_#00e5ff]" />
                 
@@ -298,7 +298,7 @@ const TopicDetail = () => {
               </div>
             </div>
 
-            <div className="p-10 border border-slate-200 dark:border-db-border bg-white/60 dark:bg-db-surface/60 backdrop-blur-2xl shadow-2xl relative overflow-hidden font-mono uppercase">
+            <div className="p-10 border border-slate-200 dark:border-db-border bg-white dark:bg-db-surface shadow-xl relative overflow-hidden font-mono uppercase">
               <div className="flex items-center space-x-4 mb-10 pb-6 border-b border-slate-200 dark:border-db-border">
                 <Binary size={20} className="text-sql-blue dark:text-sql-cyan" />
                 <span className="text-xs font-black tracking-widest text-slate-900 dark:text-white">System_Metadata</span>

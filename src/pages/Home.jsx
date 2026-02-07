@@ -91,12 +91,12 @@ const Home = () => {
               { icon: Layers, title: "02. STORAGE_MODELS", desc: "Physical data layout across B-Tree nodes and memory pages." },
               { icon: Cpu, title: "03. DISTRIBUTED_LOGIC", desc: "Distributed consensus algorithms and multi-node synchronization." }
             ].map((feature, i) => (
-              <div key={i} className="p-10 bg-slate-50/50 dark:bg-db-surface/40 backdrop-blur-sm border border-slate-200 dark:border-db-border/50 text-left hover:bg-white dark:hover:bg-db-panel/60 transition-all group">
-                <div className="w-12 h-12 rounded-lg bg-slate-100 dark:bg-db-panel flex items-center justify-center mb-8 border border-slate-200 dark:border-db-border group-hover:border-sql-cyan transition-colors">
-                  <feature.icon className="w-6 h-6 text-slate-400 dark:text-slate-500 group-hover:text-sql-cyan transition-colors" />
+              <div key={i} className="p-10 bg-slate-50 dark:bg-db-surface border border-slate-200 dark:border-db-border text-left hover:bg-white dark:hover:bg-db-panel transition-all group shadow-xl">
+                <div className="w-12 h-12 rounded-lg bg-slate-100 dark:bg-db-panel flex items-center justify-center mb-8 border border-slate-200 dark:border-db-border group-hover:border-sql-blue dark:group-hover:border-sql-cyan transition-colors">
+                  <feature.icon className="w-6 h-6 text-slate-400 dark:text-slate-500 group-hover:text-sql-blue dark:group-hover:text-sql-cyan transition-colors" />
                 </div>
                 <h3 className="text-xs font-black text-sql-blue dark:text-sql-cyan mb-4 tracking-widest">{feature.title}</h3>
-                <p className="text-slate-600 dark:text-slate-500 text-sm leading-relaxed font-mono">{feature.desc}</p>
+                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed font-mono">{feature.desc}</p>
               </div>
             ))}
           </motion.div>

@@ -114,7 +114,7 @@ const TopicCard = ({ concept, index }) => {
     >
       <Link 
         to={`/topic/${concept.id}`}
-        className="group block h-full p-6 bg-white/40 dark:bg-db-surface/40 backdrop-blur-sm border border-slate-200 dark:border-db-border hover:border-sql-blue dark:hover:border-sql-cyan transition-all relative overflow-hidden shadow-2xl"
+        className="group block h-full p-6 bg-white dark:bg-db-surface border border-slate-200 dark:border-db-border hover:border-sql-blue dark:hover:border-sql-cyan transition-all relative overflow-hidden shadow-xl"
       >
         {/* Terminal Scanline Effect */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,128,0.06))] bg-[length:100%_2px,2px_100%]" />
@@ -131,11 +131,11 @@ const TopicCard = ({ concept, index }) => {
             {concept.title}
           </h3>
           
-          <p className="text-[11px] text-slate-600 dark:text-slate-500 line-clamp-2 mb-6 font-mono leading-relaxed uppercase">
+          <p className="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2 mb-6 font-mono leading-relaxed uppercase">
             {concept.definition}
           </p>
           
-          <div className="mt-auto flex items-center text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600 group-hover:text-sql-blue dark:group-hover:text-sql-cyan transition-all">
+          <div className="mt-auto flex items-center text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 group-hover:text-sql-blue dark:group-hover:text-sql-cyan transition-all">
             &gt; INIT_MODULE <ChevronRight size={10} className="ml-1 group-hover:translate-x-1 transition-transform" />
           </div>
         </div>
