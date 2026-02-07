@@ -36,6 +36,18 @@ export default {
           900: '#0b416f',
           950: '#07294a',
         },
+        db: {
+          black: '#050507',
+          surface: '#0d0e12',
+          panel: '#14161f',
+          border: '#232735',
+        },
+        sql: {
+          cyan: '#00e5ff',
+          blue: '#336791',
+          gold: '#ffcc00',
+          green: '#00ff9d',
+        },
       },
     },
   },

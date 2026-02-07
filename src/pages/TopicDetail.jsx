@@ -231,10 +231,10 @@ const TopicDetail = () => {
             <ArrowLeft className="w-3 h-3 mr-3 group-hover:-translate-x-1 transition-transform" /> 
             &lt; Return_To_Index
           </Link>
-          <div className="flex items-center space-x-4 px-5 py-2 bg-slate-50 dark:bg-[#0d0e12] border border-slate-200 dark:border-[#232735] uppercase">
+          <div className="flex items-center space-x-4 px-5 py-2 bg-slate-50 dark:bg-db-surface border border-slate-200 dark:border-db-border uppercase">
             <span className="text-[9px] font-black text-slate-400 dark:text-slate-600 tracking-widest">Path: {concept.path}</span>
-            <div className="w-1 h-1 rounded-full bg-slate-200 dark:bg-[#232735]" />
-            <span className="text-[9px] font-black text-sql-blue dark:text-[#00e5ff] tracking-widest">{concept.id}</span>
+            <div className="w-1 h-1 rounded-full bg-slate-200 dark:bg-db-border" />
+            <span className="text-[9px] font-black text-sql-blue dark:text-sql-cyan tracking-widest">{concept.id}</span>
           </div>
         </nav>
 
@@ -252,12 +252,12 @@ const TopicDetail = () => {
             </motion.div>
 
             <motion.section initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="relative group">
-              <div className="p-10 bg-slate-50 dark:bg-[#0d0e12] border border-slate-200 dark:border-[#232735] relative overflow-hidden shadow-xl">
+              <div className="p-10 bg-slate-50 dark:bg-db-surface border border-slate-200 dark:border-db-border relative overflow-hidden shadow-xl">
                 {/* Tech bar decoration */}
-                <div className="absolute top-0 left-0 w-1 h-full bg-sql-blue dark:bg-[#00e5ff] shadow-[0_0_15px_#00e5ff]" />
+                <div className="absolute top-0 left-0 w-1 h-full bg-sql-blue dark:bg-sql-cyan shadow-[0_0_15px_#00e5ff]" />
                 
                 <div className="flex items-center space-x-4 mb-8">
-                  <div className="p-2 border border-sql-blue/20 dark:border-[#00e5ff]/20 bg-sql-blue/5 dark:bg-[#00e5ff]/5 text-sql-blue dark:text-[#00e5ff]">
+                  <div className="p-2 border border-sql-blue/20 dark:border-sql-cyan/20 bg-sql-blue/5 dark:bg-sql-cyan/5 text-sql-blue dark:text-sql-cyan">
                     <Terminal size={20} />
                   </div>
                   <h3 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-[0.3em]">Core_Optimization_Protocol</h3>
@@ -298,9 +298,9 @@ const TopicDetail = () => {
               </div>
             </div>
 
-            <div className="p-10 border border-slate-200 dark:border-[#232735] bg-white dark:bg-[#0d0e12] shadow-xl relative overflow-hidden font-mono uppercase">
-              <div className="flex items-center space-x-4 mb-10 pb-6 border-b border-slate-200 dark:border-[#232735]">
-                <Binary size={20} className="text-sql-blue dark:text-[#00e5ff]" />
+            <div className="p-10 border border-slate-200 dark:border-db-border bg-white dark:bg-db-surface shadow-xl relative overflow-hidden font-mono uppercase">
+              <div className="flex items-center space-x-4 mb-10 pb-6 border-b border-slate-200 dark:border-db-border">
+                <Binary size={20} className="text-sql-blue dark:text-sql-cyan" />
                 <span className="text-xs font-black tracking-widest text-slate-900 dark:text-white">System_Metadata</span>
               </div>
               <div className="grid grid-cols-2 gap-y-10 gap-x-6">
@@ -312,7 +312,7 @@ const TopicDetail = () => {
                 ].map((item, i) => (
                   <div key={i}>
                     <span className="text-[8px] font-black text-slate-400 dark:text-slate-600 tracking-widest block mb-2">{item.label}</span>
-                    <p className="text-[10px] font-bold text-sql-blue dark:text-[#00e5ff] tracking-tighter">{item.val}</p>
+                    <p className="text-[10px] font-bold text-sql-blue dark:text-sql-cyan tracking-tighter">{item.val}</p>
                   </div>
                 ))}
               </div>

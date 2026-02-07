@@ -136,19 +136,19 @@ const Playground = () => {
 
       <div className="flex-grow grid grid-cols-1 lg:grid-cols-12 gap-0 relative z-10">
         {/* Sidebar / Table Explorer (Col 1-2) */}
-        <div className="hidden lg:flex lg:col-span-2 flex-col border-r border-slate-200 dark:border-[#232735] bg-slate-50 dark:bg-[#0d0e12] p-4 space-y-8 font-mono">
-          <div className="flex items-center space-x-2 text-slate-900 dark:text-white font-black text-[10px] uppercase tracking-widest border-b border-slate-200 dark:border-[#232735] pb-4">
-            <HardDrive className="w-3 h-3 text-sql-blue dark:text-[#00e5ff]" />
+        <div className="hidden lg:flex lg:col-span-2 flex-col border-r border-slate-200 dark:border-db-border bg-slate-50 dark:bg-db-surface p-4 space-y-8 font-mono">
+          <div className="flex items-center space-x-2 text-slate-900 dark:text-white font-black text-[10px] uppercase tracking-widest border-b border-slate-200 dark:border-db-border pb-4">
+            <HardDrive className="w-3 h-3 text-sql-blue dark:text-sql-cyan" />
             <span>SCHEMA_BROWSER</span>
           </div>
           <div className="space-y-6">
             {tables.map(table => (
               <div key={table.name} className="group cursor-pointer">
-                <div className="flex items-center space-x-2 text-slate-500 hover:text-sql-blue dark:hover:text-[#00e5ff] transition-colors">
+                <div className="flex items-center space-x-2 text-slate-500 hover:text-sql-blue dark:hover:text-sql-cyan transition-colors">
                   <TableIcon className="w-3 h-3" />
                   <span className="text-[11px] font-black tracking-tighter uppercase">{table.name}</span>
                 </div>
-                <div className="mt-3 ml-2 space-y-1.5 border-l border-slate-200 dark:border-[#232735] pl-4 hidden group-hover:block transition-all">
+                <div className="mt-3 ml-2 space-y-1.5 border-l border-slate-200 dark:border-db-border pl-4 hidden group-hover:block transition-all">
                   {table.columns.map(col => (
                     <div key={col} className="text-[9px] text-slate-400 dark:text-slate-600 hover:text-sql-green font-mono py-0.5 transition-colors cursor-default">
                       {col.toUpperCase()}
@@ -161,18 +161,18 @@ const Playground = () => {
         </div>
 
         {/* Editor Area (Col 3-7) */}
-        <div className="lg:col-span-5 flex flex-col border-r border-slate-200 dark:border-[#232735] bg-white dark:bg-[#0d0e12] shadow-2xl relative">
-          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-[#232735] bg-slate-50 dark:bg-[#14161f]">
+        <div className="lg:col-span-5 flex flex-col border-r border-slate-200 dark:border-db-border bg-white dark:bg-db-surface shadow-2xl relative">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-db-border bg-slate-50 dark:bg-db-panel">
             <div className="flex items-center space-x-6">
               <button 
                 onClick={() => setActiveTab('editor')}
-                className={`text-[9px] font-black uppercase tracking-[0.2em] pb-1 border-b-2 transition-all ${activeTab === 'editor' ? 'border-sql-blue dark:border-[#00e5ff] text-sql-blue dark:text-[#00e5ff]' : 'border-transparent text-slate-400 dark:text-slate-600 hover:text-slate-600 dark:hover:text-slate-400'}`}
+                className={`text-[9px] font-black uppercase tracking-[0.2em] pb-1 border-b-2 transition-all ${activeTab === 'editor' ? 'border-sql-blue dark:border-sql-cyan text-sql-blue dark:text-sql-cyan' : 'border-transparent text-slate-400 dark:text-slate-600 hover:text-slate-600 dark:hover:text-slate-400'}`}
               >
                 SQL_EDITOR
               </button>
               <button 
                 onClick={() => setActiveTab('plan')}
-                className={`text-[9px] font-black uppercase tracking-[0.2em] pb-1 border-b-2 transition-all ${activeTab === 'plan' ? 'border-sql-blue dark:border-[#00e5ff] text-sql-blue dark:text-[#00e5ff]' : 'border-transparent text-slate-400 dark:text-slate-600 hover:text-slate-600 dark:hover:text-slate-400'}`}
+                className={`text-[9px] font-black uppercase tracking-[0.2em] pb-1 border-b-2 transition-all ${activeTab === 'plan' ? 'border-sql-blue dark:border-sql-cyan text-sql-blue dark:text-sql-cyan' : 'border-transparent text-slate-400 dark:text-slate-600 hover:text-slate-600 dark:hover:text-slate-400'}`}
               >
                 ENGINE_LOG
               </button>
@@ -180,7 +180,7 @@ const Playground = () => {
             <button 
               onClick={runQuery}
               disabled={isExecuting}
-              className={`group px-6 py-2 rounded-none skew-x-[-12deg] font-black text-[10px] uppercase tracking-[0.2em] transition-all ${isExecuting ? 'bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed' : 'bg-sql-blue hover:bg-[#00e5ff] text-white shadow-[4px_4px_0_0_#050507]'}`}
+              className={`group px-6 py-2 rounded-none skew-x-[-12deg] font-black text-[10px] uppercase tracking-[0.2em] transition-all ${isExecuting ? 'bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed' : 'bg-sql-blue hover:bg-sql-cyan text-white shadow-[4px_4px_0_0_#050507]'}`}
             >
               <span className="skew-x-[12deg] flex items-center">
                 <Play className={`w-3 h-3 mr-2 fill-current ${isExecuting ? 'animate-pulse' : ''}`} /> 
@@ -218,13 +218,13 @@ const Playground = () => {
                   exit={{ opacity: 0, y: -10 }}
                   className="p-8 font-mono text-[10px] overflow-y-auto h-full space-y-8"
                 >
-                  <div className="mb-10 p-4 border border-slate-200 dark:border-[#232735] bg-slate-100 dark:bg-[#14161f] text-sql-blue dark:text-[#00e5ff] flex items-center shadow-inner relative">
-                    <div className="absolute top-0 left-0 w-full h-[1px] bg-sql-blue/20 dark:bg-[#00e5ff]/20 shadow-[0_0_10px_#00e5ff]" />
+                  <div className="mb-10 p-4 border border-slate-200 dark:border-db-border bg-slate-100 dark:bg-db-panel text-sql-blue dark:text-sql-cyan flex items-center shadow-inner relative">
+                    <div className="absolute top-0 left-0 w-full h-[1px] bg-sql-blue/20 dark:bg-sql-cyan/20 shadow-[0_0_10px_#00e5ff]" />
                     <TerminalSquare className="w-4 h-4 mr-3" />
                     <span className="font-black uppercase tracking-widest text-[9px]">DEBUG:: EXPLAIN ANALYZE {localQuery}</span>
                   </div>
                   
-                  <div className="space-y-10 border-l border-slate-200 dark:border-[#232735] ml-2">
+                  <div className="space-y-10 border-l border-slate-200 dark:border-db-border ml-2">
                     {executionSteps.map((step, idx) => (
                       <motion.div 
                         key={idx}
@@ -236,9 +236,9 @@ const Playground = () => {
                         className={`relative flex items-start space-x-6 pl-8 transition-all`}
                       >
                         {/* Node Marker */}
-                        <div className={`absolute left-[-5px] top-1.5 w-2 h-2 rotate-45 border ${idx === currentPlanStep ? 'bg-sql-blue dark:bg-[#00e5ff] border-sql-blue dark:border-[#00e5ff] animate-pulse' : 'bg-slate-50 dark:bg-[#0d0e12] border-slate-200 dark:border-[#232735]'}`} />
+                        <div className={`absolute left-[-5px] top-1.5 w-2 h-2 rotate-45 border ${idx === currentPlanStep ? 'bg-sql-blue dark:bg-sql-cyan border-sql-blue dark:border-sql-cyan animate-pulse' : 'bg-slate-50 dark:bg-db-surface border-slate-200 dark:border-db-border'}`} />
                         
-                        <div className={`p-2 border transition-colors ${idx === currentPlanStep ? 'bg-sql-blue/10 dark:bg-[#00e5ff]/10 border-sql-blue dark:border-[#00e5ff] text-sql-blue dark:text-[#00e5ff] shadow-[0_0_15px_rgba(0,229,255,0.2)]' : 'bg-slate-100 dark:bg-[#14161f] border-slate-200 dark:border-[#232735] text-slate-400 dark:text-slate-600'}`}>
+                        <div className={`p-2 border transition-colors ${idx === currentPlanStep ? 'bg-sql-blue/10 dark:bg-sql-cyan/10 border-sql-blue dark:border-sql-cyan text-sql-blue dark:text-sql-cyan shadow-[0_0_15px_rgba(0,229,255,0.2)]' : 'bg-slate-100 dark:bg-db-panel border-slate-200 dark:border-db-border text-slate-400 dark:text-slate-600'}`}>
                           {step.type === 'success' ? <CheckCircle className="w-3 h-3" /> : 
                            step.type === 'scan' ? <Search className="w-3 h-3" /> : 
                            <Activity className="w-3 h-3" />}
@@ -249,7 +249,7 @@ const Playground = () => {
                           </span>
                           {step.table && idx === currentPlanStep && (
                             <div className="flex items-center space-x-2 mt-2">
-                              <span className="text-[8px] bg-sql-blue/20 text-sql-blue dark:text-[#00e5ff] px-1.5 py-0.5 font-black border border-sql-blue/30">IO_ACCESS</span>
+                              <span className="text-[8px] bg-sql-blue/20 text-sql-blue dark:text-sql-cyan px-1.5 py-0.5 font-black border border-sql-blue/30">IO_ACCESS</span>
                               <span className="text-[8px] text-slate-500 font-bold tracking-tighter">STORAGE_TARGET: {step.table.toUpperCase()}</span>
                             </div>
                           )}
@@ -264,8 +264,8 @@ const Playground = () => {
         </div>
 
         {/* Visualization Area (Col 8-12) */}
-        <div className="lg:col-span-5 flex flex-col bg-slate-50 dark:bg-[#14161f] overflow-hidden relative">
-          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-[#232735] bg-slate-100 dark:bg-black">
+        <div className="lg:col-span-5 flex flex-col bg-slate-50 dark:bg-db-panel overflow-hidden relative">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-db-border bg-slate-100 dark:bg-db-black">
              <div className="flex items-center space-x-3">
                <CpuChip className="w-4 h-4 text-slate-400 dark:text-slate-600" />
                <span className="text-[9px] font-black uppercase tracking-[0.4em] text-slate-400 dark:text-slate-600">COMPUTE_VISUALIZER_V4.0</span>
@@ -279,25 +279,25 @@ const Playground = () => {
                   key={table.name} 
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="border border-slate-200 dark:border-[#232735] bg-white dark:bg-[#0d0e12] shadow-2xl relative overflow-hidden"
+                  className="border border-slate-200 dark:border-db-border bg-white dark:bg-db-surface shadow-2xl relative overflow-hidden"
                 >
-                  <div className="bg-slate-50 dark:bg-[#14161f] px-4 py-3 flex items-center justify-between border-b border-slate-200 dark:border-[#232735]">
+                  <div className="bg-slate-50 dark:bg-db-panel px-4 py-3 flex items-center justify-between border-b border-slate-200 dark:border-db-border">
                     <div className="flex items-center space-x-2">
-                      <TableIcon className="w-3 h-3 text-sql-blue dark:text-[#00e5ff]" />
+                      <TableIcon className="w-3 h-3 text-sql-blue dark:text-sql-cyan" />
                       <span className="text-[10px] font-black tracking-[0.2em] text-slate-900 dark:text-white uppercase">{table.name}</span>
                     </div>
-                    <div className="text-[8px] font-black text-slate-400 dark:text-slate-600 tracking-widest border border-slate-200 dark:border-[#232735] px-2 py-0.5">
+                    <div className="text-[8px] font-black text-slate-400 dark:text-slate-600 tracking-widest border border-slate-200 dark:border-db-border px-2 py-0.5">
                       {table.data.length}_ROWS
                     </div>
                   </div>
                   <div className="overflow-x-auto font-mono uppercase">
                     <table className="w-full text-[10px] text-left">
                       <thead>
-                        <tr className="bg-slate-100 dark:bg-black text-slate-400 dark:text-slate-600 text-[9px] border-b border-slate-200 dark:border-[#232735]">
+                        <tr className="bg-slate-100 dark:bg-db-black text-slate-400 dark:text-slate-600 text-[9px] border-b border-slate-200 dark:border-db-border">
                           {table.columns.map(col => <th key={col} className="px-4 py-3 font-black tracking-tighter">{col}</th>)}
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-slate-100 dark:divide-[#232735]/20">
+                      <tbody className="divide-y divide-slate-100 dark:divide-db-border/20">
                         {table.data.map((row, i) => (
                           <motion.tr 
                             key={i} 
@@ -309,7 +309,7 @@ const Playground = () => {
                                 ? '2px solid #00e5ff'
                                 : '0px solid transparent',
                               color: activeHighlights[table.name]?.includes(i)
-                                ? (theme === 'dark' ? '#00e5ff' : '#0066cc')
+                                ? (theme === 'dark' ? '#00e5ff' : '#336791')
                                 : (theme === 'dark' ? '#475569' : '#64748b')
                             }}
                             className="transition-all"
@@ -330,7 +330,7 @@ const Playground = () => {
                 <motion.div 
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  className="w-full max-w-lg border border-sql-green/30 bg-white dark:bg-black backdrop-blur-2xl shadow-[0_0_40px_rgba(0,255,157,0.1)] relative"
+                  className="w-full max-w-lg border border-sql-green/30 bg-white dark:bg-db-black backdrop-blur-2xl shadow-[0_0_40px_rgba(0,255,157,0.1)] relative"
                 >
                   <div className="bg-sql-green/10 border-b border-sql-green/20 px-4 py-3 flex items-center justify-between text-sql-green">
                     <div className="flex items-center space-x-3">
@@ -342,11 +342,11 @@ const Playground = () => {
                   <div className="max-h-64 overflow-auto custom-scrollbar font-mono uppercase">
                     <table className="w-full text-[10px] text-left">
                       <thead>
-                        <tr className="bg-slate-50 dark:bg-[#14161f] text-slate-400 dark:text-slate-600 text-[9px] border-b border-slate-200 dark:border-[#232735]">
+                        <tr className="bg-slate-50 dark:bg-db-panel text-slate-400 dark:text-slate-600 text-[9px] border-b border-slate-200 dark:border-db-border">
                           {Object.keys(resultRows[0]).map(col => <th key={col} className="px-4 py-3 tracking-tighter">{col}</th>)}
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-slate-100 dark:divide-[#232735]/20">
+                      <tbody className="divide-y divide-slate-100 dark:divide-db-border/20">
                         {resultRows.map((row, i) => (
                           <motion.tr 
                             key={i}
