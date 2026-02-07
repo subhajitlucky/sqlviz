@@ -48,6 +48,17 @@ import OrderByInternal from '../components/visualizers/internal/OrderByInternal'
 import LimitOffsetInternal from '../components/visualizers/internal/LimitOffsetInternal';
 import ExecutionPlanInternal from '../components/visualizers/internal/ExecutionPlanInternal';
 
+// --- Phase 3 Advanced Visualizers ---
+import CompositeIndexInternal from '../components/visualizers/internal/CompositeIndexInternal';
+import CoveringIndexInternal from '../components/visualizers/internal/CoveringIndexInternal';
+import UniqueIndexInternal from '../components/visualizers/internal/UniqueIndexInternal';
+import PrimaryKeyInternal from '../components/visualizers/internal/PrimaryKeyInternal';
+import NPlusOneInternal from '../components/visualizers/internal/NPlusOneInternal';
+import IndexMisuseInternal from '../components/visualizers/internal/IndexMisuseInternal';
+import CAPTheoremInternal from '../components/visualizers/internal/CAPTheoremInternal';
+import QueryPlannerInternal from '../components/visualizers/internal/QueryPlannerInternal';
+import SlowPatternsInternal from '../components/visualizers/internal/SlowPatternsInternal';
+
 const VisualizerSelector = ({ type, id }) => {
   // Mapping topics to their purpose-built simulations
   if (id === 'what-is-sql') return <SQLPrism />;
@@ -61,7 +72,8 @@ const VisualizerSelector = ({ type, id }) => {
   if (id === 'two-phase-commit') return <TwoPhaseCommitInternal />;
   if (id === 'replication-lag') return <ReplicationLagInternal />;
   
-  if (id === 'acid-conceptual') return <ACIDInternal />;
+  // Phase 2 Mapping
+  if (id === 'dml-conceptual') return <ACIDInternal />;
   if (id === 'mvcc-isolation') return <MVCCInternal />;
   if (id === 'locks-deadlocks') return <LocksInternal />;
   if (id === 'parallel-query') return <ParallelQueryInternal />;
@@ -71,6 +83,18 @@ const VisualizerSelector = ({ type, id }) => {
   if (id === 'order-by') return <OrderByInternal />;
   if (id === 'limit-offset') return <LimitOffsetInternal />;
   if (id === 'execution-plans') return <ExecutionPlanInternal />;
+
+  // Phase 3 Mapping
+  if (id === 'composite-indexes') return <CompositeIndexInternal />;
+  if (id === 'covering-indexes') return <CoveringIndexInternal />;
+  if (id === 'unique-indexes') return <UniqueIndexInternal />;
+  if (id === 'primary-keys') return <PrimaryKeyInternal />;
+  if (id === 'n-plus-one') return <NPlusOneInternal />;
+  if (id === 'index-misuse') return <IndexMisuseInternal />;
+  if (id === 'cap-theorem') return <CAPTheoremInternal />;
+  if (id === 'query-planner') return <QueryPlannerInternal />;
+  if (id === 'slow-query-patterns') return <SlowPatternsInternal />;
+  if (id === 'cost-estimation') return <QueryPlannerInternal />;
 
   switch (type) {
     case 'tree': return <BTreeVisualizer />;
