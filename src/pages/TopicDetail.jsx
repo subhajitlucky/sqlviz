@@ -62,18 +62,18 @@ const TableVisualizer = ({ id }) => {
   ];
 
   return (
-    <div className="w-full bg-white/60 dark:bg-db-surface/60 border border-slate-200 dark:border-db-border rounded-none shadow-2xl overflow-hidden font-mono uppercase transition-all">
-      <div className="bg-slate-50 dark:bg-db-panel px-4 py-2 border-b border-slate-200 dark:border-db-border flex justify-between items-center">
+    <div className="w-full bg-white dark:bg-[#0d0e12] border border-slate-200 dark:border-[#232735] rounded-none shadow-2xl overflow-hidden font-mono uppercase transition-all">
+      <div className="bg-slate-50 dark:bg-[#14161f] px-4 py-2 border-b border-slate-200 dark:border-[#232735] flex justify-between items-center">
         <span className="text-[9px] font-black tracking-widest text-slate-400 dark:text-slate-500">MEMORY_DUMP: stars</span>
         <div className="flex space-x-1">
-          <div className="w-1.5 h-1.5 rounded-full bg-sql-blue/20 dark:bg-sql-cyan/20" />
-          <div className="w-1.5 h-1.5 rounded-full bg-sql-blue/20 dark:bg-sql-cyan/20" />
+          <div className="w-1.5 h-1.5 rounded-full bg-sql-blue/20 dark:bg-[#00e5ff]/20" />
+          <div className="w-1.5 h-1.5 rounded-full bg-sql-blue/20 dark:bg-[#00e5ff]/20" />
         </div>
       </div>
       <div className="overflow-x-auto p-4">
         <table className="w-full text-left text-[10px]">
           <thead>
-            <tr className="text-slate-400 dark:text-slate-600 border-b border-slate-100 dark:border-db-border/50">
+            <tr className="text-slate-400 dark:text-slate-600 border-b border-slate-100 dark:border-[#232735]/50">
               <th className="pb-2 font-black tracking-tighter">ID</th>
               <th className="pb-2 font-black tracking-tighter">NAME</th>
               <th className="pb-2 font-black tracking-tighter">MAG</th>
@@ -87,9 +87,9 @@ const TableVisualizer = ({ id }) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: i * 0.05 }}
-                className="group border-b border-slate-100 dark:border-db-border/30 last:border-0 hover:bg-sql-blue/5 dark:hover:bg-sql-cyan/5 transition-colors"
+                className="group border-b border-slate-100 dark:border-[#232735]/30 last:border-0 hover:bg-sql-blue/5 dark:hover:bg-[#00e5ff]/5 transition-colors"
               >
-                <td className="py-2 text-sql-blue dark:text-sql-cyan font-bold">{row.id}</td>
+                <td className="py-2 text-sql-blue dark:text-[#00e5ff] font-bold">{row.id}</td>
                 <td className="py-2 text-slate-700 dark:text-slate-300">{row.name}</td>
                 <td className={`py-2 ${row.mag < 0 ? "text-sql-gold" : "text-slate-400 dark:text-slate-500"}`}>{row.mag}</td>
                 <td className="py-2 text-slate-400 dark:text-slate-600">{row.type}</td>
@@ -231,10 +231,10 @@ const TopicDetail = () => {
             <ArrowLeft className="w-3 h-3 mr-3 group-hover:-translate-x-1 transition-transform" /> 
             &lt; Return_To_Index
           </Link>
-          <div className="flex items-center space-x-4 px-5 py-2 bg-slate-50 dark:bg-db-surface border border-slate-200 dark:border-db-border uppercase">
+          <div className="flex items-center space-x-4 px-5 py-2 bg-slate-50 dark:bg-[#0d0e12] border border-slate-200 dark:border-[#232735] uppercase">
             <span className="text-[9px] font-black text-slate-400 dark:text-slate-600 tracking-widest">Path: {concept.path}</span>
-            <div className="w-1 h-1 rounded-full bg-slate-200 dark:bg-db-border" />
-            <span className="text-[9px] font-black text-sql-blue dark:text-sql-cyan tracking-widest">{concept.id}</span>
+            <div className="w-1 h-1 rounded-full bg-slate-200 dark:bg-[#232735]" />
+            <span className="text-[9px] font-black text-sql-blue dark:text-[#00e5ff] tracking-widest">{concept.id}</span>
           </div>
         </nav>
 
@@ -252,12 +252,12 @@ const TopicDetail = () => {
             </motion.div>
 
             <motion.section initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="relative group">
-              <div className="p-10 bg-slate-50 dark:bg-db-surface border border-slate-200 dark:border-db-border relative overflow-hidden shadow-xl">
+              <div className="p-10 bg-slate-50 dark:bg-[#0d0e12] border border-slate-200 dark:border-[#232735] relative overflow-hidden shadow-xl">
                 {/* Tech bar decoration */}
-                <div className="absolute top-0 left-0 w-1 h-full bg-sql-blue dark:bg-sql-cyan shadow-[0_0_15px_#00e5ff]" />
+                <div className="absolute top-0 left-0 w-1 h-full bg-sql-blue dark:bg-[#00e5ff] shadow-[0_0_15px_#00e5ff]" />
                 
                 <div className="flex items-center space-x-4 mb-8">
-                  <div className="p-2 border border-sql-blue/20 dark:border-sql-cyan/20 bg-sql-blue/5 dark:bg-sql-cyan/5 text-sql-blue dark:text-sql-cyan">
+                  <div className="p-2 border border-sql-blue/20 dark:border-[#00e5ff]/20 bg-sql-blue/5 dark:bg-[#00e5ff]/5 text-sql-blue dark:text-[#00e5ff]">
                     <Terminal size={20} />
                   </div>
                   <h3 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-[0.3em]">Core_Optimization_Protocol</h3>
@@ -270,7 +270,7 @@ const TopicDetail = () => {
 
             <section className="space-y-10">
               <div className="flex items-center space-x-4">
-                <div className="p-2 border border-slate-200 dark:border-db-border bg-slate-50 dark:bg-db-panel text-slate-400 dark:text-slate-500">
+                <div className="p-2 border border-slate-200 dark:border-[#232735] bg-slate-50 dark:bg-[#14161f] text-slate-400 dark:text-slate-500">
                   <Code size={20} />
                 </div>
                 <h3 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-[0.3em]">SYNTAX_MODEL</h3>
@@ -298,9 +298,9 @@ const TopicDetail = () => {
               </div>
             </div>
 
-            <div className="p-10 border border-slate-200 dark:border-db-border bg-white dark:bg-db-surface shadow-xl relative overflow-hidden font-mono uppercase">
-              <div className="flex items-center space-x-4 mb-10 pb-6 border-b border-slate-200 dark:border-db-border">
-                <Binary size={20} className="text-sql-blue dark:text-sql-cyan" />
+            <div className="p-10 border border-slate-200 dark:border-[#232735] bg-white dark:bg-[#0d0e12] shadow-xl relative overflow-hidden font-mono uppercase">
+              <div className="flex items-center space-x-4 mb-10 pb-6 border-b border-slate-200 dark:border-[#232735]">
+                <Binary size={20} className="text-sql-blue dark:text-[#00e5ff]" />
                 <span className="text-xs font-black tracking-widest text-slate-900 dark:text-white">System_Metadata</span>
               </div>
               <div className="grid grid-cols-2 gap-y-10 gap-x-6">
@@ -312,7 +312,7 @@ const TopicDetail = () => {
                 ].map((item, i) => (
                   <div key={i}>
                     <span className="text-[8px] font-black text-slate-400 dark:text-slate-600 tracking-widest block mb-2">{item.label}</span>
-                    <p className="text-[10px] font-bold text-sql-blue dark:text-sql-cyan tracking-tighter">{item.val}</p>
+                    <p className="text-[10px] font-bold text-sql-blue dark:text-[#00e5ff] tracking-tighter">{item.val}</p>
                   </div>
                 ))}
               </div>
@@ -320,11 +320,11 @@ const TopicDetail = () => {
           </div>
         </div>
 
-        <footer className="mt-40 pt-16 border-t border-slate-200 dark:border-db-border flex flex-col md:flex-row justify-between gap-1">
+        <footer className="mt-40 pt-16 border-t border-slate-200 dark:border-[#232735] flex flex-col md:flex-row justify-between gap-1">
           {prevConcept && (
-            <Link to={`/topic/${prevConcept.id}`} className="group p-8 border border-slate-200 dark:border-db-border bg-slate-50 dark:bg-db-surface hover:bg-white dark:hover:bg-db-panel hover:border-sql-blue dark:hover:border-sql-cyan transition-all flex-1">
+            <Link to={`/topic/${prevConcept.id}`} className="group p-8 border border-slate-200 dark:border-[#232735] bg-slate-50 dark:bg-[#0d0e12] hover:bg-white dark:hover:bg-[#14161f] hover:border-sql-blue dark:hover:border-[#00e5ff] transition-all flex-1">
               <div className="flex items-center space-x-6">
-                <ChevronLeft size={24} className="text-slate-400 dark:text-slate-700 group-hover:text-sql-blue dark:group-hover:text-sql-cyan transition-colors" />
+                <ChevronLeft size={24} className="text-slate-400 dark:text-slate-700 group-hover:text-sql-blue dark:group-hover:text-[#00e5ff] transition-colors" />
                 <div>
                   <span className="text-[8px] font-black text-slate-400 dark:text-slate-600 uppercase tracking-widest">Previous_Node</span>
                   <div className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest mt-1">{prevConcept.title}</div>
@@ -333,13 +333,13 @@ const TopicDetail = () => {
             </Link>
           )}
           {nextConcept && (
-            <Link to={`/topic/${nextConcept.id}`} className="group p-8 border border-slate-200 dark:border-db-border bg-slate-50 dark:bg-db-surface hover:bg-white dark:hover:bg-db-panel hover:border-sql-blue dark:hover:border-sql-cyan transition-all flex-1 text-right">
+            <Link to={`/topic/${nextConcept.id}`} className="group p-8 border border-slate-200 dark:border-[#232735] bg-slate-50 dark:bg-[#0d0e12] hover:bg-white dark:hover:bg-[#14161f] hover:border-sql-blue dark:hover:border-[#00e5ff] transition-all flex-1 text-right">
               <div className="flex items-center justify-end space-x-6">
                 <div>
                   <span className="text-[8px] font-black text-slate-400 dark:text-slate-600 uppercase tracking-widest">Next_Node</span>
                   <div className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest mt-1">{nextConcept.title}</div>
                 </div>
-                <ChevronRight size={24} className="text-slate-400 dark:text-slate-700 group-hover:text-sql-blue dark:group-hover:text-sql-cyan transition-colors" />
+                <ChevronRight size={24} className="text-slate-400 dark:text-slate-700 group-hover:text-sql-blue dark:group-hover:text-[#00e5ff] transition-colors" />
               </div>
             </Link>
           )}

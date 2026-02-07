@@ -114,20 +114,20 @@ const TopicCard = ({ concept, index }) => {
     >
       <Link 
         to={`/topic/${concept.id}`}
-        className="group block h-full p-6 bg-white dark:bg-db-surface border border-slate-200 dark:border-db-border hover:border-sql-blue dark:hover:border-sql-cyan transition-all relative overflow-hidden shadow-xl"
+        className="group block h-full p-6 bg-white dark:bg-[#0d0e12] border border-slate-200 dark:border-[#232735] hover:border-sql-blue dark:hover:border-[#00e5ff] transition-all relative overflow-hidden shadow-xl"
       >
         {/* Terminal Scanline Effect */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,128,0.06))] bg-[length:100%_2px,2px_100%]" />
         
         <div className="relative z-10 flex flex-col h-full">
           <div className="flex justify-between items-start mb-6">
-            <div className="w-10 h-10 flex items-center justify-center border border-slate-200 dark:border-db-border bg-slate-50 dark:bg-db-panel text-slate-400 dark:text-slate-500 group-hover:text-sql-blue dark:group-hover:text-sql-cyan group-hover:border-sql-blue dark:group-hover:border-sql-cyan transition-colors">
+            <div className="w-10 h-10 flex items-center justify-center border border-slate-200 dark:border-[#232735] bg-slate-50 dark:bg-[#14161f] text-slate-400 dark:text-slate-500 group-hover:text-sql-blue dark:group-hover:text-[#00e5ff] group-hover:border-sql-blue dark:group-hover:border-[#00e5ff] transition-colors">
               <Icon size={20} />
             </div>
             <DifficultyBadge difficulty={concept.difficulty} />
           </div>
           
-          <h3 className="text-sm font-black text-slate-900 dark:text-white mb-2 tracking-widest uppercase group-hover:text-sql-blue dark:group-hover:text-sql-cyan transition-colors">
+          <h3 className="text-sm font-black text-slate-900 dark:text-white mb-2 tracking-widest uppercase group-hover:text-sql-blue dark:group-hover:text-[#00e5ff] transition-colors">
             {concept.title}
           </h3>
           
@@ -135,7 +135,7 @@ const TopicCard = ({ concept, index }) => {
             {concept.definition}
           </p>
           
-          <div className="mt-auto flex items-center text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 group-hover:text-sql-blue dark:group-hover:text-sql-cyan transition-all">
+          <div className="mt-auto flex items-center text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 group-hover:text-sql-blue dark:group-hover:text-[#00e5ff] transition-all">
             &gt; INIT_MODULE <ChevronRight size={10} className="ml-1 group-hover:translate-x-1 transition-transform" />
           </div>
         </div>
@@ -181,7 +181,7 @@ const LearningPath = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="inline-flex items-center space-x-3 px-4 py-1.5 rounded-full bg-slate-100 dark:bg-db-surface border border-slate-200 dark:border-db-border text-sql-blue dark:text-sql-cyan text-[10px] font-black uppercase tracking-[0.3em] mb-10 shadow-[0_0_15px_rgba(0,229,255,0.05)]"
+            className="inline-flex items-center space-x-3 px-4 py-1.5 rounded-full bg-slate-100 dark:bg-[#0d0e12] border border-slate-200 dark:border-[#232735] text-sql-blue dark:text-[#00e5ff] text-[10px] font-black uppercase tracking-[0.3em] mb-10 shadow-[0_0_15px_rgba(0,229,255,0.05)]"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-sql-green animate-pulse" />
             <span>Navigation Terminal: Path_Map</span>
@@ -204,7 +204,7 @@ const LearningPath = () => {
                 placeholder="SEARCH_COSMOS_OBJECTS..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-12 pr-6 py-4 bg-slate-50/60 dark:bg-db-surface/60 border border-slate-200 dark:border-db-border text-xs font-black tracking-widest text-slate-900 dark:text-white focus:outline-none focus:border-sql-blue dark:focus:border-sql-cyan transition-all uppercase placeholder:text-slate-300 dark:placeholder:text-slate-700"
+                className="w-full pl-12 pr-6 py-4 bg-slate-50 dark:bg-[#0d0e12] border border-slate-200 dark:border-[#232735] text-xs font-black tracking-widest text-slate-900 dark:text-white focus:outline-none focus:border-sql-blue dark:focus:border-[#00e5ff] transition-all uppercase placeholder:text-slate-300 dark:placeholder:text-slate-700"
               />
             </div>
           </div>
@@ -223,10 +223,10 @@ const LearningPath = () => {
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  className="flex flex-col md:flex-row md:items-start justify-between mb-12 gap-8 border-l-2 border-slate-200 dark:border-db-border pl-8"
+                  className="flex flex-col md:flex-row md:items-start justify-between mb-12 gap-8 border-l-2 border-slate-200 dark:border-[#232735] pl-8"
                 >
                   <div className="flex items-start gap-6">
-                    <div className="w-14 h-14 bg-slate-50 dark:bg-db-panel border border-slate-200 dark:border-db-border flex items-center justify-center text-sql-blue dark:text-sql-cyan shadow-xl">
+                    <div className="w-14 h-14 bg-slate-50 dark:bg-[#14161f] border border-slate-200 dark:border-[#232735] flex items-center justify-center text-sql-blue dark:text-[#00e5ff] shadow-xl">
                       <Icon size={28} />
                     </div>
                     <div>

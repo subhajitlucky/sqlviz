@@ -29,7 +29,7 @@ const Home = () => {
           animate="visible"
         >
           {/* System Status Badge */}
-          <motion.div variants={itemVariants} className="inline-flex items-center space-x-3 px-4 py-1.5 rounded-full bg-slate-100 dark:bg-db-surface border border-slate-200 dark:border-db-border text-sql-blue dark:text-sql-cyan text-[10px] font-black uppercase tracking-[0.2em] mb-12 shadow-[0_0_15px_rgba(0,229,255,0.1)]">
+          <motion.div variants={itemVariants} className="inline-flex items-center space-x-3 px-4 py-1.5 rounded-full bg-slate-100 dark:bg-[#0d0e12] border border-slate-200 dark:border-[#232735] text-sql-blue dark:text-[#00e5ff] text-[10px] font-black uppercase tracking-[0.2em] mb-12 shadow-[0_0_15px_rgba(0,229,255,0.1)]">
             <span className="w-2 h-2 rounded-full bg-sql-green animate-pulse" />
             <span>Connection Established: Cluster_Alpha</span>
           </motion.div>
@@ -72,7 +72,7 @@ const Home = () => {
             
             <Link 
               to="/playground" 
-              className="px-12 py-6 bg-slate-100 dark:bg-db-surface hover:bg-slate-200 dark:hover:bg-db-panel text-slate-900 dark:text-white rounded-none skew-x-[-12deg] font-black text-xl flex items-center transition-all border border-slate-200 dark:border-db-border shadow-xl group"
+              className="px-12 py-6 bg-slate-100 dark:bg-[#0d0e12] hover:bg-slate-200 dark:hover:bg-[#14161f] text-slate-900 dark:text-white rounded-none skew-x-[-12deg] font-black text-xl flex items-center transition-all border border-slate-200 dark:border-[#232735] shadow-xl group"
             >
               <span className="skew-x-[12deg] flex items-center">
                 OPEN_TERMINAL
@@ -91,11 +91,11 @@ const Home = () => {
               { icon: Layers, title: "02. STORAGE_MODELS", desc: "Physical data layout across B-Tree nodes and memory pages." },
               { icon: Cpu, title: "03. DISTRIBUTED_LOGIC", desc: "Distributed consensus algorithms and multi-node synchronization." }
             ].map((feature, i) => (
-              <div key={i} className="p-10 bg-slate-50 dark:bg-db-surface border border-slate-200 dark:border-db-border text-left hover:bg-white dark:hover:bg-db-panel transition-all group shadow-xl">
-                <div className="w-12 h-12 rounded-lg bg-slate-100 dark:bg-db-panel flex items-center justify-center mb-8 border border-slate-200 dark:border-db-border group-hover:border-sql-blue dark:group-hover:border-sql-cyan transition-colors">
-                  <feature.icon className="w-6 h-6 text-slate-400 dark:text-slate-500 group-hover:text-sql-blue dark:group-hover:text-sql-cyan transition-colors" />
+              <div key={i} className="p-10 bg-slate-50 dark:bg-[#0d0e12] border border-slate-200 dark:border-[#232735] text-left hover:bg-white dark:hover:bg-[#14161f] transition-all group shadow-xl">
+                <div className="w-12 h-12 rounded-lg bg-slate-100 dark:bg-[#14161f] flex items-center justify-center mb-8 border border-slate-200 dark:border-[#232735] group-hover:border-sql-blue dark:group-hover:border-[#00e5ff] transition-colors">
+                  <feature.icon className="w-6 h-6 text-slate-400 dark:text-slate-500 group-hover:text-sql-blue dark:group-hover:text-[#00e5ff] transition-colors" />
                 </div>
-                <h3 className="text-xs font-black text-sql-blue dark:text-sql-cyan mb-4 tracking-widest">{feature.title}</h3>
+                <h3 className="text-xs font-black text-sql-blue dark:text-[#00e5ff] mb-4 tracking-widest">{feature.title}</h3>
                 <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed font-mono">{feature.desc}</p>
               </div>
             ))}
