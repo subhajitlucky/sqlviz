@@ -84,14 +84,14 @@ const Home = () => {
           {/* Technical Specs Grid */}
           <motion.div 
             variants={itemVariants}
-            className="mt-40 grid grid-cols-1 md:grid-cols-3 gap-1"
+            className="mt-40 grid grid-cols-1 md:grid-cols-3 gap-px bg-slate-200 dark:bg-[#232735] border border-slate-200 dark:border-[#232735] shadow-2xl"
           >
             {[
               { icon: Binary, title: "01. ENGINE_INTERNALS", desc: "Low-level visualization of query parsing and relational algebra." },
               { icon: Layers, title: "02. STORAGE_MODELS", desc: "Physical data layout across B-Tree nodes and memory pages." },
               { icon: Cpu, title: "03. DISTRIBUTED_LOGIC", desc: "Distributed consensus algorithms and multi-node synchronization." }
             ].map((feature, i) => (
-              <div key={i} className="p-10 bg-slate-50 dark:bg-[#0d0e12] border border-slate-200 dark:border-[#232735] text-left hover:bg-white dark:hover:bg-[#14161f] transition-all group shadow-xl">
+              <div key={i} className="p-10 bg-white dark:bg-[#0d0e12] text-left hover:bg-slate-50 dark:hover:bg-[#14161f] transition-all group">
                 <div className="w-12 h-12 rounded-lg bg-slate-100 dark:bg-[#14161f] flex items-center justify-center mb-8 border border-slate-200 dark:border-[#232735] group-hover:border-sql-blue dark:group-hover:border-[#00e5ff] transition-colors">
                   <feature.icon className="w-6 h-6 text-slate-400 dark:text-slate-500 group-hover:text-sql-blue dark:group-hover:text-[#00e5ff] transition-colors" />
                 </div>
