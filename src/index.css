@@ -16,7 +16,7 @@
 
 @layer base {
   body {
-    @apply bg-white dark:bg-db-black text-slate-900 dark:text-slate-400 font-sans selection:bg-sql-cyan/30 transition-colors duration-300;
+    @apply bg-white text-slate-900 font-sans selection:bg-sql-cyan/30 transition-colors duration-300;
     background-image: 
       radial-gradient(circle at 50% 0%, rgba(51, 103, 145, 0.15) 0%, transparent 50%),
       linear-gradient(rgba(13, 14, 18, 0.05) 1px, transparent 1px),
@@ -24,7 +24,8 @@
     background-size: 100% 100%, 40px 40px, 40px 40px;
   }
   
-  .dark body {
+  body.dark {
+    @apply bg-db-black text-slate-400;
     background-image: 
       radial-gradient(circle at 50% 0%, rgba(51, 103, 145, 0.15) 0%, transparent 50%),
       linear-gradient(rgba(13, 14, 18, 0.8) 1px, transparent 1px),

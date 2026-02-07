@@ -40,7 +40,7 @@ const Home = () => {
             className="text-6xl md:text-9xl font-black tracking-tighter text-slate-900 dark:text-white leading-[0.9] mb-10"
           >
             THE DATA <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-b from-sql-cyan to-sql-blue drop-shadow-[0_0_30px_rgba(0,229,255,0.2)]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-b from-sql-blue dark:from-sql-cyan to-indigo-600 dark:to-sql-blue drop-shadow-[0_0_30px_rgba(0,229,255,0.2)]">
               ARCHITECTURE
             </span>
           </motion.h1>
